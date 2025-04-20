@@ -17,7 +17,6 @@ interface DealListProps {
 
 export const DealList: React.FC<DealListProps> = ({ 
   deals, 
-  viewMode, 
   onClearFilters,
   currentPage = 1,
   onPageChange = () => {},
@@ -35,11 +34,7 @@ export const DealList: React.FC<DealListProps> = ({
 
   return (
     <div className="space-y-8">
-      <div className={cn(
-        viewMode === "list" 
-          ? "space-y-4" 
-          : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-      )}>
+      <div className="space-y-4">
         {deals.map((deal) => (
           <DealCard key={deal.id} {...deal} />
         ))}

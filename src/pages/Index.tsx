@@ -43,12 +43,12 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="pb-20 md:pb-6">
-        <div className="border-b bg-white sticky top-16 z-10">
+      <main className="pt-[73px] pb-20 md:pb-6">
+        <div className="border-b bg-white sticky top-[73px] z-10">
           <div className="container mx-auto px-4">
             <DealHeader
               activeTab={activeTab}
-              viewMode={viewMode}
+              viewMode="list"
               selectedCategories={selectedCategories}
               selectedRetailers={selectedRetailers}
               selectedPriceRanges={selectedPriceRanges}
@@ -59,7 +59,7 @@ const Index = () => {
               onRetailerToggle={handleRetailerToggle}
               onPriceRangeToggle={handlePriceRangeToggle}
               onShowExpiredChange={setShowExpired}
-              onViewModeChange={setViewMode}
+              onViewModeChange={() => {}}
               onSortChange={setSortOption}
               onClearFilters={clearFilters}
             />
@@ -69,10 +69,10 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-6 max-w-4xl">
           <DealList
             deals={currentDeals}
-            viewMode={viewMode}
+            viewMode="list"
             onClearFilters={clearFilters}
             currentPage={currentPage}
             onPageChange={setCurrentPage}
@@ -88,7 +88,7 @@ const Index = () => {
       >
         <Link to="/submit-deal" className="gap-2">
           <PlusCircle className="w-5 h-5" />
-          <span>Submit a Snag</span>
+          <span>Submit a Deal</span>
         </Link>
       </Button>
     </div>
