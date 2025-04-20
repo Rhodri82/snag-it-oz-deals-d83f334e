@@ -17,18 +17,18 @@ export const NavigationMenu = () => {
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/hot">
+          <a href="/trending">
             <Clock className="w-4 h-4" />
-            <span>Hot Deals</span>
+            <span>Trending Bargains</span>
             <Badge variant="outline" className="ml-auto text-xs px-1.5 py-0">24</Badge>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/new">
+          <a href="/latest">
             <Clock className="w-4 h-4" />
-            <span>New Deals</span>
+            <span>Latest Bargains</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -44,7 +44,7 @@ export const NavigationMenu = () => {
         <SidebarMenuButton asChild>
           <a href="/submit-deal" className="text-primary">
             <Plus className="w-4 h-4" />
-            <span>Submit Deal</span>
+            <span>Share a Bargain</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>

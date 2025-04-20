@@ -10,15 +10,15 @@ export const UserSection = () => {
         <SidebarMenuButton asChild>
           <a href="/saved">
             <Heart className="w-4 h-4" />
-            <span>Saved Deals</span>
+            <span>Saved Bargains</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/voted">
+          <a href="/rated">
             <Check className="w-4 h-4" />
-            <span>Voted Deals</span>
+            <span>Rated Bargains</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -26,15 +26,15 @@ export const UserSection = () => {
         <SidebarMenuButton asChild>
           <a href="/your-deals">
             <Star className="w-4 h-4" />
-            <span>Your Submissions</span>
+            <span>Your Bargains</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/hot-deals">
+          <a href="/trending">
             <Flame className="w-4 h-4" />
-            <span>Hot Deals</span>
+            <span>Trending Now</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>

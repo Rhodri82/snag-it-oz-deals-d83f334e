@@ -33,25 +33,25 @@ export const DealSort: React.FC<DealSortProps> = ({ sortOption, onSortChange }) 
           onClick={() => onSortChange("popular")}
           className={cn("cursor-pointer", sortOption === "popular" && "font-medium")}
         >
-          Popular
+          Most Popular
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => onSortChange("newest")}
           className={cn("cursor-pointer", sortOption === "newest" && "font-medium")}
         >
-          Newest first
+          Latest First
         </DropdownMenuItem>
         <DropdownMenuItem 
-          onClick={() => onSortChange("hottest")}
-          className={cn("cursor-pointer", sortOption === "hottest" && "font-medium")}
+          onClick={() => onSortChange("trending")}
+          className={cn("cursor-pointer", sortOption === "trending" && "font-medium")}
         >
-          Hottest first
+          Trending Now
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => onSortChange("discussed")}
           className={cn("cursor-pointer", sortOption === "discussed" && "font-medium")}
         >
-          Most discussed
+          Most Discussed
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
