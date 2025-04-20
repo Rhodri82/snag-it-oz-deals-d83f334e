@@ -12,7 +12,7 @@ const Header = () => {
               <img 
                 src="/lovable-uploads/fc099099-dc15-4611-b504-03e427847e9a.png" 
                 alt="DealsOz Logo" 
-                className="h-10 w-auto"
+                className="h-12 w-auto rounded-lg shadow-md transition-transform hover:scale-105"
               />
             </div>
             <nav className="hidden md:flex items-center gap-4">
