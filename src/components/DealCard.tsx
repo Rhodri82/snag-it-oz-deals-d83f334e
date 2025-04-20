@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +6,7 @@ import { DealImage } from './deals/DealImage';
 import { DealActions } from './deals/DealActions';
 import { DealVoting } from './deals/DealVoting';
 import { DealCategories } from './deals/DealCategories';
+import { PriceDisplay } from './deals/PriceDisplay';
 import { useDealInteractions } from '@/hooks/useDealInteractions';
 import { getTemperatureRating, getTemperatureColor } from '@/utils/dealTemperature';
 
@@ -20,7 +20,6 @@ interface DealCardProps {
   temperature: number;
   votes: { yeah: number; nah: number };
   commentCount?: number;
-  expireDate?: string;
   shipping?: string;
   discount?: string;
   previousPrice?: string;
@@ -69,17 +68,11 @@ const DealCard = ({
         <h2 className="font-semibold text-base leading-snug mb-2 line-clamp-2">{title}</h2>
         <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{description}</p>
 
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <div className="text-lg font-bold">{price}</div>
-            {previousPrice && (
-              <span className="text-sm line-through text-muted-foreground">{previousPrice}</span>
-            )}
-          </div>
-          {shipping && (
-            <span className="text-sm text-muted-foreground">{shipping}</span>
-          )}
-        </div>
+        <PriceDisplay 
+          price={price}
+          previousPrice={previousPrice}
+          shipping={shipping}
+        />
 
         <div className="mt-auto pt-3 border-t">
           <div className="flex items-center justify-between mb-2">
