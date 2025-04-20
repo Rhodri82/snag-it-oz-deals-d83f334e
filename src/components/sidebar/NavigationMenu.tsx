@@ -17,18 +17,18 @@ export const NavigationMenu = () => {
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/hot">
+          <a href="/ripper-deals">
             <Flame className="w-4 h-4" />
-            <span>Hot Deals</span>
+            <span>Ripper Deals</span>
             <Badge variant="outline" className="ml-auto text-xs px-1.5 py-0">24</Badge>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/new">
+          <a href="/fresh">
             <Clock className="w-4 h-4" />
-            <span>New Deals</span>
+            <span>Fresh Finds</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>

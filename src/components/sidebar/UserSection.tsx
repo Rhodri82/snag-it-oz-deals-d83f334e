@@ -8,9 +8,9 @@ export const UserSection = () => {
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/saved">
+          <a href="/my-alerts">
             <Heart className="w-4 h-4" />
-            <span>My Alerts</span>
+            <span>My Watchlist</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -18,7 +18,7 @@ export const UserSection = () => {
         <SidebarMenuButton asChild>
           <a href="/discussions">
             <MessageSquare className="w-4 h-4" />
-            <span>My Discussions</span>
+            <span>My Yarns</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -26,7 +26,7 @@ export const UserSection = () => {
         <SidebarMenuButton asChild>
           <a href="/your-deals">
             <Star className="w-4 h-4" />
-            <span>My Deals</span>
+            <span>My Rippa Finds</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
