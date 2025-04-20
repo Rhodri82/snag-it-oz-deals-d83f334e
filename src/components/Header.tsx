@@ -49,13 +49,15 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
             <span className="text-green-900">Deals</span>
             <span className="text-yellow-700">Oz</span>
           </Link>
-           {/* Desktop Navigation */}
-          <DesktopNav />
 
+          {/* Desktop Navigation */}
+          <DesktopNav />
 
           {/* Right Section - Search, Theme, Notifications, Profile */}
           <div className="flex items-center gap-2 md:gap-4 ml-auto">
-          {/* Desktop Search Bar */}
+            {/* Desktop Search Bar */}
+
+
             <div className="hidden md:block mr-4">
               <SearchBar onSearch={onSearch} />
             </div>
