@@ -29,36 +29,38 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
       <CategoryProvider>
-        <div className="min-h-screen flex flex-col">
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/discussions" element={<Discussions />} />
-              <Route path="/vouchers" element={<Vouchers />} />
-              <Route path="/submit-deal" element={<SubmitDeal />} />
-              <Route path="/deal/:id" element={<DealDetail />} />
-              <Route path="/alerts" element={<Alerts />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/how-it-works" element={<HowItWorks />} />
-              <Route path="/community-guidelines" element={<CommunityGuidelines />} />
-              <Route path="/legal" element={<Legal />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Footer />
-          </BrowserRouter>
-        </div>
+        <BrowserRouter>
+          <TooltipProvider>
+            <div className="min-h-screen flex flex-col">
+              <Toaster />
+              <Sonner />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/discussions" element={<Discussions />} />
+                <Route path="/vouchers" element={<Vouchers />} />
+                <Route path="/submit-deal" element={<SubmitDeal />} />
+                <Route path="/deal/:id" element={<DealDetail />} />
+                <Route path="/alerts" element={<Alerts />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/how-it-works" element={<HowItWorks />} />
+                <Route path="/community-guidelines" element={<CommunityGuidelines />} />
+                <Route path="/legal" element={<Legal />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <Footer />
+            </div>
+          </TooltipProvider>
+        </BrowserRouter>
       </CategoryProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+    </QueryClientProvider>
+  );
+};
 
 export default App;
