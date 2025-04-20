@@ -1,0 +1,34 @@
+
+import React from 'react';
+import { cn } from "@/lib/utils";
+import DealCard from '../DealCard';
+import { Button } from "@/components/ui/button";
+import { Deal } from '@/types/deals';
+
+interface DealListProps {
+  deals: Deal[];
+  viewMode: "list" | "grid";
+  onClearFilters: () => void;
+}
+
+export const DealList: React.FC<DealListProps> = ({ deals, viewMode, onClearFilters }) => {
+  if (deals.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 text-center">
+        <h3 className="text-lg font-medium mb-2">No deals match your filters</h3>
+        <p className="text-muted-foreground mb-6">Try changing or clearing your filters</p>
+        <Button onClick={onClearFilters}>Clear all filters</Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className={cn(
+      viewMode === "list" ? "space-y-1" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+    )}>
+      {deals.map((deal) => (
+        <DealCard key={deal.id} {...deal} />
+      ))}
+    </div>
+  );
+};
