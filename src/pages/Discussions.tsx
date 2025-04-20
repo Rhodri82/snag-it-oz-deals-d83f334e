@@ -41,7 +41,7 @@ const Discussions = () => {
       <Header />
       
       <main className="pt-[73px] pb-20 md:pb-6">
-        <div className="container mx-auto px-4 max-w-3xl">
+        <div className="container mx-auto">
           <div className="flex items-center justify-between py-6">
             <h1 className="text-2xl font-bold flex items-center gap-2">
               <MessageSquare className="h-6 w-6" />

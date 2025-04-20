@@ -43,8 +43,8 @@ const Index = () => {
       <Header />
       
       <main className="pt-[73px] pb-20 md:pb-6">
-        <div className="border-b bg-background sticky top-[73px] z-10">
-          <div className="container mx-auto px-4">
+        <div className="bg-background sticky top-[73px] z-10 border-b">
+          <div className="container mx-auto">
             <DealHeader
               activeTab={activeTab}
               viewMode={viewMode}
@@ -65,7 +65,7 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="mx-auto px-4 py-6 max-w-[800px]">
+        <div className="container mx-auto py-6">
           <DealList
             deals={currentDeals}
             viewMode={viewMode}

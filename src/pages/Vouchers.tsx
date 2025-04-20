@@ -57,7 +57,7 @@ const Vouchers = () => {
           title="Latest Vouchers & Promo Codes"
           subtitle="Save with exclusive voucher codes and special offers from top Australian retailers"
         />
-        <div className="container mx-auto px-4 py-6 max-w-3xl">
+        <div className="container mx-auto py-6">
           <VoucherList vouchers={SAMPLE_VOUCHERS} />
         </div>
       </main>
