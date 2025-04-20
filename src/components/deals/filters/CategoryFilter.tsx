@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BaseFilter } from './BaseFilter';
+import { CategoryPills } from './CategoryPills';
 
 interface CategoryFilterProps {
   selectedCategories: string[];
@@ -8,13 +8,13 @@ interface CategoryFilterProps {
 }
 
 const categoryOptions = [
-  { label: "Electronics", value: "Electronics" },
-  { label: "Gaming", value: "Gaming" },
-  { label: "Home & Garden", value: "Home & Garden" },
-  { label: "Fashion", value: "Fashion" },
-  { label: "Groceries", value: "Groceries" },
-  { label: "Travel", value: "Travel" },
-  { label: "Services", value: "Services" }
+  "Electronics",
+  "Gaming",
+  "Home & Garden",
+  "Fashion",
+  "Groceries",
+  "Travel",
+  "Services"
 ];
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({
@@ -22,12 +22,12 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   onCategoryToggle,
 }) => {
   return (
-    <BaseFilter
-      title="Categories"
-      items={categoryOptions}
-      selectedItems={selectedCategories}
-      onItemToggle={onCategoryToggle}
-      className="space-y-2"
-    />
+    <div className="w-full py-2">
+      <CategoryPills
+        categories={categoryOptions}
+        selectedCategories={selectedCategories}
+        onCategoryToggle={onCategoryToggle}
+      />
+    </div>
   );
 };
