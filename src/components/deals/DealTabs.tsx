@@ -7,33 +7,26 @@ interface DealTabsProps {
   onTabChange: (tab: string) => void;
 }
 
+const TABS = [
+  { label: "Ripper Deals", value: "popular" },
+  { label: "Fresh Finds", value: "newest" },
+  { label: "Most Snagged", value: "trending" },
+];
+
 export const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange }) => {
   return (
-    <div className="flex items-center text-sm overflow-x-auto hide-scrollbar">
-      <Button 
-        variant={activeTab === "popular" ? "default" : "ghost"} 
-        size="sm"
-        onClick={() => onTabChange("popular")}
-        className="rounded-full text-xs whitespace-nowrap"
-      >
-        Ripper Deals
-      </Button>
-      <Button 
-        variant={activeTab === "newest" ? "default" : "ghost"} 
-        size="sm"
-        onClick={() => onTabChange("newest")}
-        className="rounded-full text-xs whitespace-nowrap"
-      >
-        Fresh Finds
-      </Button>
-      <Button 
-        variant={activeTab === "trending" ? "default" : "ghost"} 
-        size="sm"
-        onClick={() => onTabChange("trending")}
-        className="rounded-full text-xs whitespace-nowrap"
-      >
-        Most Snagged
-      </Button>
+    <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar">
+      {TABS.map((tab) => (
+        <Button
+          key={tab.value}
+          onClick={() => onTabChange(tab.value)}
+          size="sm"
+          variant={activeTab === tab.value ? "default" : "ghost"}
+          className="rounded-full text-xs font-medium px-4 py-1 whitespace-nowrap"
+        >
+          {tab.label}
+        </Button>
+      ))}
     </div>
   );
 };
