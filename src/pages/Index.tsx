@@ -12,7 +12,7 @@ import { PlusCircle } from "lucide-react";
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  
+
   const {
     activeTab,
     viewMode,
@@ -41,31 +41,29 @@ const Index = () => {
   return (
     <Layout>
       <main className="pt-[73px] pb-20 md:pb-6">
-        {/* Sticky Header */}
+        {/* Sticky header with filter tabs */}
         <div className="bg-background sticky top-[73px] z-10 border-b">
-          <div className="container mx-auto">
-            <DealHeader
-              activeTab={activeTab}
-              viewMode={viewMode}
-              selectedCategories={selectedCategories}
-              selectedRetailers={selectedRetailers}
-              selectedPriceRanges={selectedPriceRanges}
-              showExpired={showExpired}
-              sortOption={sortOption}
-              onTabChange={handleTabChange}
-              onCategoryToggle={handleCategoryToggle}
-              onRetailerToggle={handleRetailerToggle}
-              onPriceRangeToggle={handlePriceRangeToggle}
-              onShowExpiredChange={setShowExpired}
-              onViewModeChange={setViewMode}
-              onSortChange={setSortOption}
-              onClearFilters={clearFilters}
-            />
-          </div>
+          <DealHeader
+            activeTab={activeTab}
+            viewMode={viewMode}
+            selectedCategories={selectedCategories}
+            selectedRetailers={selectedRetailers}
+            selectedPriceRanges={selectedPriceRanges}
+            showExpired={showExpired}
+            sortOption={sortOption}
+            onTabChange={handleTabChange}
+            onCategoryToggle={handleCategoryToggle}
+            onRetailerToggle={handleRetailerToggle}
+            onPriceRangeToggle={handlePriceRangeToggle}
+            onShowExpiredChange={setShowExpired}
+            onViewModeChange={setViewMode}
+            onSortChange={setSortOption}
+            onClearFilters={clearFilters}
+          />
         </div>
 
-        {/* Deal List */}
-        <div className="container mx-auto py-6">
+        {/* Deal listing */}
+        <div className="py-6">
           <DealList
             deals={currentDeals}
             viewMode={viewMode}
@@ -77,7 +75,7 @@ const Index = () => {
         </div>
       </main>
 
-      {/* Floating Button on Mobile */}
+      {/* Floating button for mobile */}
       <Button 
         className="fixed bottom-4 right-4 md:hidden rounded-full shadow-lg z-50" 
         size="lg"
