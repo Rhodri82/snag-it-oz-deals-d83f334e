@@ -5,7 +5,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -25,7 +24,7 @@ const Sidebar = () => {
     <ShadcnSidebar className="hidden lg:block">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+          <div className="px-2 py-1.5 text-xs font-medium text-sidebar-foreground/70">Navigation</div>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
@@ -49,7 +48,7 @@ const Sidebar = () => {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Popular Categories</SidebarGroupLabel>
+          <div className="px-2 py-1.5 text-xs font-medium text-sidebar-foreground/70">Popular Categories</div>
           <SidebarGroupContent>
             <SidebarMenu>
               {categories.map((category) => (

@@ -1,6 +1,8 @@
 
+import * as React from "react"
 import { PanelLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { useSidebar } from "./sidebar-context"
 import { Sidebar } from "./sidebar-base"
 import { SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader } from "./sidebar-layout"
@@ -47,4 +49,3 @@ export {
   SidebarTrigger,
   useSidebar,
 }
-
