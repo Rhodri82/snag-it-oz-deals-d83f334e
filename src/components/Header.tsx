@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, PlusCircle, MapPin } from "lucide-react";
+import { Menu, PlusCircle } from "lucide-react";
 import { SearchBar } from './header/SearchBar';
 import { DesktopNav } from './header/DesktopNav';
 import { UserMenu } from './header/UserMenu';
@@ -62,7 +62,6 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
         </div>
         
         <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1">
-          <MapPin className="w-4 h-4" />
           <span>Deals across Australia</span>
         </div>
       </div>

@@ -16,7 +16,7 @@ export const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange }) =>
         onClick={() => onTabChange("popular")}
         className="rounded-full text-xs whitespace-nowrap"
       >
-        True Blue Deals
+        Ripper Deals
       </Button>
       <Button 
         variant={activeTab === "newest" ? "default" : "ghost"} 
@@ -32,15 +32,7 @@ export const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange }) =>
         onClick={() => onTabChange("trending")}
         className="rounded-full text-xs whitespace-nowrap"
       >
-        Fair Dinkum
-      </Button>
-      <Button 
-        variant={activeTab === "discussed" ? "default" : "ghost"} 
-        size="sm"
-        onClick={() => onTabChange("discussed")}
-        className="rounded-full text-xs whitespace-nowrap"
-      >
-        Top Yarns
+        Most Snagged
       </Button>
     </div>
   );
