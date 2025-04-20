@@ -17,9 +17,9 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   return (
     <header className="border-b bg-background fixed top-0 left-0 right-0 z-50">
-      <div className="container mx-auto px-4 h-16">
-        <div className="flex items-center justify-between h-full">
-          {/* Mobile: Left - Menu Button */}
+      <div className="container mx-auto h-16">
+        <div className="flex items-center justify-between h-full gap-4">
+          {/* Mobile: Menu Button */}
           <Button 
             variant="ghost" 
             size="icon"
@@ -31,8 +31,8 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
             </Link>
           </Button>
 
-          {/* Logo - Centered on mobile, Left on desktop */}
-          <Link to="/" className="flex items-center md:mr-8">
+          {/* Logo */}
+          <Link to="/" className="flex items-center">
             <img 
               src="/public/lovable-uploads/94b05e26-27d9-4f0a-b50e-c3ca3ce313ca.png" 
               alt="DealsOz – Community Deals Across Australia" 
@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           <DesktopNav />
 
           {/* Right Section - Search, Theme, Notifications, Profile */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ml-auto">
             <SearchBar onSearch={onSearch} />
             <ThemeToggle variant="ghost" />
             <NotificationsMenu />
