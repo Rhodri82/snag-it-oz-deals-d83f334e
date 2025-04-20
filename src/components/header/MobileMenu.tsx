@@ -1,11 +1,13 @@
 
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Home, Tag, MessageSquare, Menu, Ticket, PlusCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export const MobileMenu: React.FC = () => {
+  const location = useLocation();
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -21,28 +23,44 @@ export const MobileMenu: React.FC = () => {
         <nav className="flex flex-col gap-2 pt-4">
           <Link 
             to="/" 
-            className="flex items-center gap-2 p-3 hover:bg-muted rounded-md"
+            className={`flex items-center gap-2 p-3 rounded-md ${
+              location.pathname === "/" 
+                ? "bg-primary text-primary-foreground" 
+                : "hover:bg-muted"
+            }`}
           >
             <Home className="w-5 h-5" />
             <span>Home</span>
           </Link>
           <Link 
             to="/categories" 
-            className="flex items-center gap-2 p-3 hover:bg-muted rounded-md"
+            className={`flex items-center gap-2 p-3 rounded-md ${
+              location.pathname === "/categories" 
+                ? "bg-primary text-primary-foreground" 
+                : "hover:bg-muted"
+            }`}
           >
             <Tag className="w-5 h-5" />
             <span>Categories</span>
           </Link>
           <Link 
             to="/vouchers" 
-            className="flex items-center gap-2 p-3 hover:bg-muted rounded-md"
+            className={`flex items-center gap-2 p-3 rounded-md ${
+              location.pathname === "/vouchers" 
+                ? "bg-primary text-primary-foreground" 
+                : "hover:bg-muted"
+            }`}
           >
             <Ticket className="w-5 h-5" />
             <span>Vouchers</span>
           </Link>
           <Link 
             to="/discussions" 
-            className="flex items-center gap-2 p-3 hover:bg-muted rounded-md"
+            className={`flex items-center gap-2 p-3 rounded-md ${
+              location.pathname === "/discussions" 
+                ? "bg-primary text-primary-foreground" 
+                : "hover:bg-muted"
+            }`}
           >
             <MessageSquare className="w-5 h-5" />
             <span>Discussions</span>

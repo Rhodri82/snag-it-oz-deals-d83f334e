@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { Link } from "react-router-dom";
-import { Home, Tag, MessageSquare, Ticket, PlusCircle } from 'lucide-react';
+import { Link, useLocation } from "react-router-dom";
+import { Home, MessageSquare, Ticket, PlusCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -39,9 +39,14 @@ const categoryGroups = [
 ];
 
 export const DesktopNav: React.FC = () => {
+  const location = useLocation();
+
   return (
     <nav className="hidden md:flex items-center gap-4 flex-1 justify-center">
-      <Button variant="ghost" asChild>
+      <Button 
+        variant={location.pathname === "/" ? "default" : "ghost"} 
+        asChild
+      >
         <Link to="/">
           <Home className="w-4 h-4 mr-2" />
           Home
@@ -51,7 +56,11 @@ export const DesktopNav: React.FC = () => {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
+            <NavigationMenuTrigger 
+              className={location.pathname === "/categories" ? "bg-primary text-primary-foreground" : ""}
+            >
+              Categories
+            </NavigationMenuTrigger>
             <NavigationMenuContent>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4 w-[600px]">
                 {categoryGroups.map((group) => (
@@ -77,14 +86,20 @@ export const DesktopNav: React.FC = () => {
         </NavigationMenuList>
       </NavigationMenu>
 
-      <Button variant="ghost" asChild>
+      <Button 
+        variant={location.pathname === "/discussions" ? "default" : "ghost"} 
+        asChild
+      >
         <Link to="/discussions">
           <MessageSquare className="w-4 h-4 mr-2" />
           Discussions
         </Link>
       </Button>
 
-      <Button variant="ghost" asChild>
+      <Button 
+        variant={location.pathname === "/vouchers" ? "default" : "ghost"} 
+        asChild
+      >
         <Link to="/vouchers">
           <Ticket className="w-4 h-4 mr-2" />
           Vouchers
@@ -92,7 +107,7 @@ export const DesktopNav: React.FC = () => {
       </Button>
 
       <Button 
-        className="bg-primary hover:bg-primary/90 rounded-full" 
+        className={`${location.pathname === "/submit-deal" ? "bg-primary/90" : "bg-primary"} hover:bg-primary/90 rounded-full`}
         size="sm" 
         asChild
       >
