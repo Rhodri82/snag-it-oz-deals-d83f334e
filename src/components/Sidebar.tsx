@@ -25,7 +25,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-64px)] w-48 min-w-48 border-r bg-background overflow-y-auto">
+    <div className="hidden md:block h-[calc(100vh-64px)] w-48 min-w-48 border-r bg-background overflow-y-auto">
       <SidebarContent className="py-2">
         {/* Navigation Section */}
         <SidebarGroup>

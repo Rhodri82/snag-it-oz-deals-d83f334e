@@ -1,7 +1,8 @@
+
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DealList } from '@/components/deals/DealList';
 import { DealHeader } from '@/components/deals/DealHeader';
 import { useDeals } from '@/hooks/use-deals';
@@ -54,6 +55,10 @@ const Index = () => {
           <div className="flex-1">
             <div className="border-b">
               <div className="container mx-auto px-4 py-2">
+                <div className="flex items-center gap-2 mb-4">
+                  <SidebarTrigger />
+                  <h1 className="text-xl font-semibold">All Deals</h1>
+                </div>
                 <DealHeader
                   activeTab={activeTab}
                   viewMode={viewMode}
@@ -76,7 +81,7 @@ const Index = () => {
                   <Button className="bg-primary hover:bg-primary/90 rounded-full" size="sm" asChild>
                     <Link to="/submit-deal" className="hidden md:flex">
                       <PlusCircle className="w-4 h-4 mr-1" />
-                      <span className="text-xs">Submit Bargain</span>
+                      <span className="text-xs">Submit Deal</span>
                     </Link>
                   </Button>
                 </div>
