@@ -1,6 +1,7 @@
 
 import { useState, useMemo } from 'react';
 import { Deal } from '@/types/deals';
+import { calculateTrendingScore } from '@/utils/trendingScore';
 
 export const useDeals = (initialDeals: Deal[]) => {
   const [activeTab, setActiveTab] = useState("popular");
@@ -60,8 +61,18 @@ export const useDeals = (initialDeals: Deal[]) => {
       switch (sortOption) {
         case "newest":
           return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
-        case "hottest":
-          return b.temperature - a.temperature;
+        case "trending":
+          const scoreA = calculateTrendingScore(
+            b.votes.yeah,
+            b.votes.nah,
+            new Date(b.timestamp)
+          );
+          const scoreB = calculateTrendingScore(
+            a.votes.yeah,
+            a.votes.nah,
+            new Date(a.timestamp)
+          );
+          return scoreA - scoreB;
         case "discussed":
           return (b.commentCount || 0) - (a.commentCount || 0);
         default: // popular
