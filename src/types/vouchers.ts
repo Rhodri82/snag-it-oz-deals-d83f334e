@@ -12,4 +12,3 @@ export interface Voucher {
   tags: string[];
   usageCount?: number;
 }
-

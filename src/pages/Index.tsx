@@ -15,22 +15,30 @@ import { type Voucher } from '@/types/vouchers';
 // Sample voucher data
 const SAMPLE_VOUCHERS: Voucher[] = [
   {
+    id: 1,
     storeLogo: "/placeholder.svg",
     storeName: "Woolworths",
     code: "SAVE20",
     summary: "20% off your first online shop",
     description: "Save 20% on your first online grocery shop at Woolworths. Minimum spend $100.",
+    postedBy: "DealHunter",
+    timestamp: "2 hours ago",
     expiryDate: "30 May 2025",
-    tags: ["Groceries", "Online Only", "New Customers"]
+    tags: ["Groceries", "Online Only", "New Customers"],
+    usageCount: 156
   },
   {
+    id: 2,
     storeLogo: "/placeholder.svg",
     storeName: "Coles",
     code: "FRESH15",
     summary: "$15 off fresh produce",
     description: "Get $15 off when you spend $100 or more on fresh produce.",
+    postedBy: "BargainPro",
+    timestamp: "1 day ago",
     expiryDate: "1 June 2025",
-    tags: ["Fresh Food", "Minimum Spend"]
+    tags: ["Fresh Food", "Minimum Spend"],
+    usageCount: 89
   }
 ];
 
