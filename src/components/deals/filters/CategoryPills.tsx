@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
@@ -41,8 +41,9 @@ export const CategoryPills: React.FC<CategoryPillsProps> = ({
   // On mobile, wrap in ScrollArea for horizontal scrolling
   if (!isDesktop) {
     return (
-      <ScrollArea className="w-full" orientation="horizontal">
+      <ScrollArea className="w-full">
         <div className="pb-4">{pillContent}</div>
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
     );
   }
