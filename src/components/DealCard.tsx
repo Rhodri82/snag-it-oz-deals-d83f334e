@@ -1,11 +1,10 @@
 
 import React from 'react';
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, TrendingDown, ExternalLink, MessageSquare, Share2, Heart, Clock, Star } from "lucide-react";
+import { TrendingUp, TrendingDown, MessageSquare, Share2, Heart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { cn } from "@/lib/utils";
 
 interface DealCardProps {
@@ -24,6 +23,7 @@ interface DealCardProps {
   previousPrice?: string;
   featured?: boolean;
   expired?: boolean;
+  categories?: string[];
 }
 
 const DealCard = ({
@@ -36,196 +36,109 @@ const DealCard = ({
   temperature,
   votes,
   commentCount = 0,
-  expireDate,
-  shipping = "Free",
-  discount,
-  previousPrice,
+  shipping,
   featured = false,
   expired = false,
+  categories = [],
 }: DealCardProps) => {
   const [saved, setSaved] = React.useState(false);
   const [userVote, setUserVote] = React.useState<'yeah' | 'nah' | null>(null);
 
   const handleVote = (type: 'yeah' | 'nah') => {
-    if (userVote === type) {
-      setUserVote(null);
-    } else {
-      setUserVote(type);
-    }
+    setUserVote(userVote === type ? null : type);
   };
 
-  const handleSave = () => {
-    setSaved(prev => !prev);
-  };
+  const defaultImageUrl = `https://via.placeholder.com/300x200?text=${encodeURIComponent(title)}`;
 
   return (
     <Card className={cn(
-      "overflow-hidden hover:shadow-lg transition-shadow mb-4 border-t-4",
-      featured ? "border-t-secondary" : "border-t-primary",
+      "overflow-hidden transition-shadow hover:shadow-md",
+      featured ? "border-t-4 border-t-secondary" : "border-t-4 border-t-primary",
       expired && "opacity-75"
     )}>
-      <CardContent className="p-0">
-        <div className="p-3">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center space-x-1">
-              <HoverCard>
-                <HoverCardTrigger asChild>
-                  <Badge variant="outline" className="text-xs px-1 py-0 h-5 bg-background cursor-pointer">
-                    {retailer}
-                  </Badge>
-                </HoverCardTrigger>
-                <HoverCardContent className="w-60 p-2">
-                  <div className="space-y-1">
-                    <h4 className="text-sm font-semibold">{retailer}</h4>
-                    <div className="text-xs text-muted-foreground">
-                      <div className="flex justify-between">
-                        <span>Total deals:</span>
-                        <span>243</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Hot deals:</span>
-                        <span>68</span>
-                      </div>
-                    </div>
-                  </div>
-                </HoverCardContent>
-              </HoverCard>
-              <span className="text-xs text-muted-foreground flex items-center">
-                <Clock className="inline-block w-3 h-3 mr-1" /> {timestamp}
-              </span>
-              {expireDate && (
-                <span className="text-xs text-muted-foreground">
-                  · Expires {expireDate}
-                </span>
-              )}
-            </div>
-            
-            <div className="flex items-center gap-1">
-              {featured && (
-                <Badge className="bg-secondary text-secondary-foreground text-xs">
-                  Featured
-                </Badge>
-              )}
-              {expired && (
-                <Badge variant="outline" className="text-xs border-destructive text-destructive">
-                  Expired
-                </Badge>
-              )}
-            </div>
-          </div>
-          
-          <div className="flex gap-3">
-            {imageUrl && (
-              <div className="w-16 h-16 lg:w-24 lg:h-24 bg-muted flex-shrink-0">
-                <img
-                  src={imageUrl}
-                  alt={title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            )}
-            <div className="flex-1">
-              <h2 className="text-sm lg:text-base font-medium line-clamp-2 mb-1">{title}</h2>
-              <div className="flex items-center gap-2 mb-1">
-                <div className="text-lg lg:text-xl font-bold text-secondary">{price}</div>
-                {previousPrice && (
-                  <div className="text-sm line-through text-muted-foreground">{previousPrice}</div>
-                )}
-                {discount && (
-                  <Badge variant="outline" className="text-xs px-1.5 py-0 border-green-500 text-green-500">
-                    {discount}
-                  </Badge>
-                )}
-              </div>
-              {shipping && (
-                <div className="text-xs text-muted-foreground">
-                  Shipping: {shipping}
-                </div>
-              )}
-              <p className="hidden lg:block text-sm text-muted-foreground mt-2 line-clamp-2">
-                {description}
-              </p>
-            </div>
-          </div>
+      <div className="p-4 flex flex-col h-full">
+        <div className="flex items-center justify-between mb-3">
+          <Badge variant="outline" className="text-xs px-2 py-0.5 bg-background">
+            {retailer}
+          </Badge>
+          <span className="text-xs text-muted-foreground">{timestamp}</span>
         </div>
-      </CardContent>
-      <CardFooter className="p-0 flex flex-col">
-        <div className="flex items-center w-full border-t border-b border-muted">
-          <div className="flex-1 flex items-center py-2 px-3">
-            <div className="flex items-center">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className={cn(
-                      "h-7 px-1",
-                      userVote === 'yeah' && "text-primary"
-                    )}
-                    onClick={() => handleVote('yeah')}
-                  >
-                    <TrendingUp className="w-4 h-4 mr-1" />
-                    <span className="text-xs">{votes.yeah + (userVote === 'yeah' ? 1 : 0)}</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Good deal!</p>
-                </TooltipContent>
-              </Tooltip>
-              
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className={cn(
-                      "h-7 px-1",
-                      userVote === 'nah' && "text-destructive"
-                    )}
-                    onClick={() => handleVote('nah')}
-                  >
-                    <TrendingDown className="w-4 h-4 mr-1" />
-                    <span className="text-xs">{votes.nah + (userVote === 'nah' ? 1 : 0)}</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Not a good deal</p>
-                </TooltipContent>
-              </Tooltip>
-              
-              <div className="mx-2 text-xs px-1.5 py-0.5 rounded bg-muted">
-                {temperature}°
-              </div>
+
+        {(imageUrl || defaultImageUrl) && (
+          <img
+            src={imageUrl || defaultImageUrl}
+            alt={title}
+            className="w-full h-40 object-cover rounded mb-3"
+            loading="lazy"
+          />
+        )}
+
+        <h2 className="font-semibold text-base leading-snug mb-2 line-clamp-2">{title}</h2>
+        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{description}</p>
+
+        <div className="flex items-center justify-between mb-3">
+          <div className="text-lg font-bold">{price}</div>
+          {shipping && (
+            <span className="text-sm text-muted-foreground">{shipping}</span>
+          )}
+        </div>
+
+        <div className="flex items-center justify-between mt-auto pt-3 border-t">
+          <div className="flex items-center gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  className={cn("h-8 px-2", userVote === 'yeah' && "text-primary")}
+                  onClick={() => handleVote('yeah')}
+                >
+                  <TrendingUp className="w-4 h-4 mr-1" />
+                  <span className="text-xs">{votes.yeah + (userVote === 'yeah' ? 1 : 0)}</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Good deal!</TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  className={cn("h-8 px-2", userVote === 'nah' && "text-destructive")}
+                  onClick={() => handleVote('nah')}
+                >
+                  <TrendingDown className="w-4 h-4 mr-1" />
+                  <span className="text-xs">{votes.nah + (userVote === 'nah' ? 1 : 0)}</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Not a good deal</TooltipContent>
+            </Tooltip>
+
+            <div className="text-xs px-2 py-1 rounded bg-muted">
+              {temperature}°
             </div>
           </div>
-          
-          <div className="flex items-center gap-1 py-2 px-3">
-            <Button variant="ghost" size="sm" className="h-7 px-2">
-              <MessageSquare className="w-4 h-4 mr-1" />
-              <span className="text-xs">{commentCount}</span>
+
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="sm" className="h-8 px-2">
+              <MessageSquare className="w-4 h-4" />
+              <span className="ml-1 text-xs">{commentCount}</span>
             </Button>
             <Button 
               variant="ghost" 
               size="sm" 
-              className={cn(
-                "h-7 px-2",
-                saved && "text-red-500"
-              )}
-              onClick={handleSave}
+              className={cn("h-8 px-2", saved && "text-red-500")}
+              onClick={() => setSaved(!saved)}
             >
               <Heart className={cn("w-4 h-4", saved && "fill-current")} />
             </Button>
-            <Button variant="ghost" size="sm" className="h-7 px-2">
+            <Button variant="ghost" size="sm" className="h-8 px-2">
               <Share2 className="w-4 h-4" />
-            </Button>
-            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full h-7" size="sm">
-              <ExternalLink className="w-4 h-4 mr-1" />
-              <span className="text-xs">Get deal</span>
             </Button>
           </div>
         </div>
-      </CardFooter>
+      </div>
     </Card>
   );
 };
