@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import DealCard from './DealCard'; // ✅ Correct relative path
 import { Button } from "@/components/ui/button";
 import { Deal } from '@/types/deals';
+import { Card } from '@/components/ui/card';
 import { Pagination } from "@/components/Pagination";
 
 interface DealListProps {
@@ -36,16 +37,37 @@ export const DealList: React.FC<DealListProps> = ({
   }
 
   return (
-    <div className={cn(
-      viewMode === 'grid' 
-        ? 'grid grid-cols-1 md:grid-cols-2 gap-6' 
-        : 'space-y-6'
-    )}>
-      {deals.map((deal) => (
-        <DealCard key={deal.id} {...deal} />
-      ))}
+    <div className="flex flex-col md:flex-row gap-6 w-full">
+        {/* Main Content Column */}
+        <div className={cn(
+            "flex-1",
+            viewMode === 'grid'
+                ? 'grid grid-cols-1 md:grid-cols-2 gap-6'
+                : 'space-y-6'
+        )}>
+            {deals.map((deal) => (
+                <DealCard key={deal.id} {...deal} />
+            ))}
 
-      {totalPages > 1 && (
+            {totalPages > 1 && (
+                <div className="flex justify-center pt-8">
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={onPageChange}
+                    />
+                </div>
+            )}
+        </div>
+        {/* Sidebar Column (Desktop Only) */}
+        <aside className="hidden md:block md:w-80 shrink-0">
+            <Card className="p-4">
+                <h4 className="font-bold mb-2">Featured Deals</h4>
+                <p className="text-sm text-muted-foreground">Placeholder for pinned posts, trending tags, or "Editor's Pick" banners.</p>
+            </Card>
+        </aside>
+    </div>
+      {/* {totalPages > 1 && (
         <div className="flex justify-center pt-8">
           <Pagination
             currentPage={currentPage}
@@ -53,7 +75,7 @@ export const DealList: React.FC<DealListProps> = ({
             onPageChange={onPageChange}
           />
         </div>
-      )}
-    </div>
+      )} */}
+    
   );
 };
