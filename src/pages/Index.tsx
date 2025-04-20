@@ -1,13 +1,13 @@
 
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import Layout from '@/components/Layout';
 import { DealList } from '@/components/deals/DealList';
 import { DealHeader } from '@/components/deals/DealHeader';
 import { useDeals } from '@/hooks/use-deals';
 import { SAMPLE_DEALS } from '@/data/sample-deals';
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
-import Layout from '@/components/layout/Layout';
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,6 +41,7 @@ const Index = () => {
   return (
     <Layout>
       <main className="pt-[73px] pb-20 md:pb-6">
+        {/* Sticky Header */}
         <div className="bg-background sticky top-[73px] z-10 border-b">
           <div className="container mx-auto">
             <DealHeader
@@ -62,7 +63,8 @@ const Index = () => {
             />
           </div>
         </div>
-        
+
+        {/* Deal List */}
         <div className="container mx-auto py-6">
           <DealList
             deals={currentDeals}
@@ -75,6 +77,7 @@ const Index = () => {
         </div>
       </main>
 
+      {/* Floating Button on Mobile */}
       <Button 
         className="fixed bottom-4 right-4 md:hidden rounded-full shadow-lg z-50" 
         size="lg"
