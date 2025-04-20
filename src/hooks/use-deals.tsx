@@ -31,7 +31,6 @@ export const useDeals = (initialDeals: Deal[]) => {
       
       // Filter by price ranges
       if (selectedPriceRanges.length > 0) {
-        // This would need more robust price parsing logic in a real app
         const numericPrice = parseFloat(deal.price.replace(/[^0-9.]/g, ''));
         const inRange = selectedPriceRanges.some(range => {
           const [min, max] = range.split('-').map(p => parseInt(p || '9999'));

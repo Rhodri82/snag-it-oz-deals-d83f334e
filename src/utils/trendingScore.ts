@@ -1,16 +1,9 @@
 
-const GRAVITY = 1.8; // Configurable constant that affects decay rate
-
-export const calculateTrendingScore = (
-  upvotes: number,
-  downvotes: number,
-  createdAt: Date
-): number => {
-  const score = upvotes - downvotes;
+export const calculateTrendingScore = (yeah: number, nah: number, timestamp: Date) => {
+  const score = yeah - nah;
   const order = Math.log10(Math.max(Math.abs(score), 1));
-  const sign = score > 0 ? 1 : score < 0 ? -1 : 0;
-  const secondsAge = (Date.now() - createdAt.getTime()) / 1000;
-  const decay = secondsAge / 45000; // ~12.5 hours for score to halve
+  const sign = score >= 0 ? 1 : -1;
+  const seconds = timestamp.getTime() / 1000;
   
-  return sign * order - decay * GRAVITY;
+  return sign * order + seconds / 45000;
 };
