@@ -1,14 +1,13 @@
+
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DealList } from '@/components/deals/DealList';
 import { DealHeader } from '@/components/deals/DealHeader';
 import { useDeals } from '@/hooks/use-deals';
 import { SAMPLE_DEALS } from '@/data/sample-deals';
 import { UserScore } from '@/components/gamification/UserScore';
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { PlusCircle } from "lucide-react";
 
 const Index = () => {
@@ -41,57 +40,58 @@ const Index = () => {
   );
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen bg-background w-full">
-        <Header />
-        
-        <div className="flex">
-          <Sidebar />
-          
-          <div className="flex-1">
-            <div className="border-b">
-              <div className="container mx-auto px-4 py-2">
-                <div className="flex items-center gap-2 mb-4">
-                  <SidebarTrigger />
-                  <h1 className="text-xl font-semibold">All Deals</h1>
-                </div>
-                <DealHeader
-                  activeTab={activeTab}
-                  viewMode={viewMode}
-                  selectedCategories={selectedCategories}
-                  selectedRetailers={selectedRetailers}
-                  selectedPriceRanges={selectedPriceRanges}
-                  showExpired={showExpired}
-                  sortOption={sortOption}
-                  onTabChange={handleTabChange}
-                  onCategoryToggle={handleCategoryToggle}
-                  onRetailerToggle={handleRetailerToggle}
-                  onPriceRangeToggle={handlePriceRangeToggle}
-                  onShowExpiredChange={setShowExpired}
-                  onViewModeChange={setViewMode}
-                  onSortChange={setSortOption}
-                  onClearFilters={clearFilters}
-                />
-                <div className="flex items-center gap-3 justify-end mt-2">
-                  <UserScore />
-                </div>
-              </div>
+    <div className="min-h-screen bg-background">
+      <Header />
+      
+      <main>
+        <div className="border-b bg-white sticky top-16 z-10">
+          <div className="container mx-auto px-4">
+            <DealHeader
+              activeTab={activeTab}
+              viewMode={viewMode}
+              selectedCategories={selectedCategories}
+              selectedRetailers={selectedRetailers}
+              selectedPriceRanges={selectedPriceRanges}
+              showExpired={showExpired}
+              sortOption={sortOption}
+              onTabChange={handleTabChange}
+              onCategoryToggle={handleCategoryToggle}
+              onRetailerToggle={handleRetailerToggle}
+              onPriceRangeToggle={handlePriceRangeToggle}
+              onShowExpiredChange={setShowExpired}
+              onViewModeChange={setViewMode}
+              onSortChange={setSortOption}
+              onClearFilters={clearFilters}
+            />
+            <div className="flex items-center gap-3 justify-end py-2">
+              <UserScore />
             </div>
-            
-            <main className="container mx-auto px-4 py-6">
-              <DealList
-                deals={currentDeals}
-                viewMode={viewMode}
-                onClearFilters={clearFilters}
-                currentPage={currentPage}
-                onPageChange={setCurrentPage}
-                totalPages={totalPages}
-              />
-            </main>
           </div>
         </div>
-      </div>
-    </SidebarProvider>
+        
+        <div className="container mx-auto px-4 py-6">
+          <DealList
+            deals={currentDeals}
+            viewMode={viewMode}
+            onClearFilters={clearFilters}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+            totalPages={totalPages}
+          />
+        </div>
+      </main>
+
+      <Button 
+        className="fixed bottom-4 right-4 md:hidden bg-primary hover:bg-primary/90 rounded-full shadow-lg z-50" 
+        size="lg"
+        asChild
+      >
+        <Link to="/submit-deal" className="gap-2">
+          <PlusCircle className="w-5 h-5" />
+          <span>Submit a Snag</span>
+        </Link>
+      </Button>
+    </div>
   );
 };
 
