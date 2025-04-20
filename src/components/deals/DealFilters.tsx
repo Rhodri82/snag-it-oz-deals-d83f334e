@@ -41,7 +41,7 @@ export const DealFilters: React.FC<DealFiltersProps> = ({
   const totalFilters = selectedCategories.length + selectedRetailers.length + selectedPriceRanges.length;
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 flex-wrap">
       <ViewModeToggle viewMode={viewMode} onViewModeChange={onViewModeChange} />
 
       <Popover>
@@ -49,39 +49,36 @@ export const DealFilters: React.FC<DealFiltersProps> = ({
           <Button
             variant="outline"
             size="sm"
-            className="gap-1 h-9 px-3 text-xs"
+            className="gap-1 h-9 px-3 text-xs flex items-center"
           >
-            <Filter className="w-3.5 h-3.5" />
+            <Filter className="w-4 h-4" />
             Filters
             {totalFilters > 0 && (
-              <Badge className="h-5 w-5 p-0 flex items-center justify-center rounded-full ml-1">
+              <Badge className="ml-1 h-5 w-5 p-0 rounded-full flex items-center justify-center text-[11px]">
                 {totalFilters}
               </Badge>
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-64 md:w-80">
+
+        <PopoverContent className="w-[290px] md:w-[320px]">
           <div className="grid gap-4">
             <CategoryFilter 
               selectedCategories={selectedCategories}
               onCategoryToggle={onCategoryToggle}
             />
-            
             <RetailerFilter
               selectedRetailers={selectedRetailers}
               onRetailerToggle={onRetailerToggle}
             />
-            
             <PriceRangeFilter
               selectedPriceRanges={selectedPriceRanges}
               onPriceRangeToggle={onPriceRangeToggle}
             />
-            
             <ExpiredToggle
               showExpired={showExpired}
               onShowExpiredChange={onShowExpiredChange}
             />
-            
             <ClearFiltersButton
               onClearFilters={onClearFilters}
               disabled={totalFilters === 0 && !showExpired}
