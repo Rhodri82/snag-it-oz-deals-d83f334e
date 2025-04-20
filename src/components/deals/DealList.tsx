@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { cn } from "@/lib/utils";
-import DealCard from '../DealCard';
+import DealCard from './DealCard'; // Corrected path
 import { Button } from "@/components/ui/button";
 import { Deal } from '@/types/deals';
 import { Pagination } from "@/components/Pagination";
