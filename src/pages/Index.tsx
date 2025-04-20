@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Header from '../components/Header';
@@ -44,7 +43,6 @@ const Index = () => {
       <Header />
       
       <main className="pt-[73px] pb-20 md:pb-6">
-        {/* Deals Section */}
         <div className="border-b bg-white sticky top-[73px] z-10">
           <div className="container mx-auto px-4">
             <DealHeader
@@ -70,7 +68,7 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="container mx-auto px-4 py-6 max-w-3xl">
+        <div className="mx-auto px-4 py-6 max-w-[700px] lg:max-w-[800px]">
           <DealList
             deals={currentDeals}
             viewMode={viewMode}

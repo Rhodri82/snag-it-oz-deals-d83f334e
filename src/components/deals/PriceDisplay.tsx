@@ -1,19 +1,21 @@
 
 import React from 'react';
+import { cn } from "@/lib/utils";
 
 interface PriceDisplayProps {
   price: string;
   previousPrice?: string;
   shipping?: string;
+  className?: string;
 }
 
-export const PriceDisplay = ({ price, previousPrice, shipping }: PriceDisplayProps) => {
+export const PriceDisplay = ({ price, previousPrice, shipping, className }: PriceDisplayProps) => {
   return (
-    <div className="flex items-center justify-between mb-3">
-      <div className="flex items-center gap-2">
-        <div className="text-lg md:text-xl font-bold text-primary">{price}</div>
+    <div className={cn("flex items-center justify-between", className)}>
+      <div className="flex items-center gap-3">
+        <div className="text-xl md:text-2xl font-bold text-primary">{price}</div>
         {previousPrice && (
-          <span className="hidden md:inline-block text-sm line-through text-muted-foreground">
+          <span className="text-sm line-through text-muted-foreground">
             {previousPrice}
           </span>
         )}
