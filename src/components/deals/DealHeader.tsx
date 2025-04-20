@@ -43,7 +43,7 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
     <div className="bg-background px-4 sm:px-6 md:px-8 py-4 border-b">
       <div className="flex flex-col gap-4">
         {/* Tabs Row */}
-        <div>
+        <div className="pl-4 sm:pl-6 md:pl-8">
           <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
         </div>
 

@@ -59,13 +59,14 @@ const DealCard = ({
   const { userVote, handleVote } = useDealInteractions(temperature, featured, expired);
 
   return (
-    <Card className="flex flex-col md:flex-row p-4 gap-4 md:gap-6 md:p-6">
+    <Card className="flex flex-col md:flex-row p-4 gap-4 md:gap-6 md:p-6 items-start">
       {/* Desktop Voting Column */}
-      <div className="hidden md:flex flex-col items-center gap-2 px-2 w-14 shrink-0">
-          <DealVoting
-              votes={votes}
-              userVote={userVote}
-              onVote={handleVote}
+      <div className="hidden md:flex flex-col items-center gap-2 px-2 w-14 shrink-0 justify-start">
+        <DealVoting
+            votes={votes}
+            userVote={userVote}
+            onVote={handleVote}
+            className="mt-2"
               commentCount={commentCount}
               orientation="vertical"
           />
@@ -73,23 +74,23 @@ const DealCard = ({
       {/* Voting Column */}
       
       {/* Image */}
-      <div className="w-full md:w-44 shrink-0">
-        <DealImage imageUrl={imageUrl} title={title} discount={discount} />
+      <div className="w-full md:w-44 shrink-0 aspect-video">
+        <DealImage imageUrl={imageUrl} title={title} discount={discount} className="aspect-video" />
       </div>
 
-      <div className="flex-1 flex flex-col justify-between">
+      <div className="flex-1 flex flex-col justify-start gap-2">
         {/* Retailer Badge */}
         <div className="absolute top-2 left-2 bg-background px-2 py-1 rounded text-xs md:static md:bg-transparent">
           <Badge variant="outline" className="p-0">{retailer}</Badge>
         </div>
 
         {/* Title */}
-        <Link to={`/deal/${id}`} className="hover:text-primary transition-colors">
-          <h2 className="text-base md:text-lg font-semibold leading-snug">
+        <Link to={`/deal/${id}`} className="hover:text-primary transition-colors ">
+          <h2 className="text-sm md:text-lg font-semibold leading-snug ">
             {title}</h2>
         </Link>
 
-        {/* Price */}
+          {/* Price */}
         <div className="ml-2">
           <PriceDisplay
             price={price}
@@ -100,10 +101,10 @@ const DealCard = ({
         </div>
 
         {/* Description */}
-        <p className="hidden md:block text-sm text-muted-foreground my-2 line-clamp-2">{description}</p>
+        <p className="hidden md:block text-sm text-muted-foreground line-clamp-2">{description}</p>
 
         {/* Info Strip */}
-        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mt-auto">
+        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mt-2">
           <div className="flex items-center gap-1 truncate">
             <Clock className="w-3 h-3" />
             <span>{timestamp}</span>
@@ -123,11 +124,11 @@ const DealCard = ({
         </div>
 
         {/* Categories */}
-        <div className="flex flex-wrap gap-1 mt-2">
+        <div className="flex flex-wrap gap-1">
           <DealCategories categories={categories} className="p-0"/>
         </div>
 
-        {/* Mobile voting & CTA */}
+         {/* Mobile voting & CTA */}
         <div className="flex justify-between items-center mt-2 md:mt-3">
           <div className="md:hidden">
             <DealVoting
@@ -138,7 +139,7 @@ const DealCard = ({
               orientation="horizontal"
             />
           </div>
-          <div className="ml-auto ">
+          <div className=" ">
             <Button
               variant="default"
               size="default"
@@ -159,4 +160,3 @@ const DealCard = ({
 
 
 export default DealCard;
-
