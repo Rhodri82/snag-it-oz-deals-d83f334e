@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
-import { Home, Flame, Clock, PlusCircle } from "lucide-react";
+import { Home, Flame, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export const NavigationMenu = () => {
@@ -29,14 +29,6 @@ export const NavigationMenu = () => {
           <a href="/new">
             <Clock className="w-4 h-4" />
             <span>New Deals</span>
-          </a>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-      <SidebarMenuItem>
-        <SidebarMenuButton asChild>
-          <a href="/submit-deal" className="text-primary">
-            <PlusCircle className="w-4 h-4" />
-            <span>Submit a Deal</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>

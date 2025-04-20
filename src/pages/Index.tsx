@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
@@ -35,7 +34,6 @@ const Index = () => {
     clearFilters
   } = useDeals(SAMPLE_DEALS);
 
-  // Pagination logic
   const totalPages = Math.ceil(sortedDeals.length / itemsPerPage);
   const currentDeals = sortedDeals.slice(
     (currentPage - 1) * itemsPerPage,
@@ -48,10 +46,8 @@ const Index = () => {
         <Header />
         
         <div className="flex">
-          {/* Sidebar */}
           <Sidebar />
           
-          {/* Main Content */}
           <div className="flex-1">
             <div className="border-b">
               <div className="container mx-auto px-4 py-2">
@@ -78,12 +74,6 @@ const Index = () => {
                 />
                 <div className="flex items-center gap-3 justify-end mt-2">
                   <UserScore />
-                  <Button className="bg-primary hover:bg-primary/90 rounded-full" size="sm" asChild>
-                    <Link to="/submit-deal" className="hidden md:flex">
-                      <PlusCircle className="w-4 h-4 mr-1" />
-                      <span className="text-xs">Submit Deal</span>
-                    </Link>
-                  </Button>
                 </div>
               </div>
             </div>
