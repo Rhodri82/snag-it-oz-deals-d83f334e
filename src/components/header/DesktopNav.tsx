@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Home, Tag, Ticket, PlusCircle } from 'lucide-react';
+import { Home, Tag, MessageSquare, Ticket, PlusCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -75,6 +76,13 @@ export const DesktopNav: React.FC = () => {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
+
+      <Button variant="ghost" asChild>
+        <Link to="/discussions">
+          <MessageSquare className="w-4 h-4 mr-2" />
+          Discussions
+        </Link>
+      </Button>
 
       <Button variant="ghost" asChild>
         <Link to="/vouchers">

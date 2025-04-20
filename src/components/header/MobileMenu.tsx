@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Home, Tag, Info, User, Menu, Ticket, PlusCircle } from 'lucide-react';
+import { Home, Tag, MessageSquare, Menu, Ticket, PlusCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -27,13 +27,6 @@ export const MobileMenu: React.FC = () => {
             <span>Home</span>
           </Link>
           <Link 
-            to="/ripper-deals" 
-            className="flex items-center gap-2 p-3 hover:bg-muted rounded-md"
-          >
-            <Tag className="w-5 h-5" />
-            <span>Ripper Deals</span>
-          </Link>
-          <Link 
             to="/categories" 
             className="flex items-center gap-2 p-3 hover:bg-muted rounded-md"
           >
@@ -46,6 +39,13 @@ export const MobileMenu: React.FC = () => {
           >
             <Ticket className="w-5 h-5" />
             <span>Vouchers</span>
+          </Link>
+          <Link 
+            to="/discussions" 
+            className="flex items-center gap-2 p-3 hover:bg-muted rounded-md"
+          >
+            <MessageSquare className="w-5 h-5" />
+            <span>Discussions</span>
           </Link>
           <Link 
             to="/submit-deal" 

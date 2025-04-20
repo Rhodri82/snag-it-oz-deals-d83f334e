@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,6 +17,7 @@ import CommunityGuidelines from "./pages/CommunityGuidelines";
 import Legal from "./pages/Legal";
 import Contact from "./pages/Contact";
 import Discussions from "./pages/Discussions";
+import Vouchers from "./pages/Vouchers";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,11 +39,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/categories" element={<Categories />} />
               <Route path="/discussions" element={<Discussions />} />
-              <Route path="/ripper-deals" element={<Index />} />
-              <Route path="/fresh" element={<Index />} />
-              <Route path="/my-alerts" element={<Index />} />
-              <Route path="/discussions" element={<Index />} />
-              <Route path="/your-deals" element={<Index />} />
+              <Route path="/vouchers" element={<Vouchers />} />
               <Route path="/submit-deal" element={<SubmitDeal />} />
               <Route path="/about" element={<About />} />
               <Route path="/faq" element={<FAQ />} />
