@@ -8,6 +8,7 @@ import { useDeals } from '@/hooks/use-deals';
 import { SAMPLE_DEALS } from '@/data/sample-deals';
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
+import Layout from '@/components/layout/Layout';
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,12 +40,12 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
-      <main className="pt-[73px] pb-20 md:pb-6">
-        <div className="bg-background sticky top-[73px] z-10 border-b">
-          <div className="container mx-auto">
+    <Layout>
+      <div className="min-h-screen bg-background">
+        <Header />
+        
+        <main className="pt-[73px] pb-20 md:pb-6">
+          <div className="bg-background sticky top-[73px] z-10 border-b">
             <DealHeader
               activeTab={activeTab}
               viewMode={viewMode}
@@ -63,32 +64,32 @@ const Index = () => {
               onClearFilters={clearFilters}
             />
           </div>
-        </div>
-        
-        <div className="container mx-auto py-6">
-          <DealList
-            deals={currentDeals}
-            viewMode={viewMode}
-            onClearFilters={clearFilters}
-            currentPage={currentPage}
-            onPageChange={setCurrentPage}
-            totalPages={totalPages}
-          />
-        </div>
-      </main>
+          
+          <div className="py-6">
+            <DealList
+              deals={currentDeals}
+              viewMode={viewMode}
+              onClearFilters={clearFilters}
+              currentPage={currentPage}
+              onPageChange={setCurrentPage}
+              totalPages={totalPages}
+            />
+          </div>
+        </main>
 
-      <Button 
-        className="fixed bottom-4 right-4 md:hidden rounded-full shadow-lg z-50" 
-        size="lg"
-        variant="secondary"
-        asChild
-      >
-        <Link to="/submit-deal" className="gap-2">
-          <PlusCircle className="w-5 h-5" />
-          <span>Submit a Deal</span>
-        </Link>
-      </Button>
-    </div>
+        <Button 
+          className="fixed bottom-4 right-4 md:hidden rounded-full shadow-lg z-50" 
+          size="lg"
+          variant="secondary"
+          asChild
+        >
+          <Link to="/submit-deal" className="gap-2">
+            <PlusCircle className="w-5 h-5" />
+            <span>Submit a Deal</span>
+          </Link>
+        </Button>
+      </div>
+    </Layout>
   );
 };
 
