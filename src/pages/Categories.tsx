@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from "react-router-dom";
 import Header from '../components/Header';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -29,19 +30,21 @@ const Categories = () => {
         
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {CATEGORIES.map((category) => (
-            <Card key={category.name} className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-3">
-                  <category.icon className="h-6 w-6 text-primary" />
-                  {category.name}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  {category.count} active deals
-                </p>
-              </CardContent>
-            </Card>
+            <Link to="/" key={category.name}>
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardHeader className="pb-2">
+                  <CardTitle className="flex items-center gap-3">
+                    <category.icon className="h-6 w-6 text-primary" />
+                    {category.name}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    {category.count} active deals
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </main>

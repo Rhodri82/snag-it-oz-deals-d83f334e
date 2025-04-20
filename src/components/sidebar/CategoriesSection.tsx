@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from "react-router-dom";
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
 import { Filter, Tag, ChevronRight, Star } from "lucide-react";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
@@ -68,10 +69,10 @@ export const CategoriesSection = ({ isOpen, onToggle }: CategoriesSectionProps) 
           ))}
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="/categories" className="text-muted-foreground hover:text-foreground">
+              <Link to="/categories" className="text-muted-foreground hover:text-foreground">
                 <Tag className="w-4 h-4" />
                 <span>All Categories</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

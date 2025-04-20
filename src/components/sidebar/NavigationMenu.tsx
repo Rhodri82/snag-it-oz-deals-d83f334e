@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from "react-router-dom";
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
 import { Home, Flame, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -9,27 +10,27 @@ export const NavigationMenu = () => {
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <Home className="w-4 h-4" />
             <span>Home</span>
-          </a>
+          </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/ripper-deals">
+          <Link to="/ripper-deals">
             <Flame className="w-4 h-4" />
             <span>Ripper Deals</span>
             <Badge variant="outline" className="ml-auto text-xs px-1.5 py-0">24</Badge>
-          </a>
+          </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/fresh">
+          <Link to="/fresh">
             <Clock className="w-4 h-4" />
             <span>Fresh Finds</span>
-          </a>
+          </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>

@@ -34,6 +34,11 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/categories" element={<Categories />} />
+            <Route path="/ripper-deals" element={<Index />} />
+            <Route path="/fresh" element={<Index />} />
+            <Route path="/my-alerts" element={<Index />} />
+            <Route path="/discussions" element={<Index />} />
+            <Route path="/your-deals" element={<Index />} />
             <Route path="/submit-deal" element={<SubmitDeal />} />
             <Route path="/about" element={<About />} />
             <Route path="/faq" element={<FAQ />} />

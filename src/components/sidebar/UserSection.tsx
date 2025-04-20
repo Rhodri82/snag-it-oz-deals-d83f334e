@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from "react-router-dom";
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
 import { Heart, MessageSquare, Star } from "lucide-react";
 
@@ -8,26 +9,26 @@ export const UserSection = () => {
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/my-alerts">
+          <Link to="/my-alerts">
             <Heart className="w-4 h-4" />
             <span>My Watchlist</span>
-          </a>
+          </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/discussions">
+          <Link to="/discussions">
             <MessageSquare className="w-4 h-4" />
             <span>My Yarns</span>
-          </a>
+          </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/your-deals">
+          <Link to="/your-deals">
             <Star className="w-4 h-4" />
             <span>My Rippa Finds</span>
-          </a>
+          </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
