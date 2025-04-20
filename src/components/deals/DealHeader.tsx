@@ -40,26 +40,24 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
   onClearFilters
 }) => {
   return (
-    <div className="sticky top-0 z-10 bg-background border-b">
-      <div className="container mx-auto px-2 py-3">
-        <div className="flex items-center justify-between">
-          <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
-          <div className="flex items-center gap-2">
-            <DealFilters
-              selectedCategories={selectedCategories}
-              selectedRetailers={selectedRetailers}
-              selectedPriceRanges={selectedPriceRanges}
-              showExpired={showExpired}
-              onCategoryToggle={onCategoryToggle}
-              onRetailerToggle={onRetailerToggle}
-              onPriceRangeToggle={onPriceRangeToggle}
-              onShowExpiredChange={onShowExpiredChange}
-              onClearFilters={onClearFilters}
-              viewMode={viewMode}
-              onViewModeChange={onViewModeChange}
-            />
-            <DealSort sortOption={sortOption} onSortChange={onSortChange} />
-          </div>
+    <div className="bg-background">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
+        <div className="flex items-center gap-2">
+          <DealFilters
+            selectedCategories={selectedCategories}
+            selectedRetailers={selectedRetailers}
+            selectedPriceRanges={selectedPriceRanges}
+            showExpired={showExpired}
+            onCategoryToggle={onCategoryToggle}
+            onRetailerToggle={onRetailerToggle}
+            onPriceRangeToggle={onPriceRangeToggle}
+            onShowExpiredChange={onShowExpiredChange}
+            onClearFilters={onClearFilters}
+            viewMode={viewMode}
+            onViewModeChange={onViewModeChange}
+          />
+          <DealSort sortOption={sortOption} onSortChange={onSortChange} />
         </div>
       </div>
     </div>

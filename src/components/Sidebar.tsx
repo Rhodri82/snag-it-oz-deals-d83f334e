@@ -25,8 +25,8 @@ const Sidebar = () => {
   };
 
   return (
-    <ShadcnSidebar>
-      <SidebarContent>
+    <div className="h-[calc(100vh-64px)] overflow-y-auto">
+      <SidebarContent className="py-4">
         {/* Navigation Section */}
         <SidebarGroup>
           <div className="px-2 py-1.5 text-xs font-medium text-sidebar-foreground/70">Navigation</div>
@@ -51,7 +51,7 @@ const Sidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-    </ShadcnSidebar>
+    </div>
   );
 };
 

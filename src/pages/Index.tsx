@@ -12,8 +12,6 @@ import { UserScore } from '@/components/gamification/UserScore';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { PlusCircle } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,53 +47,47 @@ const Index = () => {
     <SidebarProvider>
       <div className="min-h-screen bg-background w-full">
         <Header />
+        
         <div className="flex">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button 
-                variant="ghost" 
-                size="icon"
-                className="fixed left-4 top-20 z-50"
-              >
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="p-0 w-80">
-              <Sidebar />
-            </SheetContent>
-          </Sheet>
-
-          <div className="flex-1">
-            <div className="flex items-center justify-between px-4 py-2 border-b">
-              <DealHeader
-                activeTab={activeTab}
-                viewMode={viewMode}
-                selectedCategories={selectedCategories}
-                selectedRetailers={selectedRetailers}
-                selectedPriceRanges={selectedPriceRanges}
-                showExpired={showExpired}
-                sortOption={sortOption}
-                onTabChange={handleTabChange}
-                onCategoryToggle={handleCategoryToggle}
-                onRetailerToggle={handleRetailerToggle}
-                onPriceRangeToggle={handlePriceRangeToggle}
-                onShowExpiredChange={setShowExpired}
-                onViewModeChange={setViewMode}
-                onSortChange={setSortOption}
-                onClearFilters={clearFilters}
-              />
-              <div className="flex items-center gap-3">
-                <UserScore />
-                <Button className="bg-primary hover:bg-primary/90 rounded-full" size="sm" asChild>
-                  <Link to="/submit-deal" className="hidden md:flex">
-                    <PlusCircle className="w-4 h-4 mr-1" />
-                    <span className="text-xs">Submit Bargain</span>
-                  </Link>
-                </Button>
+          {/* Sidebar */}
+          <div className="w-64 flex-shrink-0 border-r">
+            <Sidebar />
+          </div>
+          
+          {/* Main Content */}
+          <div className="flex-1 overflow-x-hidden">
+            <div className="border-b">
+              <div className="container mx-auto px-2 md:px-4 py-2">
+                <DealHeader
+                  activeTab={activeTab}
+                  viewMode={viewMode}
+                  selectedCategories={selectedCategories}
+                  selectedRetailers={selectedRetailers}
+                  selectedPriceRanges={selectedPriceRanges}
+                  showExpired={showExpired}
+                  sortOption={sortOption}
+                  onTabChange={handleTabChange}
+                  onCategoryToggle={handleCategoryToggle}
+                  onRetailerToggle={handleRetailerToggle}
+                  onPriceRangeToggle={handlePriceRangeToggle}
+                  onShowExpiredChange={setShowExpired}
+                  onViewModeChange={setViewMode}
+                  onSortChange={setSortOption}
+                  onClearFilters={clearFilters}
+                />
+                <div className="flex items-center gap-3 justify-end mt-2">
+                  <UserScore />
+                  <Button className="bg-primary hover:bg-primary/90 rounded-full" size="sm" asChild>
+                    <Link to="/submit-deal" className="hidden md:flex">
+                      <PlusCircle className="w-4 h-4 mr-1" />
+                      <span className="text-xs">Submit Bargain</span>
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </div>
             
-            <main className="container mx-auto px-4 py-6">
+            <main className="container mx-auto px-4 py-6 overflow-x-hidden">
               <DealList
                 deals={currentDeals}
                 viewMode={viewMode}
