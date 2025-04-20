@@ -23,30 +23,32 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   };
 
   return (
-    <header className="border-b bg-background fixed top-0 left-0 right-0 z-50">
-      <div className="container mx-auto h-16">
+    <header className="sticky top-0 z-50 w-full border-b bg-background">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        {/* Left Section - Logo */}
+        <Link
+          to="/"
+          className="flex items-center text-2xl font-extrabold tracking-tight leading-none space-x-1"
+        >
+          <span className="text-green-900">Deals</span>
+          <span className="text-yellow-700">Oz</span>
+        </Link>
 
-        <div className="flex items-center h-full gap-2 md:gap-4">
-            {/* Pure Text Logo */}
-            <Link to="/" className="flex items-center text-2xl font-extrabold tracking-tight leading-none space-x-1">
-                <span className="text-green-900">Deals</span>
-                <span className="text-yellow-700">Oz</span>
-            </Link>
+        {/* Center Section - Desktop Search Bar */}
+        <div className="hidden md:block flex-1">
+          <SearchBar onSearch={onSearch} />
+        </div>
+
+        {/* Right Section - Mobile Search Toggle, Nav, Actions */}
+        <div className="flex items-center gap-4">
           {/* Mobile Search Button */}
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleSearch}>
-            <Search className="h-5 w-5" />
-          </Button>
-          
-          {/* Mobile: Menu Button */}
           <Button
             variant="ghost"
             size="icon"
             className="md:hidden"
-            asChild
+            onClick={toggleSearch}
           >
-            <Link to="#">
-              <Menu className="h-5 w-5" />
-            </Link>
+            <Search className="h-5 w-5" />
           </Button>
 
           {/* Desktop Search Bar */}
@@ -55,24 +57,28 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           </div>
 
           {/* Desktop Navigation */}
-          <DesktopNav />
-
-          {/* Right Section - Search, Theme, Notifications, Profile */}
-          <div className="flex items-center gap-2 md:gap-4 ">
-            {/* Theme, Notifications, Profile */}
-            <ThemeToggle variant="ghost" />
-            <NotificationsMenu />
-            <UserMenu />
-          </div>
-
-            {/* Mobile Search Bar */}
-            {isSearchOpen && (
-              <div className="md:hidden absolute top-16 left-0 right-0 z-50 bg-background p-4 border-b">
-                  <SearchBar onSearch={onSearch}/>
-              </div>
-            )}
+          <DesktopNav />      
+          <ThemeToggle variant="ghost" />
+          <NotificationsMenu />
+          <UserMenu />
         </div>
 
+        {/* Mobile Search Bar (Dropdown) */}
+        {isSearchOpen && (
+          <div className="absolute top-16 left-0 right-0 z-50 md:hidden bg-background p-4 border-b">
+            <SearchBar onSearch={onSearch} />
+          </div>
+        )}
+
+        {/* Mobile: Menu Button */}
+        <Button variant="ghost" size="icon" className="md:hidden" asChild>
+          <Link to="#">
+            <Menu className="h-5 w-5" />
+          </Link>
+        </div>
+
+      {/* Mobile Navigation Menu */}
+      <MobileMenu />
 
 
       </div>
