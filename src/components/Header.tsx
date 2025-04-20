@@ -19,6 +19,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
     <header className="border-b bg-background fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto h-16">
         <div className="flex items-center justify-between h-full gap-4">
+          
           {/* Mobile: Menu Button */}
           <Button 
             variant="ghost" 
@@ -34,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img 
-              src="/public/lovable-uploads/94b05e26-27d9-4f0a-b50e-c3ca3ce313ca.png" 
+              src="/dealsoz_logo_clean.svg" 
               alt="DealsOz – Community Deals Across Australia" 
               className="h-8 md:h-10 w-auto"
             />
@@ -52,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           </div>
         </div>
       </div>
-      
+
       {/* Mobile Navigation Menu */}
       <MobileMenu />
     </header>
