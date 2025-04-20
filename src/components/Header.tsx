@@ -19,23 +19,23 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
     <header className="border-b bg-background fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto h-16">
         <div className="flex items-center justify-between h-full gap-4">
-          
+
           {/* Mobile: Menu Button */}
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             size="icon"
             className="md:hidden"
             asChild
           >
-            <Link to="#" className="md:hidden">
+            <Link to="#">
               <Menu className="h-5 w-5" />
             </Link>
           </Button>
 
-          {/* Text-based Logo */}
-          <Link to="/" className="flex items-center text-2xl font-bold tracking-tight leading-none">
-            <span className="text-green-800">Deals</span>
-            <span className="text-amber-700">Oz</span>
+          {/* Pure Text Logo */}
+          <Link to="/" className="flex items-center text-2xl font-extrabold tracking-tight leading-none space-x-1">
+            <span className="text-green-900">Deals</span>
+            <span className="text-yellow-700">Oz</span>
           </Link>
 
           {/* Desktop Navigation */}
