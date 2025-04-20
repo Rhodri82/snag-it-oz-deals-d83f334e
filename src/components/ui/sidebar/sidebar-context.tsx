@@ -18,6 +18,8 @@ type SidebarContext = {
   setOpenMobile: (open: boolean) => void
   isMobile: boolean
   toggleSidebar: () => void
+  activeCategoryId?: string
+  setActiveCategoryId: (id: string | undefined) => void
 }
 
 const SidebarContext = React.createContext<SidebarContext | null>(null)

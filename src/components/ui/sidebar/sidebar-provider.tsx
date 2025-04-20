@@ -29,6 +29,7 @@ export const SidebarProvider = React.forwardRef<
     const [openMobile, setOpenMobile] = React.useState(false)
     const [_open, _setOpen] = React.useState(defaultOpen)
     const open = openProp ?? _open
+    const [activeCategoryId, setActiveCategoryId] = React.useState<string | undefined>()
     
     const setOpen = React.useCallback(
       (value: boolean | ((value: boolean) => boolean)) => {
@@ -75,8 +76,10 @@ export const SidebarProvider = React.forwardRef<
         openMobile,
         setOpenMobile,
         toggleSidebar,
+        activeCategoryId,
+        setActiveCategoryId,
       }),
-      [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+      [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar, activeCategoryId, setActiveCategoryId]
     )
 
     return (
