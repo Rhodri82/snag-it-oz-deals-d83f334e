@@ -15,6 +15,7 @@ import HowItWorks from "./pages/HowItWorks";
 import CommunityGuidelines from "./pages/CommunityGuidelines";
 import Legal from "./pages/Legal";
 import Contact from "./pages/Contact";
+import Discussions from "./pages/Discussions";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,6 +36,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/categories" element={<Categories />} />
+              <Route path="/discussions" element={<Discussions />} />
               <Route path="/ripper-deals" element={<Index />} />
               <Route path="/fresh" element={<Index />} />
               <Route path="/my-alerts" element={<Index />} />
