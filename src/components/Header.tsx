@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -33,13 +32,10 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
             </Link>
           </Button>
 
-          {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <img 
-              src="/dealsoz_logo_clean.svg" 
-              alt="DealsOz – Community Deals Across Australia" 
-              className="h-10 md:h-12 w-auto object-contain block"
-            />
+          {/* Text-based Logo */}
+          <Link to="/" className="flex items-center text-2xl font-bold tracking-tight leading-none">
+            <span className="text-green-800">Deals</span>
+            <span className="text-amber-700">Oz</span>
           </Link>
 
           {/* Desktop Navigation */}
