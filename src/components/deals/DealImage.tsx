@@ -11,15 +11,16 @@ export const DealImage = ({ imageUrl, title, discount }: DealImageProps) => {
   const defaultImageUrl = `https://via.placeholder.com/300x200?text=${encodeURIComponent(title)}`;
 
   return (
-    <div className="relative">
+    <div className="relative w-full h-40 rounded border bg-muted overflow-hidden">
       <img
         src={imageUrl || defaultImageUrl}
         alt={title}
-        className="w-full h-40 object-cover rounded mb-3"
+        className="w-full h-full object-cover"
         loading="lazy"
       />
+      
       {discount && (
-        <div className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-bl">
+        <div className="absolute top-2 right-2 bg-red-500 text-white text-[11px] font-bold px-2 py-1 rounded shadow-sm z-10">
           {discount}
         </div>
       )}
