@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -11,7 +10,9 @@ import {
   Bell, 
   Search, 
   X,
-  User
+  User,
+  Heart,
+  MapPin
 } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -33,17 +34,15 @@ const Header = () => {
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // Implement search functionality here
     console.log(`Searching for: ${searchQuery}`);
     
-    // Reset search field and hide on mobile
     if (window.innerWidth < 768) {
       setShowSearch(false);
     }
   };
   
   return (
-    <header className="border-b bg-white sticky top-0 z-20">
+    <header className="border-b bg-background sticky top-0 z-20">
       <div className="container mx-auto px-2 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -64,7 +63,6 @@ const Header = () => {
             </Link>
           </div>
           
-          {/* Search form - desktop */}
           <form 
             onSubmit={handleSearch} 
             className="hidden md:flex max-w-md flex-1 mx-4"
@@ -88,7 +86,6 @@ const Header = () => {
             </div>
           </form>
           
-          {/* Mobile search toggle button */}
           <div className="md:hidden flex-1 flex justify-end">
             {!showSearch ? (
               <Button 
@@ -123,8 +120,7 @@ const Header = () => {
             )}
           </div>
           
-          {/* Main navigation - desktop */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className={`flex items-center gap-4 ${showSearch ? 'hidden' : 'flex'} md:flex`}>
             <Button variant="ghost" asChild>
               <Link to="/">
                 <Home className="w-4 h-4 mr-2" />
@@ -145,9 +141,7 @@ const Header = () => {
             </Button>
           </div>
           
-          {/* Right side actions */}
           <div className={`flex items-center gap-2 ${showSearch ? 'hidden' : 'flex'} md:flex`}>
-            {/* Notifications dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
@@ -174,7 +168,6 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           
-            {/* User account dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="hidden md:flex">
@@ -205,7 +198,6 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
             
-            {/* Submit deal button */}
             <Button className="bg-primary hover:bg-primary/90 rounded-full" size="sm" asChild>
               <Link to="/submit-deal">
                 <PlusCircle className="w-4 h-4 mr-1" />
@@ -214,9 +206,13 @@ const Header = () => {
             </Button>
           </div>
         </div>
+        
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <MapPin className="w-4 h-4" />
+          <span>Deals across Australia</span>
+        </div>
       </div>
       
-      {/* Mobile navigation drawer */}
       <Sheet>
         <SheetTrigger asChild>
           <Button 

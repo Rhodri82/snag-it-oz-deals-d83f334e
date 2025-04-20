@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import { TrendingUp, TrendingDown, MessageSquare, Share2, Heart, ExternalLink } 
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { AUSTRALIAN_DEAL_CATEGORIES } from "@/components/sidebar/sidebar-data";
 
 interface DealCardProps {
   title: string;
@@ -51,21 +51,19 @@ const DealCard = ({
   };
 
   const defaultImageUrl = `https://via.placeholder.com/300x200?text=${encodeURIComponent(title)}`;
-  
-  // Australian-themed gradient for temperature indicator
-  const getTemperatureColor = () => {
-    if (temperature >= 80) return "bg-gradient-to-r from-yellow-400 to-red-500"; // Hot deal - outback colors
-    if (temperature >= 60) return "bg-gradient-to-r from-green-400 to-blue-400"; // Good deal - Great Barrier Reef colors
-    return "bg-gradient-to-r from-blue-300 to-gray-400"; // Cold deal - Sydney Harbor on a cloudy day
-  };
-  
-  // Convert temperature to Aussie slang rating
+
   const getTemperatureRating = () => {
-    if (temperature >= 90) return "Ripper!";
-    if (temperature >= 80) return "Bonza!";
-    if (temperature >= 70) return "Pretty Good";
-    if (temperature >= 50) return "Fair Dinkum";
-    return "Bit Ordinary";
+    if (temperature >= 90) return "Deadset Ripper!";
+    if (temperature >= 80) return "Bloody Good Deal!";
+    if (temperature >= 70) return "Not Bad, Mate";
+    if (temperature >= 50) return "Fair Dinkum Bargain";
+    return "Bit Ordinary, Skip";
+  };
+
+  const getTemperatureColor = () => {
+    if (temperature >= 80) return "bg-gradient-to-r from-green-400 to-blue-500";
+    if (temperature >= 60) return "bg-gradient-to-r from-yellow-400 to-red-500";
+    return "bg-gradient-to-r from-blue-300 to-gray-400";
   };
 
   return (
@@ -195,11 +193,27 @@ const DealCard = ({
         
         {categories.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
-            {categories.map((category) => (
-              <Badge key={category} variant="secondary" className="text-xs">
-                {category}
-              </Badge>
-            ))}
+            {categories.map((category) => {
+              const categoryData = AUSTRALIAN_DEAL_CATEGORIES.find(
+                (cat) => cat.slug === category.toLowerCase()
+              );
+              
+              return (
+                <Badge 
+                  key={category} 
+                  variant="secondary" 
+                  className="text-xs flex items-center gap-1"
+                  title={categoryData?.description}
+                >
+                  {category}
+                  {categoryData && (
+                    <span className="text-muted-foreground text-[0.6rem] ml-1">
+                      {categoryData.description}
+                    </span>
+                  )}
+                </Badge>
+              );
+            })}
           </div>
         )}
       </div>
