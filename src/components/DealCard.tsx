@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -58,21 +57,20 @@ const DealCard = ({
   dealUrl = "#",
   postedBy = "Anonymous",
   location = "Australia",
-  expiresAt,
   achievements = [],
 }: DealCardProps) => {
   const { saved, userVote, handleVote, handleSave } = useDealInteractions(temperature, featured, expired);
 
   return (
     <Card className={cn(
-      "overflow-hidden transition-all hover:shadow-md",
-      featured ? "border-l-4 border-l-secondary" : "border-l-4 border-l-primary",
+      "overflow-hidden rounded-lg border-l-[4px] transition-shadow hover:shadow-md",
+      featured ? "border-l-secondary" : "border-l-primary",
       expired && "opacity-75"
     )}>
-      <div className="p-4">
-        {/* Mobile and up: Retailer badge and timestamp */}
-        <div className="flex items-center justify-between mb-3">
-          <Badge variant="outline" className="text-xs px-2 py-0.5 bg-background">
+      <div className="p-4 md:p-6">
+        {/* Retailer and time */}
+        <div className="flex justify-between items-center mb-3">
+          <Badge variant="outline" className="text-xs px-2 py-0.5">
             {retailer}
           </Badge>
           <div className="text-xs text-muted-foreground flex items-center">
@@ -81,9 +79,9 @@ const DealCard = ({
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4">
-          {/* Left column for voting on desktop */}
-          <div className="hidden md:flex md:flex-col md:items-center md:gap-2 md:w-16">
+        <div className="flex flex-col md:flex-row gap-5">
+          {/* Voting Panel (left) */}
+          <div className="hidden md:flex md:flex-col items-center w-16 shrink-0">
             <DealVoting
               votes={votes}
               userVote={userVote}
@@ -93,93 +91,70 @@ const DealCard = ({
             />
           </div>
 
-          {/* Main content with image and details */}
-          <div className="flex-1">
+          {/* Deal Body (right) */}
+          <div className="flex-1 flex flex-col gap-3">
             <div className="flex flex-col sm:flex-row gap-4">
-              {/* Image column */}
-              <div className="w-full md:w-1/3">
+              {/* Deal Image */}
+              <div className="w-full sm:w-1/3">
                 <DealImage imageUrl={imageUrl} title={title} discount={discount} />
-                
-                {/* Achievement tags */}
-                {achievements.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {achievements.includes("top-deal") && (
-                      <div className="achievement-tag flex items-center gap-1">
-                        <Award className="w-3 h-3" />
-                        <span>Top Deal This Week</span>
-                      </div>
-                    )}
-                    {achievements.includes("hot") && (
-                      <div className="achievement-tag flex items-center gap-1">
-                        <FlameKindling className="w-3 h-3" />
-                        <span>Hot Deal</span>
-                      </div>
-                    )}
-                  </div>
-                )}
               </div>
 
-              {/* Content column */}
-              <div className="flex-1 flex flex-col">
-                {/* Title */}
-                <Link to={`/deal/${id}`} className="hover:text-primary transition-colors">
-                  <h2 className="font-semibold text-base md:text-lg leading-snug mb-2">{title}</h2>
-                </Link>
+              {/* Deal Info */}
+              <div className="flex-1 flex flex-col justify-between">
+                <div>
+                  <Link to={`/deal/${id}`} className="hover:text-primary transition-colors">
+                    <h2 className="font-semibold text-base md:text-lg leading-snug mb-1">{title}</h2>
+                  </Link>
 
-                {/* Description - hidden on mobile */}
-                <p className="hidden md:block text-sm text-muted-foreground mb-3">{description}</p>
+                  <p className="hidden md:block text-sm text-muted-foreground mb-3">
+                    {description}
+                  </p>
 
-                {/* Price Display */}
-                <PriceDisplay 
-                  price={price}
-                  previousPrice={previousPrice}
-                  shipping={shipping}
-                  className="mb-3"
-                />
+                  <PriceDisplay 
+                    price={price}
+                    previousPrice={previousPrice}
+                    shipping={shipping}
+                  />
 
-                {/* Posted by info */}
-                <div className="hidden md:flex items-center gap-4 text-xs text-muted-foreground mb-3">
-                  <div className="flex items-center">
-                    <User className="w-3 h-3 mr-1" />
-                    <span>Spotted by {postedBy}</span>
-                  </div>
-                  {location && (
+                  <div className="flex flex-wrap gap-2 mt-2 text-xs text-muted-foreground">
+                    <div className="flex items-center">
+                      <User className="w-3 h-3 mr-1" />
+                      Spotted by {postedBy}
+                    </div>
                     <div className="flex items-center">
                       <MapPin className="w-3 h-3 mr-1" />
-                      <span>{location}</span>
+                      {location}
                     </div>
-                  )}
+                  </div>
                 </div>
 
-                {/* Categories - hidden on mobile */}
-                <div className="hidden md:block mb-3">
+                <div className="hidden md:flex justify-between items-center mt-3">
                   <DealCategories categories={categories} />
+                  <Button variant="secondary" size="sm" className="rounded-full text-sm px-6" asChild>
+                    <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                      Snag This Deal
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </Button>
                 </div>
-
-                {/* Mobile voting row */}
-                <div className="flex md:hidden items-center border-t border-b py-2 mb-3">
-                  <DealVoting
-                    votes={votes}
-                    userVote={userVote}
-                    onVote={handleVote}
-                    commentCount={commentCount}
-                    orientation="horizontal"
-                  />
-                </div>
-
-                {/* CTA Button */}
-                <Button 
-                  variant="secondary" 
-                  size="sm" 
-                  className="w-full md:w-auto md:ml-auto rounded-full text-sm px-6"
-                  asChild
-                >
-                  <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                    Snag This Deal
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </Button>
               </div>
+            </div>
+
+            {/* Mobile layout CTA and votes */}
+            <div className="md:hidden flex flex-col gap-3 mt-4">
+              <DealVoting
+                votes={votes}
+                userVote={userVote}
+                onVote={handleVote}
+                commentCount={commentCount}
+                orientation="horizontal"
+              />
+              <Button variant="secondary" size="sm" className="w-full rounded-full text-sm px-6" asChild>
+                <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                  Snag This Deal
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </Button>
             </div>
           </div>
         </div>
