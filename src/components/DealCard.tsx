@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, TrendingDown, ExternalLink } from "lucide-react";
+import { TrendingUp, TrendingDown, ExternalLink, MessageSquare, Share2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface DealCardProps {
@@ -27,48 +27,63 @@ const DealCard = ({
   votes,
 }: DealCardProps) => {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow mb-4 border-t-4 border-t-primary">
       <CardContent className="p-0">
-        {imageUrl && (
-          <div className="relative h-48 bg-muted">
-            <img
-              src={imageUrl}
-              alt={title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-2 right-2">
-              <Badge variant="secondary" className="text-xs">
-                {retailer}
-              </Badge>
+        <div className="p-3">
+          <div className="flex items-center space-x-1 mb-2">
+            <Badge variant="outline" className="text-xs px-1 py-0 h-5 bg-background">
+              {retailer}
+            </Badge>
+            <span className="text-xs text-muted-foreground">{timestamp}</span>
+          </div>
+          
+          <div className="flex gap-3">
+            {imageUrl && (
+              <div className="w-16 h-16 bg-muted flex-shrink-0">
+                <img
+                  src={imageUrl}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+            <div className="flex-1">
+              <h2 className="text-sm font-medium line-clamp-2 mb-1">{title}</h2>
+              <div className="text-lg font-bold text-secondary">{price}</div>
             </div>
           </div>
-        )}
-        <div className="p-4">
-          <h2 className="text-xl font-semibold mb-2">{title}</h2>
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-2xl font-bold text-primary">{price}</span>
-            {!imageUrl && (
-              <span className="text-sm text-muted-foreground">{retailer}</span>
-            )}
-          </div>
-          <p className="text-sm text-muted-foreground mb-4">{description}</p>
-          <Button className="w-full mb-2 bg-secondary hover:bg-secondary/90 text-secondary-foreground">
-            <ExternalLink className="w-4 h-4 mr-2" /> Snag it!
-          </Button>
         </div>
       </CardContent>
-      <CardFooter className="bg-muted/50 px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Button variant="outline" size="sm" className="flex items-center gap-1">
-            <TrendingUp className="w-4 h-4" />
-            Yeah ({votes.yeah})
-          </Button>
-          <Button variant="outline" size="sm" className="flex items-center gap-1">
-            <TrendingDown className="w-4 h-4" />
-            Nah ({votes.nah})
+      <CardFooter className="p-0 flex flex-col">
+        <div className="flex items-center w-full border-t border-b border-muted">
+          <div className="flex-1 flex items-center py-2 px-3">
+            <div className="flex items-center">
+              <Button variant="ghost" size="sm" className="h-7 px-1">
+                <TrendingUp className="w-4 h-4 mr-1" />
+                <span className="text-xs">{votes.yeah}</span>
+              </Button>
+              <Button variant="ghost" size="sm" className="h-7 px-1">
+                <TrendingDown className="w-4 h-4 mr-1" />
+                <span className="text-xs">{votes.nah}</span>
+              </Button>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-1 py-2 px-3">
+            <Button variant="ghost" size="sm" className="h-7 px-2">
+              <MessageSquare className="w-4 h-4" />
+            </Button>
+            <Button variant="ghost" size="sm" className="h-7 px-2">
+              <Share2 className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+        
+        <div className="w-full py-1 px-3">
+          <Button className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full">
+            <ExternalLink className="w-4 h-4 mr-2" /> Get deal
           </Button>
         </div>
-        <div className="text-sm text-muted-foreground">{timestamp}</div>
       </CardFooter>
     </Card>
   );
