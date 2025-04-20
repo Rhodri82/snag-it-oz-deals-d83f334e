@@ -2,15 +2,14 @@
 import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { DealImage } from './deals/DealImage';
 import { DealVoting } from './deals/DealVoting';
 import { DealCategories } from './deals/DealCategories';
 import { PriceDisplay } from './deals/PriceDisplay';
 import { useDealInteractions } from '@/hooks/useDealInteractions';
-import { getTemperatureRating, getTemperatureColor } from '@/utils/dealTemperature';
-import { Clock, User, MapPin, ExternalLink, Award, FlameKindling } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Clock, User, MapPin, MessageSquare, ExternalLink } from 'lucide-react';
 import { Link } from "react-router-dom";
 
 interface DealCardProps {
@@ -34,7 +33,6 @@ interface DealCardProps {
   postedBy?: string;
   location?: string;
   expiresAt?: string;
-  achievements?: string[];
 }
 
 const DealCard = ({
@@ -57,100 +55,104 @@ const DealCard = ({
   dealUrl = "#",
   postedBy = "Anonymous",
   location = "Australia",
-  achievements = [],
+  expiresAt,
 }: DealCardProps) => {
-  const { saved, userVote, handleVote, handleSave } = useDealInteractions(temperature, featured, expired);
+  const { userVote, handleVote } = useDealInteractions(temperature, featured, expired);
 
   return (
-    <Card className={cn(
-      "overflow-hidden rounded-lg border-l-[4px] transition-shadow hover:shadow-md",
-      featured ? "border-l-secondary" : "border-l-primary",
-      expired && "opacity-75"
-    )}>
-      <div className="p-4 md:p-6">
-        {/* Retailer and time */}
-        <div className="flex justify-between items-center mb-3">
-          <Badge variant="outline" className="text-xs px-2 py-0.5">
-            {retailer}
-          </Badge>
-          <div className="text-xs text-muted-foreground flex items-center">
-            <Clock className="w-3 h-3 mr-1" />
-            <span>{timestamp}</span>
-          </div>
+    <Card
+      className={cn(
+        "transition-all hover:shadow-md border-l-[4px] px-4 py-4 md:px-6 md:py-5",
+        featured ? "border-l-secondary" : "border-l-primary",
+        expired && "opacity-70"
+      )}
+    >
+      <div className="flex flex-col md:flex-row gap-4 md:items-start">
+        {/* Voting column */}
+        <div className="hidden md:flex flex-col items-center gap-2 w-14 shrink-0 pt-2">
+          <DealVoting
+            votes={votes}
+            userVote={userVote}
+            onVote={handleVote}
+            commentCount={commentCount}
+            orientation="vertical"
+          />
         </div>
 
-        <div className="flex flex-col md:flex-row gap-5">
-          {/* Voting Panel (left) */}
-          <div className="hidden md:flex md:flex-col items-center w-16 shrink-0">
-            <DealVoting
-              votes={votes}
-              userVote={userVote}
-              onVote={handleVote}
-              commentCount={commentCount}
-              orientation="vertical"
-            />
+        {/* Deal content */}
+        <div className="flex-1 flex flex-col md:flex-row gap-4">
+          {/* Deal image */}
+          <div className="w-full md:w-44 shrink-0">
+            <DealImage imageUrl={imageUrl} title={title} discount={discount} />
           </div>
 
-          {/* Deal Body (right) */}
-          <div className="flex-1 flex flex-col gap-3">
-            <div className="flex flex-col sm:flex-row gap-4">
-              {/* Deal Image */}
-              <div className="w-full sm:w-1/3">
-                <DealImage imageUrl={imageUrl} title={title} discount={discount} />
-              </div>
-
-              {/* Deal Info */}
-              <div className="flex-1 flex flex-col justify-between">
-                <div>
-                  <Link to={`/deal/${id}`} className="hover:text-primary transition-colors">
-                    <h2 className="font-semibold text-base md:text-lg leading-snug mb-1">{title}</h2>
-                  </Link>
-
-                  <p className="hidden md:block text-sm text-muted-foreground mb-3">
-                    {description}
-                  </p>
-
-                  <PriceDisplay 
-                    price={price}
-                    previousPrice={previousPrice}
-                    shipping={shipping}
-                  />
-
-                  <div className="flex flex-wrap gap-2 mt-2 text-xs text-muted-foreground">
-                    <div className="flex items-center">
-                      <User className="w-3 h-3 mr-1" />
-                      Spotted by {postedBy}
-                    </div>
-                    <div className="flex items-center">
-                      <MapPin className="w-3 h-3 mr-1" />
-                      {location}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="hidden md:flex justify-between items-center mt-3">
-                  <DealCategories categories={categories} />
-                  <Button variant="secondary" size="sm" className="rounded-full text-sm px-6" asChild>
-                    <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                      Snag This Deal
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </Button>
-                </div>
+          {/* Info */}
+          <div className="flex-1 flex flex-col justify-between">
+            {/* Top bar */}
+            <div className="flex justify-between items-center text-xs text-muted-foreground mb-1">
+              <Badge variant="outline" className="px-2 py-0.5 text-xs">{retailer}</Badge>
+              <div className="flex items-center gap-1">
+                <Clock className="w-3 h-3" />
+                <span>{timestamp}</span>
               </div>
             </div>
 
-            {/* Mobile layout CTA and votes */}
-            <div className="md:hidden flex flex-col gap-3 mt-4">
-              <DealVoting
-                votes={votes}
-                userVote={userVote}
-                onVote={handleVote}
-                commentCount={commentCount}
-                orientation="horizontal"
-              />
-              <Button variant="secondary" size="sm" className="w-full rounded-full text-sm px-6" asChild>
-                <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+            {/* Title */}
+            <Link to={`/deal/${id}`} className="hover:text-primary transition-colors">
+              <h2 className="text-base md:text-lg font-semibold leading-snug mb-1">{title}</h2>
+            </Link>
+
+            {/* Description */}
+            <p className="hidden md:block text-sm text-muted-foreground mb-2 line-clamp-2">{description}</p>
+
+            {/* Price */}
+            <PriceDisplay
+              price={price}
+              previousPrice={previousPrice}
+              shipping={shipping}
+              className="mb-2"
+            />
+
+            {/* Metadata */}
+            <div className="hidden md:flex flex-wrap text-xs text-muted-foreground gap-4 mb-2">
+              <div className="flex items-center gap-1">
+                <User className="w-3 h-3" />
+                <span>Spotted by {postedBy}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <MapPin className="w-3 h-3" />
+                <span>{location}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <MessageSquare className="w-3 h-3" />
+                <span>{commentCount} comments</span>
+              </div>
+            </div>
+
+            {/* Categories */}
+            <div className="hidden md:block mb-2">
+              <DealCategories categories={categories} />
+            </div>
+
+            {/* CTA */}
+            <div className="flex justify-between items-center mt-2 md:mt-3">
+              <div className="md:hidden">
+                <DealVoting
+                  votes={votes}
+                  userVote={userVote}
+                  onVote={handleVote}
+                  commentCount={commentCount}
+                  orientation="horizontal"
+                />
+              </div>
+
+              <Button
+                variant="default"
+                size="sm"
+                className="w-full md:w-auto rounded-full text-sm px-6"
+                asChild
+              >
+                <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                   Snag This Deal
                   <ExternalLink className="w-4 h-4" />
                 </a>
