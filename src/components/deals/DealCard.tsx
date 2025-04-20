@@ -8,7 +8,7 @@ import { DealVoting } from './DealVoting';
 import { DealCategories } from './DealCategories';
 import { PriceDisplay } from './PriceDisplay';
 import { useDealInteractions } from '@/hooks/useDealInteractions';
-import { Clock, User, MapPin, ExternalLink } from 'lucide-react';
+import { Clock, User, MapPin, ExternalLink, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from "react-router-dom";
 
@@ -62,24 +62,14 @@ const DealCard = ({
   return (
     <Card
       className={cn(
-        "overflow-hidden transition-all hover:shadow-sm px-4 py-3 md:px-6 md:py-4",
+        "transition-all hover:shadow-sm px-4 py-3 md:px-6 md:py-4",
         featured ? "border-l-4 border-l-secondary" : "border-l-4 border-l-primary",
         expired && "opacity-70"
       )}
     >
-      {/* Top Bar */}
-      <div className="flex justify-between items-center mb-2">
-        <Badge variant="outline" className="text-xs px-2 py-0.5">{retailer}</Badge>
-        <div className="text-xs text-muted-foreground flex items-center">
-          <Clock className="w-3 h-3 mr-1" />
-          <span>{timestamp}</span>
-        </div>
-      </div>
-
-      {/* Main Body */}
       <div className="flex flex-col md:flex-row gap-4">
-        {/* Voting (Desktop) */}
-        <div className="hidden md:flex flex-col items-center w-12 pt-1">
+        {/* Voting Column */}
+        <div className="hidden md:flex flex-col items-center pt-2 w-16 shrink-0">
           <DealVoting
             votes={votes}
             userVote={userVote}
@@ -89,21 +79,31 @@ const DealCard = ({
           />
         </div>
 
-        {/* Image */}
-        <div className="w-full md:w-40 shrink-0">
+        {/* Image Column */}
+        <div className="w-full md:w-44 shrink-0">
           <DealImage imageUrl={imageUrl} title={title} discount={discount} />
         </div>
 
-        {/* Text Content */}
-        <div className="flex flex-col flex-1">
+        {/* Text Column */}
+        <div className="flex-1 flex flex-col justify-between">
+          {/* Top Info */}
+          <div className="flex items-center justify-between mb-1">
+            <Badge variant="outline" className="text-xs px-2 py-0.5">{retailer}</Badge>
+            <div className="text-xs text-muted-foreground flex items-center">
+              <Clock className="w-3 h-3 mr-1" />
+              <span>{timestamp}</span>
+            </div>
+          </div>
+
+          {/* Title */}
           <Link to={`/deal/${id}`} className="hover:text-primary">
             <h2 className="text-base md:text-lg font-semibold leading-snug mb-1">{title}</h2>
           </Link>
 
-          <p className="hidden md:block text-sm text-muted-foreground mb-2 line-clamp-2">
-            {description}
-          </p>
+          {/* Description */}
+          <p className="hidden md:block text-sm text-muted-foreground mb-2 line-clamp-2">{description}</p>
 
+          {/* Price */}
           <PriceDisplay
             price={price}
             previousPrice={previousPrice}
@@ -111,7 +111,8 @@ const DealCard = ({
             className="mb-2"
           />
 
-          <div className="text-xs text-muted-foreground flex items-center gap-4 mb-2 hidden md:flex">
+          {/* Meta Info */}
+          <div className="hidden md:flex items-center text-xs text-muted-foreground gap-4 mb-2">
             <div className="flex items-center">
               <User className="w-3 h-3 mr-1" />
               <span>Spotted by {postedBy}</span>
@@ -120,29 +121,34 @@ const DealCard = ({
               <MapPin className="w-3 h-3 mr-1" />
               <span>{location}</span>
             </div>
+            <div className="flex items-center">
+              <MessageSquare className="w-3 h-3 mr-1" />
+              <span>{commentCount} comments</span>
+            </div>
           </div>
 
-          <div className="hidden md:block mb-3">
+          {/* Categories */}
+          <div className="hidden md:block mb-2">
             <DealCategories categories={categories} />
           </div>
 
-          {/* Mobile Voting */}
-          <div className="md:hidden mt-2 border-t pt-2">
-            <DealVoting
-              votes={votes}
-              userVote={userVote}
-              onVote={handleVote}
-              commentCount={commentCount}
-              orientation="horizontal"
-            />
-          </div>
-
           {/* CTA Button */}
-          <div className="mt-3">
+          <div className="flex justify-between items-center mt-2 md:mt-3">
+            {/* Mobile voting under content */}
+            <div className="md:hidden">
+              <DealVoting
+                votes={votes}
+                userVote={userVote}
+                onVote={handleVote}
+                commentCount={commentCount}
+                orientation="horizontal"
+              />
+            </div>
+
             <Button
               variant="default"
               size="sm"
-              className="w-full md:w-auto md:ml-auto rounded-full text-sm px-6"
+              className="w-full md:w-auto rounded-full text-sm px-6"
               asChild
             >
               <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
