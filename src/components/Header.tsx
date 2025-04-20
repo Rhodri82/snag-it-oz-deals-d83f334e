@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Tag, Home, Info } from "lucide-react";
+import { Tag, Home, Info, PlusCircle } from "lucide-react";
 
 const Header = () => {
   return (
@@ -39,7 +39,10 @@ const Header = () => {
             </nav>
           </div>
           <Button className="bg-primary hover:bg-primary/90" asChild>
-            <Link to="/submit-deal">Snag a Deal</Link>
+            <Link to="/submit-deal">
+              <PlusCircle className="w-4 h-4 mr-2" />
+              Submit Deal
+            </Link>
           </Button>
         </div>
       </div>

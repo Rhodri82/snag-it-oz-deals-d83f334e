@@ -2,7 +2,8 @@
 import React from 'react';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, TrendingDown } from "lucide-react";
+import { TrendingUp, TrendingDown, ExternalLink } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface DealCardProps {
   title: string;
@@ -35,15 +36,25 @@ const DealCard = ({
               alt={title}
               className="w-full h-full object-cover"
             />
+            <div className="absolute top-2 right-2">
+              <Badge variant="secondary" className="text-xs">
+                {retailer}
+              </Badge>
+            </div>
           </div>
         )}
         <div className="p-4">
           <h2 className="text-xl font-semibold mb-2">{title}</h2>
           <div className="flex items-center justify-between mb-2">
             <span className="text-2xl font-bold text-primary">{price}</span>
-            <span className="text-sm text-muted-foreground">{retailer}</span>
+            {!imageUrl && (
+              <span className="text-sm text-muted-foreground">{retailer}</span>
+            )}
           </div>
           <p className="text-sm text-muted-foreground mb-4">{description}</p>
+          <Button className="w-full mb-2 bg-secondary hover:bg-secondary/90 text-secondary-foreground">
+            <ExternalLink className="w-4 h-4 mr-2" /> Snag it!
+          </Button>
         </div>
       </CardContent>
       <CardFooter className="bg-muted/50 px-4 py-3 flex items-center justify-between">

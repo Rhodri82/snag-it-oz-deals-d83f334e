@@ -2,6 +2,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import DealCard from '../components/DealCard';
+import { Badge } from "@/components/ui/badge";
 
 const SAMPLE_DEALS = [
   {
