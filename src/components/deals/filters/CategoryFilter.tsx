@@ -1,38 +1,33 @@
 
 import React from 'react';
-import { Checkbox } from "@/components/ui/checkbox";
+import { BaseFilter } from './BaseFilter';
 
 interface CategoryFilterProps {
   selectedCategories: string[];
   onCategoryToggle: (category: string) => void;
 }
 
-const categoryOptions = ["Electronics", "Gaming", "Home & Garden", "Fashion", "Groceries", "Travel", "Services"];
+const categoryOptions = [
+  { label: "Electronics", value: "Electronics" },
+  { label: "Gaming", value: "Gaming" },
+  { label: "Home & Garden", value: "Home & Garden" },
+  { label: "Fashion", value: "Fashion" },
+  { label: "Groceries", value: "Groceries" },
+  { label: "Travel", value: "Travel" },
+  { label: "Services", value: "Services" }
+];
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   selectedCategories,
   onCategoryToggle,
 }) => {
   return (
-    <div className="space-y-2">
-      <h4 className="font-medium text-sm">Categories</h4>
-      <div className="grid grid-cols-2 gap-2">
-        {categoryOptions.map((category) => (
-          <div key={category} className="flex items-center space-x-2">
-            <Checkbox 
-              id={`category-${category}`}
-              checked={selectedCategories.includes(category)}
-              onCheckedChange={() => onCategoryToggle(category)}
-            />
-            <label 
-              htmlFor={`category-${category}`}
-              className="text-sm cursor-pointer"
-            >
-              {category}
-            </label>
-          </div>
-        ))}
-      </div>
-    </div>
+    <BaseFilter
+      title="Categories"
+      items={categoryOptions}
+      selectedItems={selectedCategories}
+      onItemToggle={onCategoryToggle}
+      className="space-y-2"
+    />
   );
 };

@@ -1,38 +1,34 @@
 
 import React from 'react';
-import { Checkbox } from "@/components/ui/checkbox";
+import { BaseFilter } from './BaseFilter';
 
 interface RetailerFilterProps {
   selectedRetailers: string[];
   onRetailerToggle: (retailer: string) => void;
 }
 
-const retailerOptions = ["Amazon", "eBay", "JB Hi-Fi", "Telstra", "ALDI", "Coles", "Woolworths", "Target"];
+const retailerOptions = [
+  { label: "Amazon", value: "Amazon" },
+  { label: "eBay", value: "eBay" },
+  { label: "JB Hi-Fi", value: "JB Hi-Fi" },
+  { label: "Telstra", value: "Telstra" },
+  { label: "ALDI", value: "ALDI" },
+  { label: "Coles", value: "Coles" },
+  { label: "Woolworths", value: "Woolworths" },
+  { label: "Target", value: "Target" }
+];
 
 export const RetailerFilter: React.FC<RetailerFilterProps> = ({
   selectedRetailers,
   onRetailerToggle,
 }) => {
   return (
-    <div className="space-y-2">
-      <h4 className="font-medium text-sm">Retailers</h4>
-      <div className="grid grid-cols-2 gap-2">
-        {retailerOptions.map((retailer) => (
-          <div key={retailer} className="flex items-center space-x-2">
-            <Checkbox
-              id={`retailer-${retailer}`}
-              checked={selectedRetailers.includes(retailer)}
-              onCheckedChange={() => onRetailerToggle(retailer)}
-            />
-            <label
-              htmlFor={`retailer-${retailer}`}
-              className="text-sm cursor-pointer"
-            >
-              {retailer}
-            </label>
-          </div>
-        ))}
-      </div>
-    </div>
+    <BaseFilter
+      title="Retailers"
+      items={retailerOptions}
+      selectedItems={selectedRetailers}
+      onItemToggle={onRetailerToggle}
+      className="space-y-2"
+    />
   );
 };
