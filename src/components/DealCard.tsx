@@ -1,190 +1,84 @@
 
-import React from 'react';
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { DealImage } from './deals/DealImage';
-import { DealVoting } from './deals/DealVoting';
-import { DealCategories } from './deals/DealCategories';
-import { PriceDisplay } from './deals/PriceDisplay';
-import { useDealInteractions } from '@/hooks/useDealInteractions';
-import { getTemperatureRating, getTemperatureColor } from '@/utils/dealTemperature';
-import { Clock, User, MapPin, ExternalLink, Award, FlameKindling } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React from "react";
+import { Deal } from "@/types";
 import { Link } from "react-router-dom";
+import { ThumbsUp, ThumbsDown, MessageSquare } from "lucide-react";
 
 interface DealCardProps {
-  id: number;
-  title: string;
-  price: string;
-  retailer: string;
-  description: string;
-  imageUrl?: string;
-  timestamp: string;
-  temperature: number;
-  votes: { yeah: number; nah: number };
-  commentCount?: number;
-  shipping?: string;
-  discount?: string;
-  previousPrice?: string;
-  featured?: boolean;
-  expired?: boolean;
-  categories?: string[];
-  dealUrl?: string;
-  postedBy?: string;
-  location?: string;
-  expiresAt?: string;
-  achievements?: string[];
+  deal: Deal;
 }
 
-const DealCard = ({
-  id,
-  title,
-  price,
-  retailer,
-  description,
-  imageUrl,
-  timestamp,
-  temperature,
-  votes,
-  commentCount = 0,
-  shipping,
-  discount,
-  previousPrice,
-  featured = false,
-  expired = false,
-  categories = [],
-  dealUrl = "#",
-  postedBy = "Anonymous",
-  location = "Australia",
-  expiresAt,
-  achievements = [],
-}: DealCardProps) => {
-  const { saved, userVote, handleVote, handleSave } = useDealInteractions(temperature, featured, expired);
-
+export const DealCard: React.FC<DealCardProps> = ({ deal }) => {
   return (
-    <Card className={cn(
-      "overflow-hidden transition-all hover:shadow-md",
-      featured ? "border-l-4 border-l-secondary" : "border-l-4 border-l-primary",
-      expired && "opacity-75"
-    )}>
-      <div className="p-4">
-        {/* Mobile and up: Retailer badge and timestamp */}
-        <div className="flex items-center justify-between mb-3">
-          <Badge variant="outline" className="text-xs px-2 py-0.5 bg-background">
-            {retailer}
-          </Badge>
-          <div className="text-xs text-muted-foreground flex items-center">
-            <Clock className="w-3 h-3 mr-1" />
-            <span>{timestamp}</span>
+    <div className="rounded-lg border shadow-sm hover:shadow-md transition-shadow bg-white dark:bg-card px-4 py-5 mb-6">
+      <div className="flex items-start justify-between">
+        {/* Retailer and Metadata */}
+        <div className="text-sm font-medium text-muted-foreground mb-2">
+          {deal.retailer}
+        </div>
+
+        {/* Age */}
+        <div className="text-xs text-muted-foreground">{deal.timeAgo}</div>
+      </div>
+
+      {/* Title & Price Block */}
+      <div className="flex flex-col md:flex-row md:items-center md:gap-6">
+        <div className="flex-1">
+          <h2 className="text-lg font-semibold mb-1">{deal.title}</h2>
+          <p className="text-sm text-muted-foreground">{deal.description}</p>
+
+          <div className="mt-3 flex items-center gap-3">
+            <span className="text-xl font-bold">${deal.price}</span>
+            {deal.originalPrice && (
+              <>
+                <span className="line-through text-muted-foreground">${deal.originalPrice}</span>
+                <span className="text-green-600 text-sm font-medium">
+                  {deal.discountPercent}% OFF
+                </span>
+              </>
+            )}
+          </div>
+
+          <div className="text-xs text-muted-foreground mt-2">
+            Shipping: {deal.shipping}
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4">
-          {/* Left column for voting on desktop */}
-          <div className="hidden md:flex md:flex-col md:items-center md:gap-2 md:w-16">
-            <DealVoting
-              votes={votes}
-              userVote={userVote}
-              onVote={handleVote}
-              commentCount={commentCount}
-              orientation="vertical"
-            />
+        {/* Vote / Comment Stats */}
+        <div className="flex flex-col items-center gap-2 mt-4 md:mt-0 md:w-[90px]">
+          <div className="flex items-center gap-1 text-green-700">
+            <ThumbsUp size={16} /> {deal.upvotes}
           </div>
-
-          {/* Main content with image and details */}
-          <div className="flex-1">
-            <div className="flex flex-col sm:flex-row gap-4">
-              {/* Image column */}
-              <div className="w-full md:w-1/3">
-                <DealImage imageUrl={imageUrl} title={title} discount={discount} />
-                
-                {/* Achievement tags */}
-                {achievements.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {achievements.includes("top-deal") && (
-                      <div className="achievement-tag flex items-center gap-1">
-                        <Award className="w-3 h-3" />
-                        <span>Top Deal This Week</span>
-                      </div>
-                    )}
-                    {achievements.includes("hot") && (
-                      <div className="achievement-tag flex items-center gap-1">
-                        <FlameKindling className="w-3 h-3" />
-                        <span>Hot Deal</span>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Content column */}
-              <div className="flex-1 flex flex-col">
-                {/* Title */}
-                <Link to={`/deal/${id}`} className="hover:text-primary transition-colors">
-                  <h2 className="font-semibold text-base md:text-lg leading-snug mb-2">{title}</h2>
-                </Link>
-
-                {/* Description - hidden on mobile */}
-                <p className="hidden md:block text-sm text-muted-foreground mb-3">{description}</p>
-
-                {/* Price Display */}
-                <PriceDisplay 
-                  price={price}
-                  previousPrice={previousPrice}
-                  shipping={shipping}
-                  className="mb-3"
-                />
-
-                {/* Posted by info */}
-                <div className="hidden md:flex items-center gap-4 text-xs text-muted-foreground mb-3">
-                  <div className="flex items-center">
-                    <User className="w-3 h-3 mr-1" />
-                    <span>Spotted by {postedBy}</span>
-                  </div>
-                  {location && (
-                    <div className="flex items-center">
-                      <MapPin className="w-3 h-3 mr-1" />
-                      <span>{location}</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Categories - hidden on mobile */}
-                <div className="hidden md:block mb-3">
-                  <DealCategories categories={categories} />
-                </div>
-
-                {/* Mobile voting row */}
-                <div className="flex md:hidden items-center border-t border-b py-2 mb-3">
-                  <DealVoting
-                    votes={votes}
-                    userVote={userVote}
-                    onVote={handleVote}
-                    commentCount={commentCount}
-                    orientation="horizontal"
-                  />
-                </div>
-
-                {/* CTA Button */}
-                <Button 
-                  variant="secondary" 
-                  size="sm" 
-                  className="w-full md:w-auto md:ml-auto rounded-full text-sm px-6"
-                  asChild
-                >
-                  <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                    Snag This Deal
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </Button>
-              </div>
-            </div>
+          <div className="flex items-center gap-1 text-red-500">
+            <ThumbsDown size={16} /> {deal.downvotes}
+          </div>
+          <div className="flex items-center gap-1 text-muted-foreground">
+            <MessageSquare size={16} /> {deal.comments}
           </div>
         </div>
       </div>
-    </Card>
+
+      {/* Tags */}
+      <div className="mt-4 flex flex-wrap gap-2">
+        {deal.tags.map((tag) => (
+          <span
+            key={tag}
+            className="pill pill-amber font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div className="mt-4 flex justify-end">
+        <Link
+          to={deal.link}
+          className="inline-flex items-center gap-2 text-sm font-medium rounded-md bg-secondary text-white px-4 py-2 hover:opacity-90 transition"
+        >
+          Snag This Deal
+        </Link>
+      </div>
+    </div>
   );
 };
-
-export default DealCard;
