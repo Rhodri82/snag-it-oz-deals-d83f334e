@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
-import { Heart, Check, Star } from "lucide-react";
+import { Heart, Check, Star, Flame } from "lucide-react";
 
 export const UserSection = () => {
   return (
@@ -27,6 +27,14 @@ export const UserSection = () => {
           <a href="/your-deals">
             <Star className="w-4 h-4" />
             <span>Your Submissions</span>
+          </a>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+      <SidebarMenuItem>
+        <SidebarMenuButton asChild>
+          <a href="/hot-deals">
+            <Flame className="w-4 h-4" />
+            <span>Hot Deals</span>
           </a>
         </SidebarMenuButton>
       </SidebarMenuItem>
