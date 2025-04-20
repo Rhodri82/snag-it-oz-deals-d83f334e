@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
-import { Home, Fire, Clock, PlusCircle } from "lucide-react";
+import { Home, Flame, Clock, PlusCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export const NavigationMenu = () => {
@@ -18,7 +18,7 @@ export const NavigationMenu = () => {
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
           <a href="/hot">
-            <Fire className="w-4 h-4" />
+            <Flame className="w-4 h-4" />
             <span>Hot Deals</span>
             <Badge variant="outline" className="ml-auto text-xs px-1.5 py-0">24</Badge>
           </a>
