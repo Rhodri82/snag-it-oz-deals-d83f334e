@@ -3,16 +3,38 @@ import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Clock, User, MapPin, ExternalLink } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { DealCategories } from './deals/DealCategories';
 import { DealImage } from './deals/DealImage';
 import { DealVoting } from './deals/DealVoting';
+import { DealCategories } from './deals/DealCategories';
 import { PriceDisplay } from './deals/PriceDisplay';
 import { useDealInteractions } from '@/hooks/useDealInteractions';
-import { getTemperatureColor } from '@/utils/dealTemperature';
-import type { Deal } from '@/types/deals';
+import { getTemperatureRating, getTemperatureColor } from '@/utils/dealTemperature';
+import { Clock, User, MapPin, ExternalLink, Tag } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from "react-router-dom";
+
+interface DealCardProps {
+  id: number;
+  title: string;
+  price: string;
+  retailer: string;
+  description: string;
+  imageUrl?: string;
+  timestamp: string;
+  temperature: number;
+  votes: { yeah: number; nah: number };
+  commentCount?: number;
+  shipping?: string;
+  discount?: string;
+  previousPrice?: string;
+  featured?: boolean;
+  expired?: boolean;
+  categories?: string[];
+  dealUrl?: string;
+  postedBy?: string;
+  location?: string;
+  expiresAt?: string;
+}
 
 const DealCard = ({
   id,
@@ -34,7 +56,8 @@ const DealCard = ({
   dealUrl = "#",
   postedBy = "Anonymous",
   location = "Australia",
-}: Deal) => {
+  expiresAt,
+}: DealCardProps) => {
   const { saved, userVote, handleVote, handleSave } = useDealInteractions(temperature, featured, expired);
 
   return (
@@ -44,7 +67,7 @@ const DealCard = ({
       expired && "opacity-75"
     )}>
       <div className="p-4">
-        {/* Header: Retailer & Timestamp */}
+        {/* Mobile and up: Retailer badge and timestamp */}
         <div className="flex items-center justify-between mb-3">
           <Badge variant="outline" className="text-xs px-2 py-0.5 bg-background">
             {retailer}
@@ -56,28 +79,28 @@ const DealCard = ({
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
-          {/* Deal Image */}
+          {/* Thumbnail Image (all screens) */}
           <div className="md:w-1/3">
             <DealImage imageUrl={imageUrl} title={title} discount={discount} />
           </div>
 
-          {/* Deal Content */}
           <div className="flex-1 flex flex-col">
+            {/* Title (all screens) */}
             <Link to={`/deal/${id}`} className="hover:text-primary transition-colors">
               <h2 className="font-semibold text-base md:text-lg leading-snug mb-2">{title}</h2>
             </Link>
 
-            {/* Description - Desktop only */}
+            {/* Description (desktop only) */}
             <p className="hidden lg:block text-sm text-muted-foreground mb-3">{description}</p>
 
-            {/* Price Display */}
+            {/* Price Display (all screens) */}
             <PriceDisplay 
               price={price}
               previousPrice={previousPrice}
               shipping={shipping}
             />
 
-            {/* Posted By - Tablet and up */}
+            {/* Posted by info (tablet and up) */}
             <div className="hidden md:flex items-center gap-4 text-xs text-muted-foreground mt-2 mb-3">
               <div className="flex items-center">
                 <User className="w-3 h-3 mr-1" />
@@ -91,18 +114,18 @@ const DealCard = ({
               )}
             </div>
 
-            {/* Categories - Desktop only */}
+            {/* Categories (desktop only) */}
             <div className="hidden lg:block mb-3">
               <DealCategories categories={categories} />
             </div>
 
-            {/* Deal Score & CTA */}
+            {/* Deal Score and CTA */}
             <div className="flex items-center justify-between mt-auto">
               <div className={cn(
                 "text-xs px-2 py-1 rounded text-white",
                 getTemperatureColor(temperature)
               )}>
-                {temperature}°
+                {temperature}° <span className="hidden sm:inline">{getTemperatureRating(temperature)}</span>
               </div>
               
               <Button 
@@ -117,7 +140,7 @@ const DealCard = ({
               </Button>
             </div>
 
-            {/* Voting Section */}
+            {/* Voting and Actions */}
             <div className="mt-3 pt-3 border-t">
               <div className="flex items-center justify-between">
                 <DealVoting
