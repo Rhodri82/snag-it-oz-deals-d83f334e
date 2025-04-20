@@ -40,10 +40,15 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
   onClearFilters
 }) => {
   return (
-    <div className="bg-background">
-      <div className="flex flex-wrap items-center justify-between gap-2 max-w-[1200px] mx-auto">
-        <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
-        <div className="flex items-center gap-2">
+    <div className="bg-background px-4 sm:px-6 md:px-8 py-4 border-b">
+      <div className="flex flex-col gap-4">
+        {/* Tabs Row */}
+        <div>
+          <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
+        </div>
+
+        {/* Filters & Sort Row */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <DealFilters
             selectedCategories={selectedCategories}
             selectedRetailers={selectedRetailers}
