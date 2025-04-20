@@ -6,14 +6,22 @@ interface FeatureCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
+  accentColor?: string;
 }
 
-export const FeatureCard = ({ icon: Icon, title, description }: FeatureCardProps) => {
+export const FeatureCard = ({ 
+  icon: Icon, 
+  title, 
+  description, 
+  accentColor = "bg-primary/10" 
+}: FeatureCardProps) => {
   return (
-    <Card>
+    <Card className="transition-all hover:shadow-md">
       <CardHeader>
         <CardTitle className="flex items-center gap-3">
-          <Icon className="h-6 w-6 text-primary" />
+          <div className={`p-2 rounded-full ${accentColor}`}>
+            <Icon className="h-6 w-6 text-primary" />
+          </div>
           {title}
         </CardTitle>
       </CardHeader>
