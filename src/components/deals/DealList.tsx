@@ -33,7 +33,7 @@ export const DealList: React.FC<DealListProps> = ({
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div className="space-y-4">
         {deals.map((deal) => (
           <DealCard key={deal.id} {...deal} />

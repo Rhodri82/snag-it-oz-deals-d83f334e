@@ -69,7 +69,7 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="container mx-auto px-4 py-6 max-w-4xl">
+        <div className="container mx-auto px-4 py-6 max-w-3xl">
           <DealList
             deals={currentDeals}
             viewMode="list"
