@@ -35,6 +35,36 @@
     
     --radius: 0.5rem;
   }
+
+  .dark {
+    --background: 0 0% 12%; /* #1e1e1e */
+    --foreground: 0 0% 98%; /* #fafafa */
+    
+    --card: 0 0% 16%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 0 0% 16%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 4 79% 55%; /* Keep the same primary */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 0 0% 30%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 70%;
+    
+    --accent: 199 97% 38%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 4 79% 55%;
+  }
 }
  
 @layer base {
@@ -67,12 +97,12 @@
     @apply text-sm px-3 py-1 rounded-full;
   }
   .pill-amber {
-    @apply bg-amber-100 text-amber-700;
+    @apply bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300;
   }
   .pill-sky {
-    @apply bg-sky-100 text-sky-700;
+    @apply bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300;
   }
   .pill-green {
-    @apply bg-green-100 text-green-700;
+    @apply bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300;
   }
 }

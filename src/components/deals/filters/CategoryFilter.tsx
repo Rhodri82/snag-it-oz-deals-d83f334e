@@ -23,6 +23,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
 }) => {
   return (
     <div className="w-full py-2">
+      <h4 className="font-medium text-sm mb-2">Categories</h4>
       <CategoryPills
         categories={categoryOptions}
         selectedCategories={selectedCategories}

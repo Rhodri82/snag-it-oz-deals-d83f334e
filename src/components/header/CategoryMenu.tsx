@@ -8,6 +8,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { Tag } from 'lucide-react';
 
 const categoryGroups = [
   {
@@ -27,12 +28,12 @@ const categoryGroups = [
     items: ["Clothing", "Shoes", "Accessories", "Sports"]
   },
   {
-    name: "Bunnings",
+    name: "Home & Garden",
     items: ["Tools", "Garden", "Paint", "Storage"]
   },
   {
-    name: "Tradies Corner",
-    items: ["Power Tools", "Work Wear", "Equipment", "Materials"]
+    name: "Services",
+    items: ["Insurance", "Banking", "Internet", "Mobile"]
   }
 ];
 
@@ -46,6 +47,7 @@ export const CategoryMenu: React.FC = () => {
           <NavigationMenuTrigger 
             className={location.pathname === "/categories" ? "bg-primary text-primary-foreground" : ""}
           >
+            <Tag className="w-4 h-4 mr-2" />
             Categories
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -57,7 +59,7 @@ export const CategoryMenu: React.FC = () => {
                     {group.items.map((item) => (
                       <li key={item}>
                         <Link
-                          to={`/categories/${item.toLowerCase()}`}
+                          to={`/categories/${item.toLowerCase().replace(/\s+/g, '-')}`}
                           className="block text-sm py-1 px-2 rounded-md hover:bg-accent"
                         >
                           {item}

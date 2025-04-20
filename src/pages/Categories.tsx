@@ -19,7 +19,7 @@ const Categories = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 pt-[73px]">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Browse Categories</h1>
           <Button className="flex items-center gap-2">
@@ -30,7 +30,7 @@ const Categories = () => {
         
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {CATEGORIES.map((category) => (
-            <Link to="/" key={category.name}>
+            <Link to={`/categories/${category.name.toLowerCase()}`} key={category.name}>
               <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                 <CardHeader className="pb-2">
                   <CardTitle className="flex items-center gap-3">

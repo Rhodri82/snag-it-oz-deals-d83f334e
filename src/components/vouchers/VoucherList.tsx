@@ -12,7 +12,7 @@ const VoucherList = ({ vouchers }: VoucherListProps) => {
     <div className="space-y-4">
       {vouchers.map((voucher) => (
         <VoucherCard
-          key={voucher.code}
+          key={voucher.id}
           storeLogo={voucher.storeLogo}
           storeName={voucher.storeName}
           code={voucher.code}

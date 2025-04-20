@@ -66,4 +66,3 @@ const Vouchers = () => {
 };
 
 export default Vouchers;
-

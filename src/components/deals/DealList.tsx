@@ -17,6 +17,7 @@ interface DealListProps {
 
 export const DealList: React.FC<DealListProps> = ({ 
   deals, 
+  viewMode,
   onClearFilters,
   currentPage = 1,
   onPageChange = () => {},

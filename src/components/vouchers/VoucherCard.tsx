@@ -92,7 +92,7 @@ const VoucherCard = ({
                 </div>
               ) : (
                 <Button 
-                  className="flex-1"
+                  className="flex-1 rounded-full"
                   onClick={() => setIsRevealed(true)}
                 >
                   Reveal Code

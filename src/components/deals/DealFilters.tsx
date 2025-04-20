@@ -92,4 +92,3 @@ export const DealFilters: React.FC<DealFiltersProps> = ({
     </div>
   );
 };
-

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -61,75 +62,105 @@ const DealCard = ({
 
   return (
     <Card className={cn(
-      "overflow-hidden transition-all hover:shadow-md mb-6",
+      "overflow-hidden transition-all hover:shadow-md",
       featured ? "border-l-4 border-l-secondary" : "border-l-4 border-l-primary",
       expired && "opacity-75"
     )}>
-      <div className="p-4 md:p-6">
-        {/* Header: Store badge and timestamp */}
-        <div className="flex items-center justify-between mb-4">
-          <Badge variant="outline" className="text-xs px-2 py-0.5 bg-background">
-            {retailer}
-          </Badge>
-          <div className="flex items-center text-xs text-muted-foreground">
-            <Clock className="w-3 h-3 mr-1" />
-            <span>{timestamp}</span>
+      <div className="p-4">
+        <div className="flex flex-col md:flex-row gap-4">
+          {/* Left column for voting on desktop */}
+          <div className="hidden md:flex md:flex-col md:items-center md:gap-2 md:w-16">
+            <DealVoting
+              votes={votes}
+              userVote={userVote}
+              onVote={handleVote}
+              commentCount={commentCount}
+              orientation="vertical"
+            />
           </div>
-        </div>
 
-        {/* Title */}
-        <Link to={`/deal/${id}`} className="block hover:text-primary transition-colors mb-4">
-          <h2 className="font-semibold text-lg md:text-xl leading-snug">{title}</h2>
-        </Link>
-
-        {/* Price Display */}
-        <PriceDisplay 
-          price={price}
-          previousPrice={previousPrice}
-          shipping={shipping}
-          className="mb-4"
-        />
-
-        {/* Description - Hidden on mobile */}
-        <p className="hidden md:block text-sm text-muted-foreground mb-4">{description}</p>
-
-        {/* Metadata */}
-        <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mb-4">
-          <div className="flex items-center">
-            <User className="w-3 h-3 mr-1" />
-            <span>Spotted by {postedBy}</span>
-          </div>
-          {location && (
-            <div className="flex items-center">
-              <MapPin className="w-3 h-3 mr-1" />
-              <span>{location}</span>
+          {/* Main content with image and details */}
+          <div className="flex-1">
+            {/* Mobile and up: Retailer badge and timestamp */}
+            <div className="flex items-center justify-between mb-3">
+              <Badge variant="outline" className="text-xs px-2 py-0.5 bg-background">
+                {retailer}
+              </Badge>
+              <div className="text-xs text-muted-foreground flex items-center">
+                <Clock className="w-3 h-3 mr-1" />
+                <span>{timestamp}</span>
+              </div>
             </div>
-          )}
-        </div>
 
-        {/* Categories */}
-        <div className="mb-4">
-          <DealCategories categories={categories} />
-        </div>
+            <div className="flex flex-col md:flex-row gap-4">
+              {/* Image column */}
+              <div className="w-full md:w-1/3">
+                <DealImage imageUrl={imageUrl} title={title} discount={discount} />
+              </div>
 
-        {/* Deal Score and Actions */}
-        <div className="flex flex-col md:flex-row gap-4 items-center border-t pt-4">
-          <DealVoting
-            votes={votes}
-            userVote={userVote}
-            onVote={handleVote}
-            commentCount={commentCount}
-          />
-          
-          <Button 
-            variant="default"
-            className="w-full md:w-auto rounded-full text-sm px-6 ml-auto"
-            asChild
-          >
-            <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-              Snag This Deal <ExternalLink className="w-4 h-4" />
-            </a>
-          </Button>
+              {/* Content column */}
+              <div className="flex-1 flex flex-col">
+                {/* Title */}
+                <Link to={`/deal/${id}`} className="hover:text-primary transition-colors">
+                  <h2 className="font-semibold text-base md:text-lg leading-snug mb-2">{title}</h2>
+                </Link>
+
+                {/* Description - hidden on mobile */}
+                <p className="hidden md:block text-sm text-muted-foreground mb-3">{description}</p>
+
+                {/* Price Display */}
+                <PriceDisplay 
+                  price={price}
+                  previousPrice={previousPrice}
+                  shipping={shipping}
+                  className="mb-3"
+                />
+
+                {/* Posted by info */}
+                <div className="hidden md:flex items-center gap-4 text-xs text-muted-foreground mb-3">
+                  <div className="flex items-center">
+                    <User className="w-3 h-3 mr-1" />
+                    <span>Spotted by {postedBy}</span>
+                  </div>
+                  {location && (
+                    <div className="flex items-center">
+                      <MapPin className="w-3 h-3 mr-1" />
+                      <span>{location}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Categories - hidden on mobile */}
+                <div className="hidden md:block mb-3">
+                  <DealCategories categories={categories} />
+                </div>
+
+                {/* Mobile voting row */}
+                <div className="flex md:hidden items-center border-t border-b py-2 mb-3">
+                  <DealVoting
+                    votes={votes}
+                    userVote={userVote}
+                    onVote={handleVote}
+                    commentCount={commentCount}
+                    orientation="horizontal"
+                  />
+                </div>
+
+                {/* CTA Button */}
+                <Button 
+                  variant="default" 
+                  size="sm" 
+                  className="w-full md:w-auto md:ml-auto rounded-full text-sm px-6"
+                  asChild
+                >
+                  <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                    Snag This Deal
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </Card>
