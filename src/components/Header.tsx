@@ -25,6 +25,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   return (
     <header className="border-b bg-background fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto h-16">
+
         <div className="flex items-center h-full gap-2 md:gap-4">
           {/* Mobile Search Button */}
           <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleSearch}>
@@ -48,17 +49,16 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
             <span className="text-green-900">Deals</span>
             <span className="text-yellow-700">Oz</span>
           </Link>
+           {/* Desktop Navigation */}
+          <DesktopNav />
 
-          {/* Search Bar - Desktop */}
-          <div className="hidden md:block flex-1">
-            <SearchBar onSearch={onSearch} />
-          </div>
 
-          {/* Desktop Navigation and Right Section */}
+          {/* Right Section - Search, Theme, Notifications, Profile */}
           <div className="flex items-center gap-2 md:gap-4 ml-auto">
-            {/* Desktop Navigation */}
-            <DesktopNav />
-
+          {/* Desktop Search Bar */}
+            <div className="hidden md:block mr-4">
+              <SearchBar onSearch={onSearch} />
+            </div>
             {/* Theme, Notifications, Profile */}
             <ThemeToggle variant="ghost" />
             <NotificationsMenu />
@@ -71,11 +71,10 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
                   <SearchBar onSearch={onSearch}/>
               </div>
             )}
-          
-          {/* Mobile Search Button */}
-          
-
         </div>
+
+
+
       </div>
 
       {/* Mobile Navigation Menu */}
