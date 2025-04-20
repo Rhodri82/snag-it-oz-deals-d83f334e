@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   return (
     <header className="border-b bg-background fixed top-0 left-0 right-0 z-50">
-      <div className="container mx-auto h-20"> {/* Increased header height */}
+      <div className="container mx-auto h-16">
         <div className="flex items-center justify-between h-full gap-4">
           
           {/* Mobile: Menu Button */}
@@ -37,8 +38,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
             <img 
               src="/dealsoz_logo_clean.svg" 
               alt="DealsOz – Community Deals Across Australia" 
-              style={{ height: '2.25rem' }} // 36px, sits cleanly inside h-20
-              className="w-auto object-contain block"
+              className="h-10 md:h-12 w-auto object-contain block"
             />
           </Link>
 
