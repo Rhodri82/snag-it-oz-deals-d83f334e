@@ -12,7 +12,8 @@ import {
   X,
   User,
   Heart,
-  MapPin
+  MapPin,
+  Shield
 } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -137,6 +138,12 @@ const Header = () => {
               <Link to="/about">
                 <Info className="w-4 h-4 mr-2" />
                 About
+              </Link>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link to="/community-guidelines">
+                <Shield className="w-4 h-4 mr-2" />
+                Guidelines
               </Link>
             </Button>
           </div>
