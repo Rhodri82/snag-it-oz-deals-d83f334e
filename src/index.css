@@ -5,7 +5,7 @@
  
 @layer base {
   :root {
-    --background: 122 20% 95%; /* Soft, muted green that complements the logo */
+    --background: 34 15% 95%; /* Light beige background that contrasts with the green logo */
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -36,4 +36,3 @@
     @apply bg-background text-foreground;
   }
 }
-
