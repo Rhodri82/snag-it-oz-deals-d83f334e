@@ -9,6 +9,8 @@ import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import Categories from "./pages/Categories";
 import SubmitDeal from "./pages/SubmitDeal";
+import DealDetail from "./pages/DealDetail";
+import Alerts from "./pages/Alerts";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import FAQ from "./pages/FAQ";
@@ -41,6 +43,8 @@ const App = () => (
               <Route path="/discussions" element={<Discussions />} />
               <Route path="/vouchers" element={<Vouchers />} />
               <Route path="/submit-deal" element={<SubmitDeal />} />
+              <Route path="/deal/:id" element={<DealDetail />} />
+              <Route path="/alerts" element={<Alerts />} />
               <Route path="/about" element={<About />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/how-it-works" element={<HowItWorks />} />

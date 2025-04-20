@@ -65,7 +65,7 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="mx-auto px-4 py-6 max-w-[700px] lg:max-w-[800px]">
+        <div className="mx-auto px-4 py-6 max-w-[800px]">
           <DealList
             deals={currentDeals}
             viewMode={viewMode}
