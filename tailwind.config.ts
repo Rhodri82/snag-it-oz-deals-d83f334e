@@ -26,6 +26,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -64,9 +67,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-      },
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',
