@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { cn } from "@/lib/utils";
-import DealCard from './DealCard'; // Correct path
+import DealCard from './DealCard'; // ✅ Correct relative path
 import { Button } from "@/components/ui/button";
 import { Deal } from '@/types/deals';
 import { Pagination } from "@/components/Pagination";
@@ -37,7 +37,9 @@ export const DealList: React.FC<DealListProps> = ({
 
   return (
     <div className={cn(
-      viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 gap-6' : 'space-y-6'
+      viewMode === 'grid' 
+        ? 'grid grid-cols-1 md:grid-cols-2 gap-6' 
+        : 'space-y-6'
     )}>
       {deals.map((deal) => (
         <DealCard key={deal.id} {...deal} />
