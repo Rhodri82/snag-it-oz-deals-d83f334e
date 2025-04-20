@@ -39,7 +39,7 @@ const DealCard = ({
           
           <div className="flex gap-3">
             {imageUrl && (
-              <div className="w-16 h-16 bg-muted flex-shrink-0">
+              <div className="w-16 h-16 lg:w-24 lg:h-24 bg-muted flex-shrink-0">
                 <img
                   src={imageUrl}
                   alt={title}
@@ -48,8 +48,11 @@ const DealCard = ({
               </div>
             )}
             <div className="flex-1">
-              <h2 className="text-sm font-medium line-clamp-2 mb-1">{title}</h2>
-              <div className="text-lg font-bold text-secondary">{price}</div>
+              <h2 className="text-sm lg:text-base font-medium line-clamp-2 mb-1">{title}</h2>
+              <div className="text-lg lg:text-xl font-bold text-secondary">{price}</div>
+              <p className="hidden lg:block text-sm text-muted-foreground mt-2 line-clamp-2">
+                {description}
+              </p>
             </div>
           </div>
         </div>
@@ -76,13 +79,11 @@ const DealCard = ({
             <Button variant="ghost" size="sm" className="h-7 px-2">
               <Share2 className="w-4 h-4" />
             </Button>
+            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full h-7" size="sm">
+              <ExternalLink className="w-4 h-4 mr-1" />
+              <span className="text-xs">Get deal</span>
+            </Button>
           </div>
-        </div>
-        
-        <div className="w-full py-1 px-3">
-          <Button className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full">
-            <ExternalLink className="w-4 h-4 mr-2" /> Get deal
-          </Button>
         </div>
       </CardFooter>
     </Card>

@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import DealCard from '../components/DealCard';
-import { Badge } from "@/components/ui/badge";
+import Sidebar from '../components/Sidebar';
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 
 const SAMPLE_DEALS = [
@@ -65,72 +66,79 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState("popular");
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <div className="sticky top-0 z-10 bg-background border-b">
-        <div className="container mx-auto px-2 py-3">
-          <div className="flex items-center text-sm overflow-x-auto hide-scrollbar">
-            <Button 
-              variant={activeTab === "popular" ? "default" : "ghost"} 
-              size="sm"
-              onClick={() => setActiveTab("popular")}
-              className="rounded-full text-xs"
-            >
-              Popular deals
-            </Button>
-            <Button 
-              variant={activeTab === "newest" ? "default" : "ghost"} 
-              size="sm"
-              onClick={() => setActiveTab("newest")}
-              className="rounded-full text-xs"
-            >
-              Newest
-            </Button>
-            <Button 
-              variant={activeTab === "hottest" ? "default" : "ghost"} 
-              size="sm"
-              onClick={() => setActiveTab("hottest")}
-              className="rounded-full text-xs"
-            >
-              Hottest
-            </Button>
-            <Button 
-              variant={activeTab === "discussed" ? "default" : "ghost"} 
-              size="sm"
-              onClick={() => setActiveTab("discussed")}
-              className="rounded-full text-xs"
-            >
-              Discussed
-            </Button>
+    <SidebarProvider>
+      <div className="min-h-screen bg-background w-full">
+        <Header />
+        <div className="flex">
+          <Sidebar />
+          <div className="flex-1">
+            <div className="sticky top-0 z-10 bg-background border-b">
+              <div className="container mx-auto px-2 py-3">
+                <div className="flex items-center text-sm overflow-x-auto hide-scrollbar">
+                  <Button 
+                    variant={activeTab === "popular" ? "default" : "ghost"} 
+                    size="sm"
+                    onClick={() => setActiveTab("popular")}
+                    className="rounded-full text-xs whitespace-nowrap"
+                  >
+                    Popular deals
+                  </Button>
+                  <Button 
+                    variant={activeTab === "newest" ? "default" : "ghost"} 
+                    size="sm"
+                    onClick={() => setActiveTab("newest")}
+                    className="rounded-full text-xs whitespace-nowrap"
+                  >
+                    Newest
+                  </Button>
+                  <Button 
+                    variant={activeTab === "hottest" ? "default" : "ghost"} 
+                    size="sm"
+                    onClick={() => setActiveTab("hottest")}
+                    className="rounded-full text-xs whitespace-nowrap"
+                  >
+                    Hottest
+                  </Button>
+                  <Button 
+                    variant={activeTab === "discussed" ? "default" : "ghost"} 
+                    size="sm"
+                    onClick={() => setActiveTab("discussed")}
+                    className="rounded-full text-xs whitespace-nowrap"
+                  >
+                    Discussed
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <main className="container mx-auto px-2 py-3">
+              {activeTab === "popular" && (
+                <div className="space-y-1">
+                  {SAMPLE_DEALS.map((deal) => (
+                    <DealCard key={deal.id} {...deal} />
+                  ))}
+                </div>
+              )}
+              {activeTab === "newest" && (
+                <div className="flex items-center justify-center h-32 text-muted-foreground">
+                  Switch to this tab to see the newest deals
+                </div>
+              )}
+              {activeTab === "hottest" && (
+                <div className="flex items-center justify-center h-32 text-muted-foreground">
+                  Switch to this tab to see the hottest deals
+                </div>
+              )}
+              {activeTab === "discussed" && (
+                <div className="flex items-center justify-center h-32 text-muted-foreground">
+                  Switch to this tab to see the most discussed deals
+                </div>
+              )}
+            </main>
           </div>
         </div>
       </div>
-
-      <main className="container mx-auto px-2 py-3">
-        {activeTab === "popular" && (
-          <div className="space-y-1">
-            {SAMPLE_DEALS.map((deal) => (
-              <DealCard key={deal.id} {...deal} />
-            ))}
-          </div>
-        )}
-        {activeTab === "newest" && (
-          <div className="flex items-center justify-center h-32 text-muted-foreground">
-            Switch to this tab to see the newest deals
-          </div>
-        )}
-        {activeTab === "hottest" && (
-          <div className="flex items-center justify-center h-32 text-muted-foreground">
-            Switch to this tab to see the hottest deals
-          </div>
-        )}
-        {activeTab === "discussed" && (
-          <div className="flex items-center justify-center h-32 text-muted-foreground">
-            Switch to this tab to see the most discussed deals
-          </div>
-        )}
-      </main>
-    </div>
+    </SidebarProvider>
   );
 };
 
