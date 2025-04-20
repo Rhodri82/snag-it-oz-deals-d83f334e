@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import DealCard from '../components/DealCard';
 import Sidebar from '../components/Sidebar';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Filter, Grid3X3, LayoutList, ChevronDown } from "lucide-react";
 import { 
@@ -111,7 +111,6 @@ const SAMPLE_DEALS = [
   }
 ];
 
-// Filter and sort options
 const categoryOptions = ["Electronics", "Gaming", "Home & Garden", "Fashion", "Groceries", "Travel", "Services"];
 const retailerOptions = ["Amazon", "eBay", "JB Hi-Fi", "Telstra", "ALDI", "Coles", "Woolworths", "Target"];
 const priceRanges = [
@@ -135,23 +134,17 @@ const Index = () => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   
   const filteredDeals = SAMPLE_DEALS.filter(deal => {
-    // Filter by expired status
     if (!showExpired && deal.expired) return false;
     
-    // Filter by categories if any selected
     if (selectedCategories.length > 0 && !deal.categories?.some(cat => selectedCategories.includes(cat))) {
       return false;
     }
     
-    // Filter by retailers if any selected
     if (selectedRetailers.length > 0 && !selectedRetailers.includes(deal.retailer)) {
       return false;
     }
     
-    // Filter by price range if any selected
     if (selectedPriceRanges.length > 0) {
-      // Implementation would depend on how price values are stored
-      // This is a placeholder for the price range filtering logic
       return true;
     }
     
@@ -161,16 +154,12 @@ const Index = () => {
   const sortedDeals = [...filteredDeals].sort((a, b) => {
     switch (sortOption) {
       case "newest":
-        // Simple descending sort by id (assuming higher id = newer)
         return b.id - a.id;
       case "hottest":
-        // Sort by temperature
         return b.temperature - a.temperature;
       case "discussed":
-        // Sort by comment count
         return (b.commentCount || 0) - (a.commentCount || 0);
       default: // popular
-        // Sort by votes (yeah - nah)
         return (b.votes.yeah - b.votes.nah) - (a.votes.yeah - a.votes.nah);
     }
   });
@@ -199,7 +188,6 @@ const Index = () => {
     );
   };
 
-  // Clear all filters function
   const clearFilters = () => {
     setSelectedCategories([]);
     setSelectedRetailers([]);
@@ -216,7 +204,6 @@ const Index = () => {
           <div className="flex-1">
             <div className="sticky top-0 z-10 bg-background border-b">
               <div className="container mx-auto px-2 py-3">
-                {/* Tabs for view options */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center text-sm overflow-x-auto hide-scrollbar">
                     <Button 
@@ -253,7 +240,6 @@ const Index = () => {
                     </Button>
                   </div>
                   
-                  {/* Display options and filters */}
                   <div className="flex items-center gap-2">
                     <div className="hidden md:flex border rounded-md">
                       <Button
