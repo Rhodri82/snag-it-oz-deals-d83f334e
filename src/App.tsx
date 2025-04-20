@@ -5,7 +5,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CategoryProvider } from "@/contexts/CategoryContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import Footer from "./components/Footer";
+import { BottomNav } from "./components/layout/BottomNav";
 import Index from "./pages/Index";
 import Categories from "./pages/Categories";
 import SubmitDeal from "./pages/SubmitDeal";
@@ -32,33 +34,36 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <CategoryProvider>
-        <BrowserRouter>
-          <TooltipProvider>
-            <div className="min-h-screen flex flex-col">
-              <Toaster />
-              <Sonner />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/categories" element={<Categories />} />
-                <Route path="/discussions" element={<Discussions />} />
-                <Route path="/vouchers" element={<Vouchers />} />
-                <Route path="/submit-deal" element={<SubmitDeal />} />
-                <Route path="/deal/:id" element={<DealDetail />} />
-                <Route path="/alerts" element={<Alerts />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/how-it-works" element={<HowItWorks />} />
-                <Route path="/community-guidelines" element={<CommunityGuidelines />} />
-                <Route path="/legal" element={<Legal />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              <Footer />
-            </div>
-          </TooltipProvider>
-        </BrowserRouter>
-      </CategoryProvider>
+      <ThemeProvider>
+        <CategoryProvider>
+          <BrowserRouter>
+            <TooltipProvider>
+              <div className="min-h-screen flex flex-col">
+                <Toaster />
+                <Sonner />
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/categories" element={<Categories />} />
+                  <Route path="/discussions" element={<Discussions />} />
+                  <Route path="/vouchers" element={<Vouchers />} />
+                  <Route path="/submit-deal" element={<SubmitDeal />} />
+                  <Route path="/deal/:id" element={<DealDetail />} />
+                  <Route path="/alerts" element={<Alerts />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/how-it-works" element={<HowItWorks />} />
+                  <Route path="/community-guidelines" element={<CommunityGuidelines />} />
+                  <Route path="/legal" element={<Legal />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+                <Footer />
+                <BottomNav />
+              </div>
+            </TooltipProvider>
+          </BrowserRouter>
+        </CategoryProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };

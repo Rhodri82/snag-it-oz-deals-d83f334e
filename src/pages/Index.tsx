@@ -43,7 +43,7 @@ const Index = () => {
       <Header />
       
       <main className="pt-[73px] pb-20 md:pb-6">
-        <div className="border-b bg-white dark:bg-background sticky top-[73px] z-10">
+        <div className="border-b bg-background sticky top-[73px] z-10">
           <div className="container mx-auto px-4">
             <DealHeader
               activeTab={activeTab}
@@ -78,8 +78,9 @@ const Index = () => {
       </main>
 
       <Button 
-        className="fixed bottom-4 right-4 md:hidden bg-primary hover:bg-primary/90 rounded-full shadow-lg z-50" 
+        className="fixed bottom-4 right-4 md:hidden rounded-full shadow-lg z-50" 
         size="lg"
+        variant="secondary"
         asChild
       >
         <Link to="/submit-deal" className="gap-2">

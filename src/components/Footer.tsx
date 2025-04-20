@@ -53,7 +53,7 @@ const Footer = () => {
                 className="flex-1"
                 required
               />
-              <Button type="submit" className="whitespace-nowrap">
+              <Button type="submit" variant="secondary" className="whitespace-nowrap">
                 Sign Up
               </Button>
             </form>

@@ -8,6 +8,7 @@ import { DesktopNav } from './header/DesktopNav';
 import { UserMenu } from './header/UserMenu';
 import { NotificationsMenu } from './header/NotificationsMenu';
 import { MobileMenu } from './header/MobileMenu';
+import { ThemeToggle } from './theme/ThemeToggle';
 
 interface HeaderProps {
   onSearch?: (query: string) => void;
@@ -33,18 +34,19 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           {/* Logo - Centered on mobile, Left on desktop */}
           <Link to="/" className="flex items-center md:mr-8">
             <img 
-              src="/lovable-uploads/fc099099-dc15-4611-b504-03e427847e9a.png" 
-              alt="DealsOz Logo" 
-              className="h-8 w-auto"
+              src="/public/lovable-uploads/94b05e26-27d9-4f0a-b50e-c3ca3ce313ca.png" 
+              alt="DealsOz – Community Deals Across Australia" 
+              className="h-8 md:h-10 w-auto"
             />
           </Link>
 
           {/* Desktop Navigation */}
           <DesktopNav />
 
-          {/* Right Section - Search, Notifications, Profile */}
+          {/* Right Section - Search, Theme, Notifications, Profile */}
           <div className="flex items-center gap-2">
             <SearchBar onSearch={onSearch} />
+            <ThemeToggle variant="ghost" />
             <NotificationsMenu />
             <UserMenu />
           </div>

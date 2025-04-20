@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Copy } from "lucide-react";
+import { Calendar, Copy, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
@@ -27,26 +27,35 @@ const VoucherCard = ({
   tags = [],
 }: VoucherCardProps) => {
   const [isRevealed, setIsRevealed] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
   const { toast } = useToast();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code);
+    setIsCopied(true);
+    
     toast({
       title: "Code copied!",
       description: `${code} has been copied to your clipboard.`,
     });
+    
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
   };
 
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-md">
+    <Card className="overflow-hidden transition-all hover:shadow-md bg-background/80 border border-muted">
       <div className="p-4">
         <div className="flex items-start gap-4">
           {/* Store Logo */}
-          <img
-            src={storeLogo}
-            alt={`${storeName} logo`}
-            className="w-16 h-16 object-contain rounded-md"
-          />
+          <div className="w-16 h-16 flex items-center justify-center rounded-md bg-muted/50">
+            <img
+              src={storeLogo}
+              alt={`${storeName} logo`}
+              className="w-12 h-12 object-contain"
+            />
+          </div>
           
           <div className="flex-1">
             {/* Store Name & Summary */}
@@ -62,7 +71,7 @@ const VoucherCard = ({
             {tags.length > 0 && (
               <div className="hidden md:flex flex-wrap gap-1 mb-3">
                 {tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
+                  <Badge key={tag} variant="outline" className="text-xs bg-primary/5 text-primary border-primary/20">
                     {tag}
                   </Badge>
                 ))}
@@ -81,17 +90,22 @@ const VoucherCard = ({
                 <div className="flex-1 flex items-center gap-2 p-2 bg-muted rounded-md">
                   <code className="text-sm font-mono">{code}</code>
                   <Button
-                    variant="ghost"
+                    variant={isCopied ? "default" : "outline"}
                     size="sm"
                     className="ml-auto h-8 px-2"
                     onClick={handleCopy}
                   >
-                    <Copy className="h-4 w-4" />
+                    {isCopied ? (
+                      <Check className="h-4 w-4" />
+                    ) : (
+                      <Copy className="h-4 w-4" />
+                    )}
                     <span className="sr-only">Copy code</span>
                   </Button>
                 </div>
               ) : (
                 <Button 
+                  variant="secondary"
                   className="flex-1 rounded-full"
                   onClick={() => setIsRevealed(true)}
                 >

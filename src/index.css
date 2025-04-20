@@ -5,40 +5,44 @@
  
 @layer base {
   :root {
-    --background: 0 0% 100%; /* White */
-    --foreground: 0 0% 13%; /* #212121 */
+    --background: 0 0% 98%; /* Neutral sand: #FAFAFA */
+    --foreground: 0 0% 12%; /* Slate-adjacent for text */
     
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 13%;
+    --card-foreground: 0 0% 12%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 13%;
+    --popover-foreground: 0 0% 12%;
     
-    --primary: 4 79% 55%; /* #E53935 */
-    --primary-foreground: 0 0% 100%;
+    --primary: 140 45% 21%; /* Eucalyptus green: #1C4C2E */
+    --primary-foreground: 0 0% 98%;
     
-    --secondary: 0 0% 62%; /* #9E9E9E */
-    --secondary-foreground: 0 0% 13%;
+    --secondary: 31 74% 43%; /* Outback ochre: #BF6C1D */
+    --secondary-foreground: 0 0% 98%;
     
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 0 0% 46%; /* #757575 */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
     
-    --accent: 199 97% 48%; /* #03A9F4 */
-    --accent-foreground: 0 0% 100%;
+    --accent: 140 45% 21%; /* Same as primary for consistency */
+    --accent-foreground: 0 0% 98%;
+    --accent-info: 199 97% 48%;
+    --accent-success: 142 71% 45%;
+    --accent-warning: 33 100% 50%;
+    --accent-tag: 33 90% 55%;
     
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 98%;
     
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 4 79% 55%; /* Same as primary */
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 140 45% 21%;
     
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 0 0% 12%; /* #1e1e1e */
-    --foreground: 0 0% 98%; /* #fafafa */
+    --background: 0 0% 12%; /* Slate: #1E1E1E */
+    --foreground: 0 0% 98%;
     
     --card: 0 0% 16%;
     --card-foreground: 0 0% 98%;
@@ -46,24 +50,28 @@
     --popover: 0 0% 16%;
     --popover-foreground: 0 0% 98%;
     
-    --primary: 4 79% 55%; /* Keep the same primary */
-    --primary-foreground: 0 0% 100%;
+    --primary: 140 45% 24%; /* Slightly lightened Eucalyptus for dark mode */
+    --primary-foreground: 0 0% 98%;
     
-    --secondary: 0 0% 30%;
+    --secondary: 31 74% 48%; /* Slightly lightened Ochre for dark mode */
     --secondary-foreground: 0 0% 98%;
     
-    --muted: 0 0% 18%;
+    --muted: 0 0% 20%;
     --muted-foreground: 0 0% 70%;
     
-    --accent: 199 97% 38%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 140 45% 24%;
+    --accent-foreground: 0 0% 98%;
+    --accent-info: 199 97% 40%;
+    --accent-success: 142 71% 38%;
+    --accent-warning: 33 100% 45%;
+    --accent-tag: 33 90% 50%;
     
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 98%;
     
     --border: 0 0% 25%;
     --input: 0 0% 25%;
-    --ring: 4 79% 55%;
+    --ring: 140 45% 30%;
   }
 }
  
@@ -104,5 +112,13 @@
   }
   .pill-green {
     @apply bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300;
+  }
+  
+  .achievement-tag {
+    @apply text-xs font-medium px-2 py-1 rounded-sm bg-accent-tag/10 text-accent-tag;
+  }
+  
+  .level-badge {
+    @apply inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full bg-primary/10 text-primary;
   }
 }

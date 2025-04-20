@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { User } from 'lucide-react';
+import { User, Award } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,6 +13,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export const UserMenu: React.FC = () => {
+  // This would come from a user context or auth system in a real app
+  const userLevel = {
+    level: 2,
+    title: "Deal Spotter",
+    streak: 3,
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -21,7 +28,16 @@ export const UserMenu: React.FC = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <div className="flex flex-col p-2">
+          <p className="font-medium">Guest User</p>
+          <div className="level-badge mt-1">
+            <Award className="h-3 w-3" />
+            Level {userLevel.level} - {userLevel.title}
+          </div>
+          <div className="text-xs text-muted-foreground mt-1">
+            {userLevel.streak} day streak
+          </div>
+        </div>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer">

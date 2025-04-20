@@ -9,7 +9,7 @@ import { DealCategories } from './deals/DealCategories';
 import { PriceDisplay } from './deals/PriceDisplay';
 import { useDealInteractions } from '@/hooks/useDealInteractions';
 import { getTemperatureRating, getTemperatureColor } from '@/utils/dealTemperature';
-import { Clock, User, MapPin, ExternalLink } from 'lucide-react';
+import { Clock, User, MapPin, ExternalLink, Award, FlameKindling } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from "react-router-dom";
 
@@ -34,6 +34,7 @@ interface DealCardProps {
   postedBy?: string;
   location?: string;
   expiresAt?: string;
+  achievements?: string[];
 }
 
 const DealCard = ({
@@ -57,6 +58,7 @@ const DealCard = ({
   postedBy = "Anonymous",
   location = "Australia",
   expiresAt,
+  achievements = [],
 }: DealCardProps) => {
   const { saved, userVote, handleVote, handleSave } = useDealInteractions(temperature, featured, expired);
 
@@ -67,6 +69,17 @@ const DealCard = ({
       expired && "opacity-75"
     )}>
       <div className="p-4">
+        {/* Mobile and up: Retailer badge and timestamp */}
+        <div className="flex items-center justify-between mb-3">
+          <Badge variant="outline" className="text-xs px-2 py-0.5 bg-background">
+            {retailer}
+          </Badge>
+          <div className="text-xs text-muted-foreground flex items-center">
+            <Clock className="w-3 h-3 mr-1" />
+            <span>{timestamp}</span>
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row gap-4">
           {/* Left column for voting on desktop */}
           <div className="hidden md:flex md:flex-col md:items-center md:gap-2 md:w-16">
@@ -81,21 +94,28 @@ const DealCard = ({
 
           {/* Main content with image and details */}
           <div className="flex-1">
-            {/* Mobile and up: Retailer badge and timestamp */}
-            <div className="flex items-center justify-between mb-3">
-              <Badge variant="outline" className="text-xs px-2 py-0.5 bg-background">
-                {retailer}
-              </Badge>
-              <div className="text-xs text-muted-foreground flex items-center">
-                <Clock className="w-3 h-3 mr-1" />
-                <span>{timestamp}</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               {/* Image column */}
               <div className="w-full md:w-1/3">
                 <DealImage imageUrl={imageUrl} title={title} discount={discount} />
+                
+                {/* Achievement tags */}
+                {achievements.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {achievements.includes("top-deal") && (
+                      <div className="achievement-tag flex items-center gap-1">
+                        <Award className="w-3 h-3" />
+                        <span>Top Deal This Week</span>
+                      </div>
+                    )}
+                    {achievements.includes("hot") && (
+                      <div className="achievement-tag flex items-center gap-1">
+                        <FlameKindling className="w-3 h-3" />
+                        <span>Hot Deal</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Content column */}
@@ -148,7 +168,7 @@ const DealCard = ({
 
                 {/* CTA Button */}
                 <Button 
-                  variant="default" 
+                  variant="secondary" 
                   size="sm" 
                   className="w-full md:w-auto md:ml-auto rounded-full text-sm px-6"
                   asChild

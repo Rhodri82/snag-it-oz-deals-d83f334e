@@ -43,7 +43,8 @@ export const DesktopNav: React.FC = () => {
       </Button>
 
       <Button 
-        className={`${location.pathname === "/submit-deal" ? "bg-primary/90" : "bg-primary"} hover:bg-primary/90 rounded-full`}
+        variant="secondary"
+        className="rounded-full"
         size="sm" 
         asChild
       >
