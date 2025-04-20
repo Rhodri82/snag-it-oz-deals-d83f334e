@@ -4,43 +4,11 @@ import { Link } from "react-router-dom";
 import Header from '../components/Header';
 import { DealList } from '@/components/deals/DealList';
 import { DealHeader } from '@/components/deals/DealHeader';
-import VoucherList from '@/components/vouchers/VoucherList';
 import { useDeals } from '@/hooks/use-deals';
 import { SAMPLE_DEALS } from '@/data/sample-deals';
 import { UserScore } from '@/components/gamification/UserScore';
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
-import { type Voucher } from '@/types/vouchers';
-
-// Sample voucher data
-const SAMPLE_VOUCHERS: Voucher[] = [
-  {
-    id: 1,
-    storeLogo: "/placeholder.svg",
-    storeName: "Woolworths",
-    code: "SAVE20",
-    summary: "20% off your first online shop",
-    description: "Save 20% on your first online grocery shop at Woolworths. Minimum spend $100.",
-    postedBy: "DealHunter",
-    timestamp: "2 hours ago",
-    expiryDate: "30 May 2025",
-    tags: ["Groceries", "Online Only", "New Customers"],
-    usageCount: 156
-  },
-  {
-    id: 2,
-    storeLogo: "/placeholder.svg",
-    storeName: "Coles",
-    code: "FRESH15",
-    summary: "$15 off fresh produce",
-    description: "Get $15 off when you spend $100 or more on fresh produce.",
-    postedBy: "BargainPro",
-    timestamp: "1 day ago",
-    expiryDate: "1 June 2025",
-    tags: ["Fresh Food", "Minimum Spend"],
-    usageCount: 89
-  }
-];
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,7 +49,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <DealHeader
               activeTab={activeTab}
-              viewMode="list"
+              viewMode={viewMode}
               selectedCategories={selectedCategories}
               selectedRetailers={selectedRetailers}
               selectedPriceRanges={selectedPriceRanges}
@@ -92,7 +60,7 @@ const Index = () => {
               onRetailerToggle={handleRetailerToggle}
               onPriceRangeToggle={handlePriceRangeToggle}
               onShowExpiredChange={setShowExpired}
-              onViewModeChange={() => {}}
+              onViewModeChange={setViewMode}
               onSortChange={setSortOption}
               onClearFilters={clearFilters}
             />
@@ -103,16 +71,9 @@ const Index = () => {
         </div>
         
         <div className="container mx-auto px-4 py-6 max-w-3xl">
-          {/* Vouchers Section */}
-          <div className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">Featured Vouchers</h2>
-            <VoucherList vouchers={SAMPLE_VOUCHERS} />
-          </div>
-
-          {/* Deals List */}
           <DealList
             deals={currentDeals}
-            viewMode="list"
+            viewMode={viewMode}
             onClearFilters={clearFilters}
             currentPage={currentPage}
             onPageChange={setCurrentPage}
