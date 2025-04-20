@@ -4,14 +4,25 @@ import { cn } from "@/lib/utils";
 import DealCard from '../DealCard';
 import { Button } from "@/components/ui/button";
 import { Deal } from '@/types/deals';
+import { Pagination } from "@/components/Pagination";
 
 interface DealListProps {
   deals: Deal[];
   viewMode: "list" | "grid";
   onClearFilters: () => void;
+  currentPage?: number;
+  onPageChange?: (page: number) => void;
+  totalPages?: number;
 }
 
-export const DealList: React.FC<DealListProps> = ({ deals, viewMode, onClearFilters }) => {
+export const DealList: React.FC<DealListProps> = ({ 
+  deals, 
+  viewMode, 
+  onClearFilters,
+  currentPage = 1,
+  onPageChange = () => {},
+  totalPages = 1
+}) => {
   if (deals.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
@@ -23,14 +34,26 @@ export const DealList: React.FC<DealListProps> = ({ deals, viewMode, onClearFilt
   }
 
   return (
-    <div className={cn(
-      viewMode === "list" 
-        ? "space-y-4" 
-        : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-    )}>
-      {deals.map((deal) => (
-        <DealCard key={deal.id} {...deal} />
-      ))}
+    <div className="space-y-8">
+      <div className={cn(
+        viewMode === "list" 
+          ? "space-y-4" 
+          : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      )}>
+        {deals.map((deal) => (
+          <DealCard key={deal.id} {...deal} />
+        ))}
+      </div>
+      
+      {totalPages > 1 && (
+        <div className="flex justify-center my-8">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={onPageChange}
+          />
+        </div>
+      )}
     </div>
   );
 };

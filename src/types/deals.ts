@@ -20,4 +20,8 @@ export interface Deal {
   featured?: boolean;
   expired?: boolean;
   categories?: string[];
+  dealUrl?: string;
+  postedBy?: string;
+  location?: string;
+  expiresAt?: string;
 }

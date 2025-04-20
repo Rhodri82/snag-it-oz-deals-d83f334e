@@ -1,3 +1,4 @@
+
 import { Deal } from '@/types/deals';
 
 export const SAMPLE_DEALS: Deal[] = [
@@ -16,7 +17,11 @@ export const SAMPLE_DEALS: Deal[] = [
     commentCount: 12,
     shipping: "Free Delivery",
     featured: true,
-    categories: ["Gaming", "Electronics"]
+    categories: ["Gaming", "Electronics"],
+    dealUrl: "https://www.jbhifi.com.au",
+    postedBy: "SwitchFan22",
+    location: "Sydney",
+    expiresAt: "3 days"
   },
   {
     id: 2,
@@ -24,13 +29,16 @@ export const SAMPLE_DEALS: Deal[] = [
     price: "$1,499",
     retailer: "Telstra",
     description: "Get a $200 gift card when you purchase any iPhone 15 Pro model. Limited time offer.",
+    imageUrl: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab",
     timestamp: "5 hours ago",
     temperature: 65,
     votes: { yeah: 32, nah: 8 },
     commentCount: 5,
     shipping: "$9.95 Delivery",
-    expireDate: "Tomorrow",
-    categories: ["Electronics", "Smartphones"]
+    categories: ["Electronics", "Smartphones"],
+    dealUrl: "https://www.telstra.com.au",
+    postedBy: "DealHunterAU",
+    location: "Melbourne"
   },
   {
     id: 3,
@@ -46,7 +54,10 @@ export const SAMPLE_DEALS: Deal[] = [
     votes: { yeah: 67, nah: 2 },
     commentCount: 15,
     shipping: "Free with Prime",
-    categories: ["Electronics", "Accessories"]
+    categories: ["Electronics", "Accessories"],
+    dealUrl: "https://www.amazon.com.au",
+    postedBy: "PowerUser99",
+    location: "Brisbane"
   },
   {
     id: 4,
@@ -62,7 +73,10 @@ export const SAMPLE_DEALS: Deal[] = [
     commentCount: 8,
     shipping: "Free Delivery",
     expireDate: "3 days",
-    categories: ["Home & Garden", "Appliances"]
+    categories: ["Home & Garden", "Appliances"],
+    dealUrl: "https://www.ebay.com.au",
+    postedBy: "CleanFreak",
+    expiresAt: "24 hours"
   },
   {
     id: 5,
@@ -76,7 +90,9 @@ export const SAMPLE_DEALS: Deal[] = [
     votes: { yeah: 41, nah: 4 },
     commentCount: 6,
     shipping: "Click & Collect",
-    categories: ["Electronics", "Audio"]
+    categories: ["Electronics", "Audio"],
+    dealUrl: "https://www.jbhifi.com.au",
+    postedBy: "AudioPhile"
   },
   {
     id: 6,
@@ -90,6 +106,46 @@ export const SAMPLE_DEALS: Deal[] = [
     commentCount: 3,
     shipping: "In-store only",
     expired: true,
-    categories: ["Home & Garden", "Bedding"]
+    categories: ["Home & Garden", "Bedding"],
+    postedBy: "AldiLover",
+    location: "Perth"
+  },
+  {
+    id: 7,
+    title: "Bonds Men's Underwear - 40% off everything",
+    price: "From $10.99",
+    previousPrice: "From $18.99",
+    discount: "40% OFF",
+    retailer: "Bonds",
+    description: "Stock up with 40% off all men's underwear styles. Online and in-store.",
+    timestamp: "6 hours ago",
+    temperature: 75,
+    votes: { yeah: 23, nah: 2 },
+    commentCount: 4,
+    shipping: "$7.95 or Free over $75",
+    categories: ["Fashion", "Menswear"],
+    dealUrl: "https://www.bonds.com.au",
+    postedBy: "FashionDeal",
+    expiresAt: "5 days"
+  },
+  {
+    id: 8,
+    title: "Coles Half Price: Ben & Jerry's Ice Cream 458ml",
+    price: "$6.50",
+    previousPrice: "$13.00",
+    discount: "50% OFF",
+    retailer: "Coles",
+    description: "Half price on all Ben & Jerry's flavours this week only. In-store and online.",
+    imageUrl: "/lovable-uploads/1c9a78ae-d210-4b5e-a315-9c85b8813e84.png",
+    timestamp: "12 hours ago",
+    temperature: 95,
+    votes: { yeah: 85, nah: 1 },
+    commentCount: 26,
+    shipping: "In-store or delivery",
+    categories: ["Groceries", "Food"],
+    dealUrl: "https://www.coles.com.au",
+    postedBy: "IceCreamFanatic",
+    location: "Nationwide",
+    expiresAt: "6 days"
   }
 ];

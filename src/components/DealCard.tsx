@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,8 +10,12 @@ import { DealCategories } from './deals/DealCategories';
 import { PriceDisplay } from './deals/PriceDisplay';
 import { useDealInteractions } from '@/hooks/useDealInteractions';
 import { getTemperatureRating, getTemperatureColor } from '@/utils/dealTemperature';
+import { Clock, User, MapPin, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from "react-router-dom";
 
 interface DealCardProps {
+  id: number;
   title: string;
   price: string;
   retailer: string;
@@ -26,9 +31,14 @@ interface DealCardProps {
   featured?: boolean;
   expired?: boolean;
   categories?: string[];
+  dealUrl?: string;
+  postedBy?: string;
+  location?: string;
+  expiresAt?: string;
 }
 
 const DealCard = ({
+  id,
   title,
   price,
   retailer,
@@ -44,6 +54,10 @@ const DealCard = ({
   featured = false,
   expired = false,
   categories = [],
+  dealUrl = "#",
+  postedBy = "Anonymous",
+  location = "Australia",
+  expiresAt,
 }: DealCardProps) => {
   const { saved, userVote, handleVote, handleSave } = useDealInteractions(temperature, featured, expired);
 
@@ -58,40 +72,83 @@ const DealCard = ({
           <Badge variant="outline" className="text-xs px-2 py-0.5 bg-background">
             {retailer}
           </Badge>
-          <span className="text-xs text-muted-foreground">{timestamp}</span>
+          <div className="flex items-center text-xs text-muted-foreground">
+            <Clock className="w-3 h-3 mr-1" />
+            <span>{timestamp}</span>
+          </div>
         </div>
 
-        {(imageUrl || title) && (
-          <DealImage imageUrl={imageUrl} title={title} discount={discount} />
-        )}
+        <div className="flex flex-col md:flex-row gap-4">
+          {(imageUrl || title) && (
+            <div className="md:w-1/3">
+              <DealImage imageUrl={imageUrl} title={title} discount={discount} />
+            </div>
+          )}
+          
+          <div className="flex-1">
+            <Link to={`/deal/${id}`} className="hover:text-primary transition-colors">
+              <h2 className="font-semibold text-base leading-snug mb-2 line-clamp-2">{title}</h2>
+            </Link>
+            <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{description}</p>
 
-        <h2 className="font-semibold text-base leading-snug mb-2 line-clamp-2">{title}</h2>
-        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{description}</p>
+            <PriceDisplay 
+              price={price}
+              previousPrice={previousPrice}
+              shipping={shipping}
+            />
 
-        <PriceDisplay 
-          price={price}
-          previousPrice={previousPrice}
-          shipping={shipping}
-        />
+            <div className="flex items-center gap-4 text-xs text-muted-foreground mt-2 mb-3">
+              <div className="flex items-center">
+                <User className="w-3 h-3 mr-1" />
+                <span>{postedBy}</span>
+              </div>
+              {location && (
+                <div className="flex items-center">
+                  <MapPin className="w-3 h-3 mr-1" />
+                  <span>{location}</span>
+                </div>
+              )}
+              {expiresAt && (
+                <div className="flex items-center">
+                  <Clock className="w-3 h-3 mr-1" />
+                  <span>Expires: {expiresAt}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center justify-between mt-2">
+              <div className={`text-xs px-2 py-1 rounded text-white ${getTemperatureColor(temperature)}`}>
+                {temperature}° <span className="hidden sm:inline">{getTemperatureRating(temperature)}</span>
+              </div>
+              
+              <Button 
+                variant="default" 
+                size="sm" 
+                className="rounded-full text-xs px-4"
+                asChild
+              >
+                <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+                  Get Deal <ExternalLink className="w-3 h-3" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
 
         <div className="mt-auto pt-3 border-t">
           <div className="flex items-center justify-between mb-2">
-            <div className={`text-xs px-2 py-1 rounded text-white ${getTemperatureColor(temperature)}`}>
-              {temperature}° <span className="hidden sm:inline">{getTemperatureRating(temperature)}</span>
-            </div>
+            <DealVoting
+              votes={votes}
+              userVote={userVote}
+              onVote={handleVote}
+              commentCount={commentCount}
+            />
             
             <DealActions saved={saved} onSave={handleSave} />
           </div>
           
-          <DealVoting
-            votes={votes}
-            userVote={userVote}
-            onVote={handleVote}
-            commentCount={commentCount}
-          />
+          <DealCategories categories={categories} />
         </div>
-        
-        <DealCategories categories={categories} />
       </div>
     </Card>
   );

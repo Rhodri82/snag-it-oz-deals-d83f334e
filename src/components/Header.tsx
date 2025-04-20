@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { 
   Menu, 
   Tag, 
@@ -28,14 +29,19 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 
-const Header = () => {
+interface HeaderProps {
+  onSearch?: (query: string) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
+  const navigate = useNavigate();
   const { toggleSidebar } = useSidebar();
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(`Searching for: ${searchQuery}`);
+    onSearch(searchQuery);
     
     if (window.innerWidth < 768) {
       setShowSearch(false);
@@ -122,28 +128,22 @@ const Header = () => {
           </div>
           
           <div className={`flex items-center gap-4 ${showSearch ? 'hidden' : 'flex'} md:flex`}>
-            <Button variant="ghost" asChild>
+            <Button variant="ghost" asChild className="hidden md:flex">
               <Link to="/">
                 <Home className="w-4 h-4 mr-2" />
                 Home
               </Link>
             </Button>
-            <Button variant="ghost" asChild>
+            <Button variant="ghost" asChild className="hidden md:flex">
               <Link to="/categories">
                 <Tag className="w-4 h-4 mr-2" />
                 Categories
               </Link>
             </Button>
-            <Button variant="ghost" asChild>
+            <Button variant="ghost" asChild className="hidden md:flex">
               <Link to="/about">
                 <Info className="w-4 h-4 mr-2" />
                 About
-              </Link>
-            </Button>
-            <Button variant="ghost" asChild>
-              <Link to="/community-guidelines">
-                <Shield className="w-4 h-4 mr-2" />
-                Guidelines
               </Link>
             </Button>
           </div>
@@ -207,8 +207,8 @@ const Header = () => {
             
             <Button className="bg-primary hover:bg-primary/90 rounded-full" size="sm" asChild>
               <Link to="/submit-deal">
-                <PlusCircle className="w-4 h-4 mr-1" />
-                <span className="text-xs">Submit</span>
+                <PlusCircle className="w-4 h-4 md:mr-1" />
+                <span className="hidden md:inline text-xs">Submit</span>
               </Link>
             </Button>
           </div>
