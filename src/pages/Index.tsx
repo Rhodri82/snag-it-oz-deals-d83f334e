@@ -12,9 +12,10 @@ import { UserScore } from '@/components/gamification/UserScore';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { PlusCircle } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 
 const Index = () => {
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   
@@ -49,7 +50,21 @@ const Index = () => {
       <div className="min-h-screen bg-background w-full">
         <Header />
         <div className="flex">
-          <Sidebar />
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className="fixed left-4 top-20 z-50"
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="p-0 w-80">
+              <Sidebar />
+            </SheetContent>
+          </Sheet>
+
           <div className="flex-1">
             <div className="flex items-center justify-between px-4 py-2 border-b">
               <DealHeader
@@ -74,7 +89,7 @@ const Index = () => {
                 <Button className="bg-primary hover:bg-primary/90 rounded-full" size="sm" asChild>
                   <Link to="/submit-deal" className="hidden md:flex">
                     <PlusCircle className="w-4 h-4 mr-1" />
-                    <span className="text-xs">Submit Deal</span>
+                    <span className="text-xs">Submit Bargain</span>
                   </Link>
                 </Button>
               </div>

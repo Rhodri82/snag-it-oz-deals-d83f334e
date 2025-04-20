@@ -25,7 +25,7 @@ const Sidebar = () => {
   };
 
   return (
-    <ShadcnSidebar className="hidden lg:block border-r">
+    <ShadcnSidebar>
       <SidebarContent>
         {/* Navigation Section */}
         <SidebarGroup>
