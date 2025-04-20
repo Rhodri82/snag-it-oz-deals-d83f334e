@@ -1,9 +1,9 @@
-
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { TooltipIndicator } from "./TooltipIndicator";
 import { TooltipLabel } from "./TooltipLabel";
 import { useChart } from "../ChartContext";
+import { getPayloadConfigFromPayload } from "../utils";
 
 interface TooltipContentProps {
   active?: boolean;
