@@ -25,11 +25,10 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-64px)] overflow-y-auto">
-      <SidebarContent className="py-4">
+    <div className="h-[calc(100vh-64px)] w-48 min-w-48 border-r bg-background overflow-y-auto">
+      <SidebarContent className="py-2">
         {/* Navigation Section */}
         <SidebarGroup>
-          <div className="px-2 py-1.5 text-xs font-medium text-sidebar-foreground/70">Navigation</div>
           <SidebarGroupContent>
             <NavigationMenu />
           </SidebarGroupContent>
@@ -45,7 +44,6 @@ const Sidebar = () => {
 
         {/* User Section */}
         <SidebarGroup>
-          <div className="px-2 py-1.5 text-xs font-medium text-sidebar-foreground/70">Your Deals</div>
           <SidebarGroupContent>
             <UserSection />
           </SidebarGroupContent>

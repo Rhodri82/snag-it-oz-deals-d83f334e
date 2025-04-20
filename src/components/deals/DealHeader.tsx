@@ -41,7 +41,7 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
 }) => {
   return (
     <div className="bg-background">
-      <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 max-w-[1200px] mx-auto">
         <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
         <div className="flex items-center gap-2">
           <DealFilters

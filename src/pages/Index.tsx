@@ -1,9 +1,7 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import { DealList } from '@/components/deals/DealList';
 import { DealHeader } from '@/components/deals/DealHeader';
 import { useDeals } from '@/hooks/use-deals';
@@ -50,14 +48,12 @@ const Index = () => {
         
         <div className="flex">
           {/* Sidebar */}
-          <div className="w-64 flex-shrink-0 border-r">
-            <Sidebar />
-          </div>
+          <Sidebar />
           
           {/* Main Content */}
-          <div className="flex-1 overflow-x-hidden">
+          <div className="flex-1">
             <div className="border-b">
-              <div className="container mx-auto px-2 md:px-4 py-2">
+              <div className="container mx-auto px-4 py-2">
                 <DealHeader
                   activeTab={activeTab}
                   viewMode={viewMode}
@@ -87,7 +83,7 @@ const Index = () => {
               </div>
             </div>
             
-            <main className="container mx-auto px-4 py-6 overflow-x-hidden">
+            <main className="container mx-auto px-4 py-6">
               <DealList
                 deals={currentDeals}
                 viewMode={viewMode}
