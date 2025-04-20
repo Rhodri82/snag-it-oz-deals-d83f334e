@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Instagram, Facebook, Tiktok } from "lucide-react";
+import { Instagram, Facebook, TikTok } from "lucide-react";
 
 const Footer = () => {
   const footerLinks = [
@@ -87,7 +86,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                <Tiktok className="h-6 w-6" />
+                <TikTok className="h-6 w-6" />
                 <span className="sr-only">TikTok</span>
               </a>
             </div>
