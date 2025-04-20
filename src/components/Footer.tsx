@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Instagram, Facebook, TikTok } from "lucide-react";
+import { Instagram, Facebook } from "lucide-react";
 
 const Footer = () => {
   const footerLinks = [
@@ -86,7 +87,15 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                <TikTok className="h-6 w-6" />
+                {/* Custom TikTok icon since it's not available in lucide-react */}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                  <path d="M9 12a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
+                  <path d="M15 8c0 3 2 4 2 4" />
+                  <path d="M17 3v14" />
+                  <path d="M15 7c-1.5-1-4-1-4-1" />
+                  <path d="M15 5c-1-.5-4-.5-4-.5" />
+                  <path d="M21 10c0-1-2-2-2-2" />
+                </svg>
                 <span className="sr-only">TikTok</span>
               </a>
             </div>
