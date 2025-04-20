@@ -43,7 +43,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main>
+      <main className="pb-20 md:pb-6">
         <div className="border-b bg-white sticky top-16 z-10">
           <div className="container mx-auto px-4">
             <DealHeader
