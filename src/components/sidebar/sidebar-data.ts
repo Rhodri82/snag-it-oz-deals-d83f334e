@@ -37,3 +37,11 @@ export const AUSTRALIAN_DEAL_CATEGORIES = [
     description: 'Tools, work gear, and equipment'
   }
 ];
+
+// Add mainCategories export
+export const mainCategories = AUSTRALIAN_DEAL_CATEGORIES.map((category, index) => ({
+  id: category.slug,
+  name: category.name,
+  count: Math.floor(Math.random() * 100), // Random count for demonstration
+  icon: category.icon
+}));
