@@ -18,51 +18,47 @@ export const PriceDisplay: React.FC<PriceDisplayProps> = ({
   size = 'default'
 }) => {
   const hasDiscount = previousPrice && previousPrice !== price;
-  const calculatedDiscount = hasDiscount ? calculateDiscountPercent(previousPrice, price) : null;
-  
+  const discount = hasDiscount ? calculateDiscountPercent(previousPrice, price) : null;
+
   return (
-    <div className={cn("flex flex-col", className)}>
-      <div className="flex items-baseline gap-2">
+    <div className={cn("flex flex-col gap-1", className)}>
+      <div className="flex flex-wrap items-center gap-2">
         <span 
           className={cn(
-            "font-bold", 
-            size === 'large' ? "text-xl md:text-2xl" : "text-lg"
+            "font-bold text-foreground",
+            size === 'large' ? "text-2xl md:text-3xl" : "text-lg md:text-xl"
           )}
         >
           {price}
         </span>
-        
+
         {hasDiscount && (
-          <span className="text-muted-foreground line-through text-sm">
+          <span className="line-through text-sm text-muted-foreground">
             {previousPrice}
           </span>
         )}
-        
-        {calculatedDiscount && (
-          <span className="text-xs px-1.5 py-0.5 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 rounded">
-            -{calculatedDiscount}% OFF
+
+        {discount && (
+          <span className="text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-300 px-2 py-0.5 rounded">
+            -{discount}% OFF
           </span>
         )}
       </div>
-      
+
       {shipping && (
-        <div className="text-xs text-muted-foreground mt-1">
-          {shipping === "free" ? "Free Shipping" : `Shipping: ${shipping}`}
+        <div className="text-xs text-muted-foreground">
+          {shipping.toLowerCase().includes("free") ? "Shipping: Free" : `Shipping: ${shipping}`}
         </div>
       )}
     </div>
   );
 };
 
-// Helper function to calculate discount percentage
+// Helper
 const calculateDiscountPercent = (originalPrice: string, currentPrice: string): number | null => {
   const original = parseFloat(originalPrice.replace(/[^0-9.-]+/g, ""));
   const current = parseFloat(currentPrice.replace(/[^0-9.-]+/g, ""));
-  
-  if (isNaN(original) || isNaN(current) || original <= 0 || current <= 0) {
-    return null;
-  }
-  
-  const percentage = Math.round(((original - current) / original) * 100);
-  return percentage > 0 ? percentage : null;
+  if (isNaN(original) || isNaN(current) || original <= 0 || current <= 0) return null;
+  const percent = Math.round(((original - current) / original) * 100);
+  return percent > 0 ? percent : null;
 };
