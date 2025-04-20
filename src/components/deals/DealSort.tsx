@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
@@ -39,19 +38,13 @@ export const DealSort: React.FC<DealSortProps> = ({ sortOption, onSortChange }) 
           onClick={() => onSortChange("newest")}
           className={cn("cursor-pointer", sortOption === "newest" && "font-medium")}
         >
-          Newest first
-        </DropdownMenuItem>
-        <DropdownMenuItem 
-          onClick={() => onSortChange("hottest")}
-          className={cn("cursor-pointer", sortOption === "hottest" && "font-medium")}
-        >
-          Hottest first
+          Latest
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => onSortChange("discussed")}
           className={cn("cursor-pointer", sortOption === "discussed" && "font-medium")}
         >
-          Most discussed
+          Most Discussed
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

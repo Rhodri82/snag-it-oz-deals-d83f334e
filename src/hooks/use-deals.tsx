@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from 'react';
 import { Deal } from '@/types/deals';
 
@@ -60,8 +59,6 @@ export const useDeals = (initialDeals: Deal[]) => {
       switch (sortOption) {
         case "newest":
           return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
-        case "hottest":
-          return b.temperature - a.temperature;
         case "discussed":
           return (b.commentCount || 0) - (a.commentCount || 0);
         default: // popular
