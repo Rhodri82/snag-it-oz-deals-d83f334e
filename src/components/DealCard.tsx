@@ -51,11 +51,35 @@ const DealCard = ({
     const newVote = userVote === type ? null : type;
     setUserVote(newVote);
     
-    if (newVote === 'yeah' && temperature >= 90) {
+    if (newVote === 'yeah') {
+      if (temperature >= 90) {
+        showAchievement({
+          title: "Ripper Deal Hunter",
+          description: "You've spotted a deadset bargain!",
+          points: 50,
+          type: 'deal'
+        });
+      } else if (featured) {
+        showAchievement({
+          title: "Featured Deal Expert",
+          description: "You've got an eye for quality deals!",
+          points: 30,
+          type: 'special'
+        });
+      }
+    }
+  };
+
+  const handleSave = () => {
+    const newSaved = !saved;
+    setSaved(newSaved);
+    
+    if (newSaved && !expired) {
       showAchievement({
-        title: "Ripper Deal Hunter",
-        description: "You've spotted a deadset bargain!",
-        points: 50
+        title: "Deal Collector",
+        description: "Good on ya for saving this beauty!",
+        points: 10,
+        type: 'deal'
       });
     }
   };
@@ -140,7 +164,7 @@ const DealCard = ({
                 variant="ghost" 
                 size="sm" 
                 className={cn("h-8 px-2", saved && "text-red-500")}
-                onClick={() => setSaved(!saved)}
+                onClick={handleSave}
                 title={saved ? "Remove from saved" : "Save deal"}
               >
                 <Heart className={cn("w-4 h-4", saved && "fill-current")} />
