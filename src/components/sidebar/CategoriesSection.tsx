@@ -1,11 +1,10 @@
 
 import React from 'react';
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
-import { Filter, Tag, ChevronRight } from "lucide-react";
+import { Filter, Tag, ChevronRight, Star } from "lucide-react";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
-import { mainCategories } from './sidebar-data';
-import { useSidebar } from "@/components/ui/sidebar";
+import { useCategories } from "@/contexts/CategoryContext";
 
 interface CategoriesSectionProps {
   isOpen: boolean;
@@ -13,10 +12,16 @@ interface CategoriesSectionProps {
 }
 
 export const CategoriesSection = ({ isOpen, onToggle }: CategoriesSectionProps) => {
-  const { activeCategoryId, setActiveCategoryId } = useSidebar();
+  const { 
+    categoriesWithCount, 
+    activeCategory, 
+    setActiveCategory,
+    toggleFavorite,
+    isFavorite 
+  } = useCategories();
 
   const handleCategoryClick = (categoryId: string) => {
-    setActiveCategoryId(categoryId === activeCategoryId ? undefined : categoryId);
+    setActiveCategory(categoryId === activeCategory ? undefined : categoryId);
   };
 
   return (
@@ -30,20 +35,35 @@ export const CategoriesSection = ({ isOpen, onToggle }: CategoriesSectionProps) 
       </CollapsibleTrigger>
       <CollapsibleContent>
         <SidebarMenu>
-          {mainCategories.map((category) => (
+          {categoriesWithCount.map((category) => (
             <SidebarMenuItem key={category.id}>
-              <SidebarMenuButton
-                onClick={() => handleCategoryClick(category.id)}
-                className={cn(
-                  activeCategoryId === category.id && "bg-accent text-accent-foreground font-medium"
-                )}
-              >
-                <Filter className="w-4 h-4" />
-                <span>{category.name}</span>
-                <span className="ml-auto text-xs text-muted-foreground">
-                  {category.count}
-                </span>
-              </SidebarMenuButton>
+              <div className="flex items-center w-full">
+                <SidebarMenuButton
+                  onClick={() => handleCategoryClick(category.id)}
+                  className={cn(
+                    "flex-1",
+                    activeCategory === category.id && "bg-accent text-accent-foreground font-medium"
+                  )}
+                >
+                  <Filter className="w-4 h-4" />
+                  <span>{category.name}</span>
+                  <span className="ml-auto text-xs text-muted-foreground">
+                    {category.count}
+                  </span>
+                </SidebarMenuButton>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFavorite(category.slug);
+                  }}
+                  className={cn(
+                    "p-2 hover:text-yellow-500 transition-colors",
+                    isFavorite(category.slug) && "text-yellow-500"
+                  )}
+                >
+                  <Star className="w-4 h-4" />
+                </button>
+              </div>
             </SidebarMenuItem>
           ))}
           <SidebarMenuItem>
