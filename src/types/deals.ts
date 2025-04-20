@@ -2,26 +2,25 @@
 export interface Deal {
   id: number;
   title: string;
-  price: string;
-  retailer: string;
   description: string;
+  price: string;
+  previousPrice?: string; // original_price
+  retailer: string; // store
   imageUrl?: string;
-  timestamp: string;
+  postedBy: string;
+  timestamp: string; // posted_at
+  categories: string[]; // tags + category
   temperature: number;
   votes: {
     yeah: number;
     nah: number;
   };
-  commentCount?: number;
-  expireDate?: string;
+  commentCount: number;
   shipping?: string;
   discount?: string;
-  previousPrice?: string;
   featured?: boolean;
   expired?: boolean;
-  categories?: string[];
   dealUrl?: string;
-  postedBy?: string;
   location?: string;
-  expiresAt?: string;
 }
+
