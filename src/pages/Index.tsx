@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Header from '../components/Header';
@@ -43,7 +42,7 @@ const Index = () => {
       <Header />
       
       <main className="pt-[73px] pb-20 md:pb-6">
-        <div className="border-b bg-white sticky top-[73px] z-10">
+        <div className="border-b bg-white dark:bg-background sticky top-[73px] z-10">
           <div className="container mx-auto px-4">
             <DealHeader
               activeTab={activeTab}
@@ -62,7 +61,6 @@ const Index = () => {
               onSortChange={setSortOption}
               onClearFilters={clearFilters}
             />
-            {/* Removed UserScore component */}
           </div>
         </div>
         
