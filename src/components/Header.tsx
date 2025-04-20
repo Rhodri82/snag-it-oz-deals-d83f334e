@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
             <img 
               src="/dealsoz_logo_clean.svg" 
               alt="DealsOz – Community Deals Across Australia" 
-              className="h-8 md:h-10 w-auto"
+              className="h-10 md:h-12 w-auto object-contain block"
             />
           </Link>
 
