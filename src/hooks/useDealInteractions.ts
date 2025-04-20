@@ -5,10 +5,16 @@ import { showAchievement } from '@/components/gamification/AchievementPopup';
 export const useDealInteractions = (temperature: number, featured: boolean, expired: boolean) => {
   const [saved, setSaved] = React.useState(false);
   const [userVote, setUserVote] = React.useState<'yeah' | 'nah' | null>(null);
+  const [voteAnimation, setVoteAnimation] = React.useState<'yeah' | 'nah' | null>(null);
 
   const handleVote = (type: 'yeah' | 'nah') => {
     const newVote = userVote === type ? null : type;
     setUserVote(newVote);
+    
+    if (newVote) {
+      setVoteAnimation(newVote);
+      setTimeout(() => setVoteAnimation(null), 500);
+    }
     
     if (newVote === 'yeah') {
       if (temperature >= 90) {
@@ -46,6 +52,7 @@ export const useDealInteractions = (temperature: number, featured: boolean, expi
   return {
     saved,
     userVote,
+    voteAnimation,
     handleVote,
     handleSave
   };
