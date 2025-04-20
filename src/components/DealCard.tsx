@@ -59,32 +59,14 @@ const DealCard = ({
   const { userVote, handleVote } = useDealInteractions(temperature, featured, expired);
 
   return (
-    <Card
+    <>
+      <Card
       className={cn(
-        "flex flex-col md:flex-row items-start transition-all hover:shadow-sm px-4 py-3 md:px-5 md:py-4 rounded-md",
-        featured ? "border-l-4 border-l-secondary" : "border-l-4 border-l-primary",
+        "flex flex-col md:flex-row items-start transition-all hover:shadow-md px-2 py-2 md:px-3 md:py-3 rounded-md border",
+
         expired && "opacity-70"
       )}
-    >
-      {/* Voting Column */}
-      <div className="hidden md:flex flex-col items-center gap-2 px-2 w-14 shrink-0">
-        <DealVoting
-          votes={votes}
-          userVote={userVote}
-          onVote={handleVote}
-          commentCount={commentCount}
-          orientation="vertical"
-        />
-      </div>
-
-      {/* Main Content */}
       <div className="flex flex-1 flex-col md:flex-row gap-4 w-full">
-        {/* Image */}
-        <div className="w-full md:w-44 shrink-0">
-          <DealImage imageUrl={imageUrl} title={title} discount={discount} />
-        </div>
-
-        {/* Info */}
         <div className="flex-1 flex flex-col justify-between">
           {/* Top Meta */}
           <div className="flex justify-between items-center text-xs text-muted-foreground mb-1">
@@ -100,9 +82,6 @@ const DealCard = ({
             <h2 className="text-base md:text-lg font-semibold leading-snug mb-1">{title}</h2>
           </Link>
 
-          {/* Description */}
-          <p className="hidden md:block text-sm text-muted-foreground mb-2 line-clamp-2">{description}</p>
-
           {/* Price */}
           <PriceDisplay
             price={price}
@@ -110,6 +89,9 @@ const DealCard = ({
             shipping={shipping}
             className="mb-2"
           />
+
+          {/* Description */}
+          <p className="hidden md:block text-sm text-muted-foreground mb-2 line-clamp-2">{description}</p>
 
           {/* Info Strip */}
           <div className="hidden md:flex flex-wrap gap-4 text-xs text-muted-foreground mb-2">
@@ -145,9 +127,9 @@ const DealCard = ({
             </div>
 
             <Button
-              variant="default"
+              variant="secondary"
               size="sm"
-              className="w-full md:w-auto rounded-full text-sm px-6"
+              className="w-full md:w-auto text-sm px-4"
               asChild
             >
               <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
@@ -158,7 +140,23 @@ const DealCard = ({
           </div>
         </div>
       </div>
-    </Card>
+        {/* Image */}
+     <div className="w-full md:w-44 shrink-0">
+          <DealImage imageUrl={imageUrl} title={title} discount={discount} />
+        </div>
+        {/* Voting Column */}
+        <div className="hidden md:flex flex-col items-center gap-2 px-2 w-14 shrink-0">
+        <DealVoting
+          votes={votes}
+          userVote={userVote}
+          onVote={handleVote}
+          commentCount={commentCount}
+          orientation="vertical"
+        />     
+         </div>
+
+      </Card>
+    </>
   );
 };
 
