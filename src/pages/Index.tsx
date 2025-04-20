@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Header from '../components/Header';
@@ -5,7 +6,6 @@ import { DealList } from '@/components/deals/DealList';
 import { DealHeader } from '@/components/deals/DealHeader';
 import { useDeals } from '@/hooks/use-deals';
 import { SAMPLE_DEALS } from '@/data/sample-deals';
-import { UserScore } from '@/components/gamification/UserScore';
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 
@@ -62,9 +62,7 @@ const Index = () => {
               onSortChange={setSortOption}
               onClearFilters={clearFilters}
             />
-            <div className="flex items-center gap-3 justify-end py-2">
-              <UserScore />
-            </div>
+            {/* Removed UserScore component */}
           </div>
         </div>
         
