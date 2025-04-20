@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { AUSTRALIAN_DEAL_CATEGORIES } from "@/components/sidebar/sidebar-data";
+import { showAchievement } from '@/components/gamification/AchievementPopup';
 
 interface DealCardProps {
   title: string;
@@ -47,7 +48,16 @@ const DealCard = ({
   const [userVote, setUserVote] = React.useState<'yeah' | 'nah' | null>(null);
 
   const handleVote = (type: 'yeah' | 'nah') => {
-    setUserVote(userVote === type ? null : type);
+    const newVote = userVote === type ? null : type;
+    setUserVote(newVote);
+    
+    if (newVote === 'yeah' && temperature >= 90) {
+      showAchievement({
+        title: "Ripper Deal Hunter",
+        description: "You've spotted a deadset bargain!",
+        points: 50
+      });
+    }
   };
 
   const defaultImageUrl = `https://via.placeholder.com/300x200?text=${encodeURIComponent(title)}`;

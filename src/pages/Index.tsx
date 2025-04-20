@@ -8,6 +8,7 @@ import { DealList } from '@/components/deals/DealList';
 import { DealHeader } from '@/components/deals/DealHeader';
 import { useDeals } from '@/hooks/use-deals';
 import { SAMPLE_DEALS } from '@/data/sample-deals';
+import { UserScore } from '@/components/gamification/UserScore';
 
 const Index = () => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
@@ -37,23 +38,26 @@ const Index = () => {
         <div className="flex">
           <Sidebar />
           <div className="flex-1">
-            <DealHeader
-              activeTab={activeTab}
-              viewMode={viewMode}
-              selectedCategories={selectedCategories}
-              selectedRetailers={selectedRetailers}
-              selectedPriceRanges={selectedPriceRanges}
-              showExpired={showExpired}
-              sortOption={sortOption}
-              onTabChange={handleTabChange}
-              onCategoryToggle={handleCategoryToggle}
-              onRetailerToggle={handleRetailerToggle}
-              onPriceRangeToggle={handlePriceRangeToggle}
-              onShowExpiredChange={setShowExpired}
-              onViewModeChange={setViewMode}
-              onSortChange={setSortOption}
-              onClearFilters={clearFilters}
-            />
+            <div className="flex items-center justify-between px-4 py-2 border-b">
+              <DealHeader
+                activeTab={activeTab}
+                viewMode={viewMode}
+                selectedCategories={selectedCategories}
+                selectedRetailers={selectedRetailers}
+                selectedPriceRanges={selectedPriceRanges}
+                showExpired={showExpired}
+                sortOption={sortOption}
+                onTabChange={handleTabChange}
+                onCategoryToggle={handleCategoryToggle}
+                onRetailerToggle={handleRetailerToggle}
+                onPriceRangeToggle={handlePriceRangeToggle}
+                onShowExpiredChange={setShowExpired}
+                onViewModeChange={setViewMode}
+                onSortChange={setSortOption}
+                onClearFilters={clearFilters}
+              />
+              <UserScore />
+            </div>
             <main className="container mx-auto px-2 py-3">
               <DealList
                 deals={sortedDeals}
