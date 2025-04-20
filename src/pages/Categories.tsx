@@ -3,11 +3,11 @@ import React from 'react';
 import Header from '../components/Header';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Tag, ShoppingBag, Monitor, GameController, Utensils, Car, Home as HomeIcon } from "lucide-react";
+import { Tag, ShoppingBag, Monitor, Gamepad, Utensils, Car, Home as HomeIcon } from "lucide-react";
 
 const CATEGORIES = [
   { name: "Electronics", icon: Monitor, count: 145 },
-  { name: "Gaming", icon: GameController, count: 87 },
+  { name: "Gaming", icon: Gamepad, count: 87 },
   { name: "Food & Dining", icon: Utensils, count: 62 },
   { name: "Automotive", icon: Car, count: 34 },
   { name: "Home & Garden", icon: HomeIcon, count: 53 },
