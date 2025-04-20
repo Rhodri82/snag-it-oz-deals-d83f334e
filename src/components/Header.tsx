@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   return (
     <header className="border-b bg-background fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto h-16">
-        <div className="flex items-center justify-between h-full gap-2 md:gap-4">
+        <div className="flex items-center h-full gap-2 md:gap-4">
           {/* Mobile Search Button */}
           <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleSearch}>
             <Search className="h-5 w-5" />
@@ -49,31 +49,32 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
             <span className="text-yellow-700">Oz</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <DesktopNav />
+          {/* Search Bar - Desktop */}
+          <div className="hidden md:block flex-1">
+            <SearchBar onSearch={onSearch} />
+          </div>
 
-          {/* Right Section - Search, Theme, Notifications, Profile */}
+          {/* Desktop Navigation and Right Section */}
           <div className="flex items-center gap-2 md:gap-4 ml-auto">
-             {/* Desktop Search Bar */}
-            <div className="hidden md:block">
-              <SearchBar onSearch={onSearch} />
-            </div>
+            {/* Desktop Navigation */}
+            <DesktopNav />
 
+            {/* Theme, Notifications, Profile */}
             <ThemeToggle variant="ghost" />
             <NotificationsMenu />
-            
+            <UserMenu />
+          </div>
+
             {/* Mobile Search Bar */}
             {isSearchOpen && (
               <div className="md:hidden absolute top-16 left-0 right-0 z-50 bg-background p-4 border-b">
                   <SearchBar onSearch={onSearch}/>
               </div>
             )}
-            <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleSearch}>
-              <Search className="h-5 w-5" />
-            </Button>
+          
+          {/* Mobile Search Button */}
+          
 
-            <UserMenu />
-          </div>
         </div>
       </div>
 
