@@ -2,13 +2,14 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Filter, ChevronDown } from "lucide-react";
+import { Filter } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import { Checkbox } from "@/components/ui/checkbox";
 import { CategoryFilter } from './filters/CategoryFilter';
 import { RetailerFilter } from './filters/RetailerFilter';
 import { PriceRangeFilter } from './filters/PriceRangeFilter';
 import { ViewModeToggle } from './filters/ViewModeToggle';
+import { ExpiredToggle } from './filters/ExpiredToggle';
+import { ClearFiltersButton } from './filters/ClearFiltersButton';
 
 interface DealFiltersProps {
   selectedCategories: string[];
@@ -76,31 +77,19 @@ export const DealFilters: React.FC<DealFiltersProps> = ({
               onPriceRangeToggle={onPriceRangeToggle}
             />
             
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="show-expired"
-                checked={showExpired}
-                onCheckedChange={(value) => onShowExpiredChange(!!value)}
-              />
-              <label
-                htmlFor="show-expired"
-                className="text-sm cursor-pointer"
-              >
-                Show expired deals
-              </label>
-            </div>
+            <ExpiredToggle
+              showExpired={showExpired}
+              onShowExpiredChange={onShowExpiredChange}
+            />
             
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={onClearFilters}
+            <ClearFiltersButton
+              onClearFilters={onClearFilters}
               disabled={totalFilters === 0 && !showExpired}
-            >
-              Clear All Filters
-            </Button>
+            />
           </div>
         </PopoverContent>
       </Popover>
     </div>
   );
 };
+
