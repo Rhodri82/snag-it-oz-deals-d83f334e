@@ -8,7 +8,13 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <h1 className="text-2xl font-bold text-primary">DealsOz</h1>
+            <div className="flex items-center gap-2">
+              <img 
+                src="/lovable-uploads/fc099099-dc15-4611-b504-03e427847e9a.png" 
+                alt="DealsOz Logo" 
+                className="h-10 w-auto"
+              />
+            </div>
             <nav className="hidden md:flex items-center gap-4">
               <Button variant="ghost">Newest</Button>
               <Button variant="ghost">Hottest</Button>
