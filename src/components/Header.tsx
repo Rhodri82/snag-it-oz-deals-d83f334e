@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, Menu, X, Tag, MessageSquare, Ticket, PlusCircle } from "lucide-react";
+import { Menu, X, Tag, MessageSquare, Ticket, PlusCircle } from "lucide-react";
 import { UserMenu } from './header/UserMenu';
 import { NotificationsMenu } from './header/NotificationsMenu';
 import { ThemeToggle } from './theme/ThemeToggle';
@@ -10,14 +10,21 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { DealTabs } from './deals/DealTabs';
 
 interface HeaderProps {
   onSearch?: (query: string) => void;
+  activeTab?: string;
+  onTabChange?: (tab: string) => void;
 }
 
 export const HEADER_HEIGHT = 54;
 
-const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
+const Header: React.FC<HeaderProps> = ({ 
+  onSearch = () => {}, 
+  activeTab = "popular",
+  onTabChange = () => {}
+}) => {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = React.useState(false);
   const isMobile = useIsMobile();
@@ -53,16 +60,14 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
       className="sticky top-0 z-50 w-full border-b bg-background shadow-sm"
       style={{
         minHeight: HEADER_HEIGHT,
-        height: HEADER_HEIGHT,
+        height: isMobile ? 'auto' : HEADER_HEIGHT,
         lineHeight: '1',
       }}
     >
       <div
-        className="max-w-screen-2xl mx-auto flex items-center justify-between"
+        className="max-w-screen-2xl mx-auto flex items-center justify-between px-2 md:px-6"
         style={{
           height: HEADER_HEIGHT,
-          paddingLeft: isMobile ? 8 : 20,
-          paddingRight: isMobile ? 8 : 20,
         }}
       >
         {/* Left: Logo + Hamburger Menu */}
@@ -123,6 +128,13 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           </Link>
         </div>
 
+        {/* Mobile Tabs - Only visible on mobile */}
+        {isMobile && (
+          <div className="flex-1 ml-2">
+            <DealTabs activeTab={activeTab} onTabChange={onTabChange} isMobileHeader={true} />
+          </div>
+        )}
+
         {/* Center Navigation - DESKTOP ONLY */}
         {!isMobile && (
           <div 
@@ -148,7 +160,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
 
         {/* Right: Actions */}
         <div className="flex items-center gap-2">
-          {/* Search */}
+          {/* Search - DESKTOP ONLY */}
           {!isMobile && (
             <div className="relative flex items-center">
               {isSearchOpen ? (
@@ -215,28 +227,12 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
         </div>
       </div>
 
-      {/* Mobile search overlay when active */}
-      {isMobile && isSearchOpen && (
-        <div className="fixed inset-x-0 top-[44px] z-40 bg-background border-b p-2 shadow">
-          <form onSubmit={handleSearch} className="flex items-center">
-            <Input
-              type="search"
-              placeholder="Search deals..."
-              className="w-full"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              autoFocus
-            />
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={() => setIsSearchOpen(false)}
-              type="button"
-              className="ml-2"
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </form>
+      {/* Desktop tabs section - only for desktop */}
+      {!isMobile && (
+        <div className="border-t border-b bg-background">
+          <div className="max-w-screen-2xl mx-auto">
+            <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
+          </div>
         </div>
       )}
     </header>
