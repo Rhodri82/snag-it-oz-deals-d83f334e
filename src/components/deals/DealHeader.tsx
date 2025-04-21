@@ -47,7 +47,7 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
       </div>
 
       {/* Filters & Sort Row */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
+      <div className="flex flex-row md:flex-row items-center justify-between gap-3 md:gap-4 pb-2">
         <DealFilters
           selectedCategories={selectedCategories}
           selectedRetailers={selectedRetailers}
