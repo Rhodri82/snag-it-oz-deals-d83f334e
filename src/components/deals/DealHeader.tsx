@@ -39,9 +39,7 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
   onSortChange,
   onClearFilters
 }) => {
-  return (
-    <div className="bg-background border-b">
-      <div className="flex flex-col gap-0 mt-0 mb-2 max-w-screen-xl mx-auto">
+  return (<div className="flex flex-col gap-0 mt-0 mb-1 max-w-screen-xl mx-auto bg-background border-b">
         {/* Tabs Row */}
         <div>
           <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
@@ -65,6 +63,5 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
           <DealSort sortOption={sortOption} onSortChange={onSortChange} />
         </div>
       </div>
-    </div>
   );
 };
