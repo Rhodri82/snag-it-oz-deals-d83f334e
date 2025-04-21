@@ -41,14 +41,14 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
 }) => {
   return (
     <div className="bg-background border-b">
-      <div className="flex flex-col gap-0 mt-0 mb-0 max-w-screen-xl mx-auto">
+      <div className="flex flex-col gap-0 mt-0 mb-2 max-w-screen-xl mx-auto">
         {/* Tabs Row */}
         <div>
           <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
         </div>
 
         {/* Filters & Sort Row */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-2 h-10">
           <DealFilters
             selectedCategories={selectedCategories}
             selectedRetailers={selectedRetailers}
