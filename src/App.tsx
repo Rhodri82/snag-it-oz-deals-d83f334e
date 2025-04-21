@@ -6,8 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CategoryProvider } from "@/contexts/CategoryContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import Footer from "./components/Footer";
 import { BottomNav } from "./components/layout/BottomNav";
+import Layout from "./components/Layout";
+
 import Index from "./pages/Index";
 import Categories from "./pages/Categories";
 import SubmitDeal from "./pages/SubmitDeal";
@@ -42,22 +43,21 @@ const App = () => {
                 <Toaster />
                 <Sonner />
                 <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/categories" element={<Categories />} />
-                  <Route path="/discussions" element={<Discussions />} />
-                  <Route path="/vouchers" element={<Vouchers />} />
-                  <Route path="/submit-deal" element={<SubmitDeal />} />
-                  <Route path="/deal/:id" element={<DealDetail />} />
-                  <Route path="/alerts" element={<Alerts />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/faq" element={<FAQ />} />
-                  <Route path="/how-it-works" element={<HowItWorks />} />
-                  <Route path="/community-guidelines" element={<CommunityGuidelines />} />
-                  <Route path="/legal" element={<Legal />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="*" element={<NotFound />} />
+                  <Route path="/" element={<Layout><Index /></Layout>} />
+                  <Route path="/categories" element={<Layout><Categories /></Layout>} />
+                  <Route path="/discussions" element={<Layout><Discussions /></Layout>} />
+                  <Route path="/vouchers" element={<Layout><Vouchers /></Layout>} />
+                  <Route path="/submit-deal" element={<Layout><SubmitDeal /></Layout>} />
+                  <Route path="/deal/:id" element={<Layout><DealDetail /></Layout>} />
+                  <Route path="/alerts" element={<Layout><Alerts /></Layout>} />
+                  <Route path="/about" element={<Layout><About /></Layout>} />
+                  <Route path="/faq" element={<Layout><FAQ /></Layout>} />
+                  <Route path="/how-it-works" element={<Layout><HowItWorks /></Layout>} />
+                  <Route path="/community-guidelines" element={<Layout><CommunityGuidelines /></Layout>} />
+                  <Route path="/legal" element={<Layout><Legal /></Layout>} />
+                  <Route path="/contact" element={<Layout><Contact /></Layout>} />
+                  <Route path="*" element={<Layout><NotFound /></Layout>} />
                 </Routes>
-                <Footer />
                 <BottomNav />
               </div>
             </TooltipProvider>
