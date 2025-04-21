@@ -40,14 +40,8 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
   onClearFilters
 }) => {
   return (
-    <div 
-      className="bg-background px-2 sm:px-6 md:px-8 border-b" 
-      style={{ 
-        paddingTop: 0, 
-        paddingBottom: 0
-      }}
-    >
-      <div className="max-w-screen-xl mx-auto flex flex-col gap-0 mt-[-6px]">
+    <div className="bg-background border-b">
+      <div className="flex flex-col gap-0 mt-0 mb-0 max-w-screen-xl mx-auto">
         {/* Tabs Row */}
         <div>
           <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
