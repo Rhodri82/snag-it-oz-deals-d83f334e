@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { DesktopNav } from './header/DesktopNav';
 import { SearchBar } from './header/SearchBar';
@@ -23,6 +23,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
  * - User account dropdown
  * - Desktop navigation links
  * 
+ * When search is active on desktop:
  * Adapts responsively between mobile and desktop layouts
  */
 interface HeaderProps {
@@ -38,6 +39,7 @@ export const HEADER_HEIGHT = 54;
 const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const isMobile = useIsMobile();
+  const [isDesktopSearchActive, setIsDesktopSearchActive] = React.useState(false);
 
   // More compact height for header on mobile & desktop
   const HEADER_HEIGHT = isMobile ? 44 : 54;  
@@ -45,6 +47,13 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   
 
   const toggleSearch = () => setIsSearchOpen((v) => !v);
+
+  const toggleDesktopSearch = () => {
+    setIsDesktopSearchActive((prev) => !prev);
+    if(isDesktopSearchActive) {
+      setIsSearchOpen(false)
+    }
+  };
   
   return (    
     <header className="sticky top-0 z-50 w-full border-b bg-background shadow-sm"
@@ -90,17 +99,44 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
         </div>
 
         {/* Center: Search */}
-        <div className={`flex-1 flex justify-center items-center px-1 ${isMobile ? "" : ""}`}>          
+        <div className={`flex-1 flex justify-center items-center px-1`}>          
           {isMobile ? (
             <div className={`w-full max-w-xs ${isMobile ? "flex justify-end" : ""}`}>
-              {isSearchOpen ? (
-                <SearchBar onSearch={onSearch} />
-              ) : (
-                <Button variant="ghost" size="icon" className="ml-auto" onClick={toggleSearch} style={{marginRight: 2}}>
-                  <Search className="h-5 w-5" />
-                  <span className="sr-only">Open search</span>
-                </Button>
-              )}
+                {isSearchOpen ? (
+                  <SearchBar onSearch={onSearch} />
+                ) : (
+                  <Button variant="ghost" size="icon" className="ml-auto" onClick={toggleSearch} style={{marginRight: 2}}>
+                    <Search className="h-5 w-5" />
+                    <span className="sr-only">Open search</span>
+                  </Button>
+                )}
+            </div>
+          ) : isDesktopSearchActive ? (
+            <div className="w-full max-w-md">
+              <SearchBar onSearch={onSearch} className="w-full max-w-md" />
+            </div>
+          ) : (
+            <div className="w-full max-w-md"/>
+          )}
+        </div>
+
+        {/* Actions, to the far right on desktop (Submit Deal, Theme, User, Notifications) */}
+        <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          <div className="flex items-center gap-2 md:gap-4 shrink-0">
+            <Link to="/submit-deal" className={`md:block ${isDesktopSearchActive ? "" : "hidden"} `}>
+              <Button variant="secondary" size="icon" >
+                <span className="text-green-900">D</span>
+                <span className="text-yellow-700">O</span>
+              </Button>
+            </Link>
+          </div>
+          <div className={`flex items-center gap-2 md:gap-4 shrink-0`}>
+            <Button variant="ghost" size="icon" className="ml-auto" onClick={toggleDesktopSearch} style={{marginRight: 2}}>
+              <Search className="h-5 w-5" />
+            </Button>
+            <ThemeToggle variant="ghost" />
+            <NotificationsMenu />
+            <UserMenu />
             </div>
           ) : (
             <SearchBar onSearch={onSearch} className="w-full max-w-md" />
