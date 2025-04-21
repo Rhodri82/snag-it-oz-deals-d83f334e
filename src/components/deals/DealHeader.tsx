@@ -44,19 +44,17 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
       className="bg-background px-2 sm:px-6 md:px-8 border-b" 
       style={{ 
         paddingTop: 0, 
-        paddingBottom: 0,
-        maxWidth: '1280px', // Matches typical max-w-screen-xl
-        margin: '0 auto' 
+        paddingBottom: 0
       }}
     >
-      <div className="flex flex-col">
-        {/* Tabs Row - remove extra padding */}
-        <div className="pl-0 sm:pl-6 md:pl-8">
+      <div className="max-w-screen-xl mx-auto flex flex-col gap-0 mt-[-6px]">
+        {/* Tabs Row */}
+        <div>
           <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
         </div>
 
-        {/* Filters & Sort Row - tighter vertical spacing, consistent alignment */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 -mt-1">
+        {/* Filters & Sort Row */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
           <DealFilters
             selectedCategories={selectedCategories}
             selectedRetailers={selectedRetailers}
