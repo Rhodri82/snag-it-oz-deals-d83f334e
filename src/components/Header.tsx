@@ -2,12 +2,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, PlusCircle, X, Menu } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import { DesktopNav } from './header/DesktopNav';
 import { SearchBar } from './header/SearchBar';
 import { UserMenu } from './header/UserMenu';
 import { NotificationsMenu } from './header/NotificationsMenu';
-import { MobileMenu } from './header/MobileMenu';
 import { ThemeToggle } from './theme/ThemeToggle';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Input } from "@/components/ui/input";
@@ -53,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           paddingRight: isMobile ? 0 : 20,
         }}
       >
-        {/* Left: Hamburger menu + Logo */}
+        {/* Left: Logo + Hamburger Menu */}
         <div className="flex items-center gap-4">
           <Sheet open={isSideMenuOpen} onOpenChange={setIsSideMenuOpen}>
             <SheetTrigger asChild>
@@ -103,7 +102,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
               </nav>
             </SheetContent>
           </Sheet>
-          
+
           <Link
             to="/"
             className="flex items-center text-xl sm:text-2xl font-extrabold leading-none space-x-1"
@@ -113,44 +112,34 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           </Link>
         </div>
 
-        {/* Center: Desktop Search */}
-        <div className="flex-1 flex justify-center px-2">
-          {!isMobile && isSearchOpen && (
-            <div className="w-full max-w-md">
-              <form onSubmit={handleSearch} className="flex items-center">
-                <Input
-                  type="search"
-                  placeholder="Search deals..."
-                  className="w-full"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoFocus
-                />
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  onClick={() => setIsSearchOpen(false)}
-                  type="button"
-                  className="ml-2"
-                >
-                  <X className="h-5 w-5" />
-                </Button>
-              </form>
-            </div>
-          )}
+        {/* Center: Navigation Links - Keep the existing styled links */}
+        <div className="hidden md:flex items-center">
+          <Link to="/" className="px-4 py-2 font-medium relative text-amber-700 font-bold">
+            Home
+            <span className="block absolute left-1.5 right-1.5 -bottom-[3px] h-[2px] rounded-full transition-all duration-200 bg-amber-500" />
+          </Link>
+          <Link to="/categories" className="px-4 py-2 text-muted-foreground hover:text-amber-900">
+            Categories
+          </Link>
+          <Link to="/discussions" className="px-4 py-2 text-muted-foreground hover:text-amber-900">
+            Discussions
+          </Link>
+          <Link to="/vouchers" className="px-4 py-2 text-muted-foreground hover:text-amber-900">
+            Vouchers
+          </Link>
         </div>
 
-        {/* Right: Submit button + Search + User Actions */}
+        {/* Right: Submit + Search + User Actions */}
         <div className="flex items-center gap-2">
-          {/* We now only have ONE submit button that's shown on desktop when search isn't open */}
-          {!isMobile && !isSearchOpen && (
-            <Link to="/submit-deal">
-              <Button variant="secondary" size="default">
-                Submit a Deal
-              </Button>
-            </Link>
-          )}
+          {/* Keep only the first Submit button (with plus icon) */}
+          <Link to="/submit-deal">
+            <Button variant="secondary" className="flex items-center gap-2">
+              <span className="text-lg font-bold">+</span>
+              Submit a Deal
+            </Button>
+          </Link>
 
+          {/* Search button */}
           <Button 
             variant="ghost" 
             size="icon" 
@@ -166,10 +155,10 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
         </div>
       </div>
 
-      {/* Mobile Slide-in Search */}
-      {isMobile && isSearchOpen && (
-        <div className="fixed inset-x-0 top-[44px] z-40 md:hidden bg-background border-b p-2 shadow">
-          <form onSubmit={handleSearch} className="flex items-center">
+      {/* Search overlay when active */}
+      {isSearchOpen && (
+        <div className="fixed inset-x-0 top-[54px] z-40 bg-background border-b p-2 shadow">
+          <form onSubmit={handleSearch} className="flex items-center max-w-md mx-auto">
             <Input
               type="search"
               placeholder="Search deals..."
