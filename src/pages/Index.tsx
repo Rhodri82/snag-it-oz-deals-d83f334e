@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { DealList } from '@/components/deals/DealList';
 import { DealHeader } from '@/components/deals/DealHeader';
 import Header from '@/components/Header';
-import { HEADER_HEIGHT } from '@/components/Header';
 import { useDeals } from '@/hooks/use-deals';
 import { SAMPLE_DEALS } from '@/data/sample-deals';
 import { Button } from "@/components/ui/button";
@@ -44,7 +43,7 @@ const Index = () => {
       <Header activeTab={activeTab} onTabChange={handleTabChange} />
       <main className="px-4 sm:px-6 md:px-8 max-w-screen-xl mx-auto pt-16 pb-8 md:pb-12">
         {/* Sticky header with filter tabs */}
-        <div className={`bg-background sticky top-[${HEADER_HEIGHT}px] z-10`}>
+        <div className="bg-background sticky top-14 z-10">
          <DealHeader
             activeTab={activeTab}
             viewMode={viewMode}
@@ -74,7 +73,6 @@ const Index = () => {
           />
         </div>
       </main>
-
       {/* Floating button for mobile */}
       <Button
         className="fixed bottom-4 right-4 md:hidden z-50 rounded-full shadow-lg"
