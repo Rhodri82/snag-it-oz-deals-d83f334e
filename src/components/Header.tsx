@@ -15,6 +15,8 @@ interface HeaderProps {
   onSearch?: (query: string) => void;
 }
 
+export const HEADER_HEIGHT = 54;
+
 const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = React.useState(false);
@@ -22,11 +24,14 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const searchInputRef = React.useRef<HTMLInputElement>(null);
 
-  const HEADER_HEIGHT = isMobile ? 44 : 60;
+  const HEADER_HEIGHT = isMobile ? 44 : 54;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(searchQuery);
+    if (isMobile) {
+      setIsSearchOpen(false);
+    }
   };
 
   const toggleSearch = () => {
@@ -34,7 +39,10 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
     setIsSearchOpen(newState);
     
     if (newState) {
-      setTimeout(() => searchInputRef.current?.focus(), 10);
+      // Focus the search input after it's rendered
+      setTimeout(() => {
+        searchInputRef.current?.focus();
+      }, 10);
     } else {
       setSearchQuery("");
     }
@@ -43,105 +51,192 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   return (
     <header
       className="sticky top-0 z-50 w-full border-b bg-background shadow-sm"
-      style={{ height: HEADER_HEIGHT }}
+      style={{
+        minHeight: HEADER_HEIGHT,
+        height: HEADER_HEIGHT,
+        lineHeight: '1',
+      }}
     >
       <div
-        className="max-w-screen-2xl mx-auto flex items-center justify-between px-3 md:px-6"
-        style={{ height: HEADER_HEIGHT }}
+        className="max-w-screen-2xl mx-auto flex items-center justify-between"
+        style={{
+          height: HEADER_HEIGHT,
+          paddingLeft: isMobile ? 8 : 20,
+          paddingRight: isMobile ? 8 : 20,
+        }}
       >
-        {/* Left: Logo + Hamburger */}
-        <div className="flex items-center gap-2 md:gap-4">
+        {/* Left: Logo + Hamburger Menu */}
+        <div className="flex items-center gap-3">
           <Sheet open={isSideMenuOpen} onOpenChange={setIsSideMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className={isMobile ? "p-1" : ""}>
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">Menu</span>
+                <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-72 pt-12">
               <div className="flex justify-between items-center mb-6">
                 <Link to="/" onClick={() => setIsSideMenuOpen(false)}>
-                  <span className="text-green-900 font-bold text-lg">Deals</span>
-                  <span className="text-yellow-700 font-bold text-lg">Oz</span>
+                  <div className="flex items-center">
+                    <span className="text-green-900 font-bold text-lg">Deals</span>
+                    <span className="text-yellow-700 font-bold text-lg">Oz</span>
+                  </div>
                 </Link>
                 <ThemeToggle />
               </div>
+              
               <nav className="space-y-1">
-                <Link to="/categories" className="flex items-center gap-3 py-2 px-2 hover:bg-muted rounded-md text-foreground" onClick={() => setIsSideMenuOpen(false)}>
-                  <Tag className="h-4 w-4" /> Categories
+                <Link 
+                  to="/categories"
+                  className="flex items-center gap-3 py-2 px-2 hover:bg-muted rounded-md text-foreground"
+                  onClick={() => setIsSideMenuOpen(false)}
+                >
+                  <Tag className="h-4 w-4" />
+                  Categories
                 </Link>
-                <Link to="/discussions" className="flex items-center gap-3 py-2 px-2 hover:bg-muted rounded-md text-foreground" onClick={() => setIsSideMenuOpen(false)}>
-                  <MessageSquare className="h-4 w-4" /> Discussions
+                <Link 
+                  to="/discussions"
+                  className="flex items-center gap-3 py-2 px-2 hover:bg-muted rounded-md text-foreground"
+                  onClick={() => setIsSideMenuOpen(false)}
+                >
+                  <MessageSquare className="h-4 w-4" />
+                  Discussions
                 </Link>
-                <Link to="/vouchers" className="flex items-center gap-3 py-2 px-2 hover:bg-muted rounded-md text-foreground" onClick={() => setIsSideMenuOpen(false)}>
-                  <Ticket className="h-4 w-4" /> Vouchers
+                <Link 
+                  to="/vouchers"
+                  className="flex items-center gap-3 py-2 px-2 hover:bg-muted rounded-md text-foreground"
+                  onClick={() => setIsSideMenuOpen(false)}
+                >
+                  <Ticket className="h-4 w-4" />
+                  Vouchers
                 </Link>
               </nav>
             </SheetContent>
           </Sheet>
 
-          <Link to="/" className="text-xl sm:text-2xl font-extrabold leading-none">
+          <Link
+            to="/"
+            className="flex items-center text-xl sm:text-2xl font-extrabold leading-none"
+          >
             <span className="text-green-900">Deals</span>
             <span className="text-yellow-700">Oz</span>
           </Link>
-
-          {/* Desktop icons close to logo */}
-          <div className={cn("hidden md:flex items-center gap-4", isSearchOpen && "hidden")}>
-            <Link to="/categories" className="flex items-center gap-1 text-muted-foreground hover:text-amber-900">
-              <Tag className="h-4 w-4" />
-              <span>Categories</span>
-            </Link>
-            <Link to="/discussions" className="flex items-center gap-1 text-muted-foreground hover:text-amber-900">
-              <MessageSquare className="h-4 w-4" />
-              <span>Discussions</span>
-            </Link>
-            <Link to="/vouchers" className="flex items-center gap-1 text-muted-foreground hover:text-amber-900">
-              <Ticket className="h-4 w-4" />
-              <span>Vouchers</span>
-            </Link>
-          </div>
         </div>
 
-        {/* Right section */}
+        {/* Center Navigation - DESKTOP ONLY */}
+        {!isMobile && (
+          <div 
+            className={cn(
+              "flex items-center ml-6 transition-all duration-300",
+              isSearchOpen && "ml-0"
+            )}
+          >
+            <Link to="/categories" className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-amber-900">
+              <Tag className="h-4 w-4" />
+              <span className={cn("transition-all duration-300", isSearchOpen && "hidden")}>Categories</span>
+            </Link>
+            <Link to="/discussions" className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-amber-900">
+              <MessageSquare className="h-4 w-4" />
+              <span className={cn("transition-all duration-300", isSearchOpen && "hidden")}>Discussions</span>
+            </Link>
+            <Link to="/vouchers" className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-amber-900">
+              <Ticket className="h-4 w-4" />
+              <span className={cn("transition-all duration-300", isSearchOpen && "hidden")}>Vouchers</span>
+            </Link>
+          </div>
+        )}
+
+        {/* Right: Actions */}
         <div className="flex items-center gap-2">
-          {/* Search toggle */}
+          {/* Search */}
           <div className="relative flex items-center">
             {isSearchOpen ? (
-              <form onSubmit={handleSearch} className="absolute right-0 w-64">
-                <Input
-                  ref={searchInputRef}
-                  type="search"
-                  placeholder="Search deals..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pr-8"
-                />
-                <Button type="button" variant="ghost" size="icon" className="absolute right-0" onClick={toggleSearch}>
-                  <X className="h-4 w-4" />
-                </Button>
+              <form onSubmit={handleSearch} className={cn(
+                "absolute right-0 transition-all duration-300 ease-in-out",
+                isMobile ? "w-48" : "w-64"
+              )}>
+                <div className="flex items-center">
+                  <Input
+                    ref={searchInputRef}
+                    type="search"
+                    placeholder="Search deals..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pr-8"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    className="absolute right-0"
+                    onClick={toggleSearch}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
               </form>
             ) : (
-              <Button variant="ghost" size="icon" onClick={toggleSearch}>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={toggleSearch}
+                aria-label="Search"
+                className={isMobile ? "p-1" : ""}
+              >
                 <Search className="h-5 w-5" />
               </Button>
             )}
           </div>
 
-          {/* Submit Deal button */}
-          <div className={cn("transition-all duration-300", isSearchOpen ? "opacity-0 w-0 overflow-hidden" : "opacity-100")}>
-            <Link to="/submit-deal">
-              <Button variant="secondary" className="bg-orange-500 text-white hover:bg-orange-600">
-                <PlusCircle className="h-4 w-4 mr-1" />
-                Submit a Deal
-              </Button>
-            </Link>
-          </div>
+          {/* Submit button - DESKTOP ONLY */}
+          {!isMobile && (
+            <div className={cn("transition-all duration-300", isSearchOpen ? "opacity-0 w-0 overflow-hidden" : "opacity-100")}>
+              <Link to="/submit-deal">
+                <Button variant="secondary" className="bg-orange-500 text-white hover:bg-orange-600">
+                  <PlusCircle className="h-4 w-4 mr-1" />
+                  Submit a Deal
+                </Button>
+              </Link>
+            </div>
+          )}
 
-          <ThemeToggle variant="ghost" />
-          <NotificationsMenu />
-          <UserMenu />
+          {/* Theme toggle - visible on both */}
+          <ThemeToggle variant="ghost" className={isMobile ? "p-1" : ""} />
+          
+          {/* Notifications and profile - DESKTOP ONLY */}
+          {!isMobile && (
+            <>
+              <NotificationsMenu />
+              <UserMenu />
+            </>
+          )}
         </div>
       </div>
+
+      {/* Mobile search overlay when active */}
+      {isMobile && isSearchOpen && (
+        <div className="fixed inset-x-0 top-[44px] z-40 bg-background border-b p-2 shadow">
+          <form onSubmit={handleSearch} className="flex items-center">
+            <Input
+              type="search"
+              placeholder="Search deals..."
+              className="w-full"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              autoFocus
+            />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setIsSearchOpen(false)}
+              type="button"
+              className="ml-2"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          </form>
+        </div>
+      )}
     </header>
   );
 };
