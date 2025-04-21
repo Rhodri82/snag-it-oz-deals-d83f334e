@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
+import { Search, PlusCircle, X } from "lucide-react";
 import { DesktopNav } from './header/DesktopNav';
 import { SearchBar } from './header/SearchBar';
 import { UserMenu } from './header/UserMenu';
@@ -10,6 +10,7 @@ import { NotificationsMenu } from './header/NotificationsMenu';
 import { MobileMenu } from './header/MobileMenu';
 import { ThemeToggle } from './theme/ThemeToggle';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Input } from "@/components/ui/input";
 
 interface HeaderProps {
   onSearch?: (query: string) => void;
@@ -20,15 +21,17 @@ export const HEADER_HEIGHT = 54;
 const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const isMobile = useIsMobile();
-  const [isDesktopSearchActive, setIsDesktopSearchActive] = React.useState(false);
+  const [searchQuery, setSearchQuery] = React.useState("");
 
   const HEADER_HEIGHT = isMobile ? 44 : 54;
 
-  const toggleSearch = () => setIsSearchOpen((v) => !v);
-
-  const toggleDesktopSearch = () => {
-    setIsDesktopSearchActive((prev) => !prev);
-    if (isDesktopSearchActive) setIsSearchOpen(false);
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearch(searchQuery);
+    
+    if (window.innerWidth < 768) {
+      setIsSearchOpen(false);
+    }
   };
 
   return (
@@ -77,28 +80,63 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
 
         {/* Center: Desktop Search */}
         <div className="flex-1 flex justify-center px-2">
-          {!isMobile && isDesktopSearchActive && (
-            <SearchBar onSearch={onSearch} className="w-full max-w-md" />
+          {!isMobile && isSearchOpen && (
+            <div className="w-full max-w-md">
+              <form onSubmit={handleSearch} className="flex items-center">
+                <Input
+                  type="search"
+                  placeholder="Search deals..."
+                  className="w-full"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus
+                />
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  onClick={() => setIsSearchOpen(false)}
+                  type="button"
+                  className="ml-2"
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </form>
+            </div>
           )}
         </div>
 
         {/* Right: Submit + Search + User Actions */}
         <div className="flex items-center gap-2">
-          <Link to="/submit-deal">
-            <Button variant="secondary" size={isDesktopSearchActive ? "icon" : "default"}>
-              {isDesktopSearchActive ? (
-                <>
-                  <span className="text-green-900">D</span>
-                  <span className="text-yellow-700">O</span>
-                </>
-              ) : (
-                "Submit a Deal"
-              )}
-            </Button>
-          </Link>
-
+          {/* Only show Submit button on desktop and hide when search is open */}
           {!isMobile && (
-            <Button variant="ghost" size="icon" onClick={toggleDesktopSearch}>
+            <>
+              {!isSearchOpen && (
+                <Link to="/submit-deal">
+                  <Button variant="secondary" size="default">
+                    Submit a Deal
+                  </Button>
+                </Link>
+              )}
+
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+            </>
+          )}
+
+          {/* Always show search button on mobile */}
+          {isMobile && (
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              aria-label="Search"
+            >
               <Search className="h-5 w-5" />
             </Button>
           )}
@@ -112,7 +150,25 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
       {/* Mobile Slide-in Search */}
       {isMobile && isSearchOpen && (
         <div className="fixed inset-x-0 top-[44px] z-40 md:hidden bg-background border-b p-2 shadow">
-          <SearchBar onSearch={onSearch} />
+          <form onSubmit={handleSearch} className="flex items-center">
+            <Input
+              type="search"
+              placeholder="Search deals..."
+              className="w-full"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              autoFocus
+            />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setIsSearchOpen(false)}
+              type="button"
+              className="ml-2"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          </form>
         </div>
       )}
     </header>
