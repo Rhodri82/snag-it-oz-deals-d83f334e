@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { DealList } from '@/components/deals/DealList';
 import { DealHeader } from '@/components/deals/DealHeader';
+import Header from '@/components/Header';
 import { HEADER_HEIGHT } from '@/components/Header';
 import { useDeals } from '@/hooks/use-deals';
 import { SAMPLE_DEALS } from '@/data/sample-deals';
@@ -40,9 +41,10 @@ const Index = () => {
 
   return (
     <>
+      <Header activeTab={activeTab} onTabChange={handleTabChange} />
       <main className="px-4 sm:px-6 md:px-8 max-w-screen-xl mx-auto pt-16 pb-8 md:pb-12">
         {/* Sticky header with filter tabs */}
-        <div className={`bg-background sticky top-[${HEADER_HEIGHT}px] z-10 border-b`}>
+        <div className={`bg-background sticky top-[${HEADER_HEIGHT}px] z-10`}>
          <DealHeader
             activeTab={activeTab}
             viewMode={viewMode}
