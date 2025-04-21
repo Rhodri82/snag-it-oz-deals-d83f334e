@@ -70,10 +70,8 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           <Link to="#">
             <Menu className="h-5 w-5" />
           </Link>
-        </div>
+          </div>
 
-      {/* Mobile Navigation Menu */}
-      <MobileMenu />
 
 
       </div>
@@ -81,6 +79,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
       {/* Mobile Navigation Menu */}
       <MobileMenu />
     </header>
+    
   );
 };
 
