@@ -1,8 +1,8 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Tag, MessageSquare, Ticket, PlusCircle } from "lucide-react";
+import { Menu, X, Tag, MessageSquare, Ticket, PlusCircle, Search } from "lucide-react";
 import { UserMenu } from './header/UserMenu';
 import { NotificationsMenu } from './header/NotificationsMenu';
 import { ThemeToggle } from './theme/ThemeToggle';
@@ -25,13 +25,11 @@ const Header: React.FC<HeaderProps> = ({
   activeTab = "popular",
   onTabChange = () => {}
 }) => {
-  const [isSearchOpen, setIsSearchOpen] = React.useState(false);
-  const [isSideMenuOpen, setIsSideMenuOpen] = React.useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const isMobile = useIsMobile();
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = React.useRef<HTMLInputElement>(null);
-
-  const HEADER_HEIGHT = isMobile ? 44 : 54;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
