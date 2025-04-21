@@ -78,7 +78,7 @@ const DealCard = ({
         <DealImage imageUrl={imageUrl} title={title} discount={discount} className="aspect-video" />
       </div>
 
-      <div className="flex-1 flex flex-col justify-start gap-2">
+      <div className="flex-1 flex flex-col justify-start gap-1">
         {/* Retailer Badge */}
         <div className="absolute top-2 left-2 bg-background px-2 py-1 rounded text-xs md:static md:bg-transparent">
           <Badge variant="outline" className="p-0">{retailer}</Badge>
