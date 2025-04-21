@@ -1,4 +1,14 @@
 
+import React from 'react';
+import { Button } from "@/components/ui/button";
+import { LayoutList, Grid3X3 } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+interface ViewModeToggleProps {
+  viewMode: "list" | "grid";
+  onViewModeChange: (mode: "list" | "grid") => void;
+}
+
 export const ViewModeToggle: React.FC<ViewModeToggleProps> = ({
   viewMode,
   onViewModeChange,
