@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Layout from '@/components/Layout';
 import { DealList } from '@/components/deals/DealList';
 import { DealHeader } from '@/components/deals/DealHeader';
+import { HEADER_HEIGHT } from '@/components/Header';
 import { useDeals } from '@/hooks/use-deals';
 import { SAMPLE_DEALS } from '@/data/sample-deals';
 import { Button } from "@/components/ui/button";
@@ -53,10 +54,10 @@ const Index = () => {
 
   return (
     <Layout>
-      <main className="pt-[73px] pb-20 md:pb-6">
-        {/* Sticky header with filter tabs */}
-        <div className="bg-background sticky top-[73px] z-10 border-b">
-          <DealHeader
+      <main className="pt-16 pb-8 md:pb-12">
+        {/* Sticky header with filter tabs */}        
+        <div className={`bg-background sticky top-[${HEADER_HEIGHT}px] z-10 border-b`}>
+        <DealHeader
             activeTab={activeTab}
             viewMode={viewMode}
             selectedCategories={selectedCategories}
@@ -73,7 +74,6 @@ const Index = () => {
             onSortChange={setSortOption}
             onClearFilters={clearFilters}
           />
-        </div>
 
         {/* Deal listing */}
         <div className="py-6">
@@ -89,9 +89,8 @@ const Index = () => {
       </main>
 
       {/* Floating button for mobile */}
-      <Button 
-        className="fixed bottom-4 right-4 md:hidden rounded-full shadow-lg z-50" 
-        size="lg"
+      <Button
+        className="fixed bottom-4 right-4 md:hidden z-50 rounded-full shadow-lg"
         variant="secondary"
         asChild
       >

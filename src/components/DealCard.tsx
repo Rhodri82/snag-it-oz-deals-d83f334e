@@ -2,11 +2,10 @@
 import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { DealImage } from './deals/DealImage';
 import { DealVoting } from './deals/DealVoting';
 import { DealCategories } from './deals/DealCategories';
+import { Button } from "@/components/ui/button";
 import { PriceDisplay } from './deals/PriceDisplay';
 import { useDealInteractions } from '@/hooks/useDealInteractions';
 import { Clock, User, MapPin, MessageSquare, ExternalLink } from 'lucide-react';
@@ -67,52 +66,49 @@ const DealCard = ({
   const { userVote, handleVote } = useDealInteractions(temperature, featured, expired);
 
   return (
-    <Card className="flex flex-col md:flex-row p-4 gap-4 md:gap-6 md:p-6 items-start">
+    <Card className="flex flex-col md:flex-row gap-4 p-4 md:p-6 items-start">
       {/* Desktop Voting Column */}
-      <div className="hidden md:flex flex-col items-center gap-2 px-2 w-14 shrink-0 justify-start">
-        <DealVoting
-            votes={votes}
-            userVote={userVote}
-            onVote={handleVote}
-            className="mt-2"
-              commentCount={commentCount}
-              orientation="vertical"
-          />
+      <div className="hidden md:flex flex-col items-center gap-2 w-14 shrink-0 justify-start">
+        <DealVoting votes={votes} userVote={userVote} onVote={handleVote} commentCount={commentCount} orientation="vertical" />
       </div>
-      {/* Voting Column */}
-      
+
       {/* Image */}
       <div className="w-full md:w-44 shrink-0 aspect-video">
-        <DealImage imageUrl={imageUrl} title={title} discount={discount} className="aspect-video" />
+        <DealImage imageUrl={imageUrl} title={title} discount={discount} alt={title} className="aspect-video" />
       </div>
 
-      <div className="flex-1 flex flex-col justify-start gap-1">
+      <div className="flex-1 flex flex-col gap-2">
         {/* Retailer Badge */}
-        <div className="absolute top-2 left-2 bg-background px-2 py-1 rounded text-xs md:static md:bg-transparent">
-          <Badge variant="outline" className="p-0">{retailer}</Badge>
+        <div className="relative">
+          <Badge
+            variant="outline"
+            className="absolute top-2 left-2 bg-background px-2 py-1 rounded text-xs md:static md:bg-transparent z-10"
+          >
+            {retailer}
+          </Badge>
         </div>
+        {/* Title and Price */}
+        <div className="flex flex-col gap-1">
+          <Link to={`/deal/${id}`} className="hover:text-primary transition-colors">
+            <h2 className="text-sm md:text-lg font-semibold leading-snug">{title}</h2>
+          </Link>
 
-        {/* Title */}
-        <Link to={`/deal/${id}`} className="hover:text-primary transition-colors ">
-          <h2 className="text-sm md:text-lg font-semibold leading-snug ">
-            {title}</h2>
-        </Link>
-
-          {/* Price */}
-        <div className="ml-2">
-          <PriceDisplay
-            price={price}
-            previousPrice={previousPrice}
-            shipping={shipping}
-            className="text-lg font-semibold"
-          />
+          <div className="ml-0">
+            {/* Price */}
+            <PriceDisplay
+              price={price}
+              previousPrice={previousPrice}
+              shipping={shipping}
+              className="text-lg font-semibold"
+            />
+          </div>
         </div>
 
         {/* Description */}
         <p className="hidden md:block text-sm text-muted-foreground line-clamp-2">{description}</p>
 
         {/* Info Strip */}
-        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mt-2">
+        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
           <div className="flex items-center gap-1 truncate">
             <Clock className="w-3 h-3" />
             <span>{timestamp}</span>
@@ -133,37 +129,30 @@ const DealCard = ({
 
         {/* Categories */}
         <div className="flex flex-wrap gap-1">
-          <DealCategories categories={categories} className="p-0"/>
+          <DealCategories categories={categories} className="p-0" />
         </div>
 
-         {/* Mobile voting & CTA */}
+        {/* Mobile voting & CTA */}
         <div className="flex justify-between items-center mt-2 md:mt-3">
           <div className="md:hidden">
-            <DealVoting
-              votes={votes}
-              userVote={userVote}
-              onVote={handleVote}
-              commentCount={commentCount}
-              orientation="horizontal"
-            />
+            <DealVoting votes={votes} userVote={userVote} onVote={handleVote} commentCount={commentCount} orientation="horizontal" />
           </div>
-          <div className=" ">
-            <Button
-              variant="default"
-              size="default"
-              className="bg-orange-500 text-white rounded-md px-4 py-2 text-sm hover:bg-orange-600"
-              asChild
-            >
-              <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                Get deal
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </Button>
-          </div>
+          <Button
+            variant="default"
+            size="default"
+            className="bg-orange-500 text-white rounded-md px-4 py-2 text-sm hover:bg-orange-600"
+            asChild
+          >
+            <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              Get deal
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </Button>
         </div>
       </div>
     </Card>
   );
 };
+
 
 export default DealCard;

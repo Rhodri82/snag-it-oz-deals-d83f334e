@@ -40,102 +40,88 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background shadow-sm"
-    style={{
-      minHeight: HEADER_HEIGHT,
-      height: HEADER_HEIGHT,
-      lineHeight: '1',
-    }}>
-      <div
-        className="max-w-screen-2xl mx-auto flex items-center justify-between"
+      style={{
+        minHeight: HEADER_HEIGHT,
+        height: HEADER_HEIGHT,
+        lineHeight: '1',
+      }}
+    >
+      <div className="max-w-screen-2xl mx-auto flex items-center justify-between"
         style={{
           height: HEADER_HEIGHT,
           paddingLeft: isMobile ? 0 : 20,
           paddingRight: isMobile ? 0 : 20,
         }}
       >
-        {/* Left: Hamburger & Logo, all on one row, tightly aligned */}
-        {isMobile ? (
-          // Mobile: Hamburger next to logo, center-aligned
-          <div className="flex items-center flex-1 min-w-0 relative" style={{height: HEADER_HEIGHT}}>
-            <div className="flex-shrink-0">
+        {/* Left: Mobile Menu Button / Logo, Desktop: Logo & Nav */}
+        <div className="flex items-center gap-4">
+          {isMobile ? (
+            <div className="flex items-center gap-4">
               <MobileMenu />
+              <Link
+                to="/"
+                className="flex items-center text-lg font-extrabold tracking-tight leading-none ml-2"
+              >
+                <span className="text-green-900">Deals</span>
+                <span className="text-yellow-700">Oz</span>
+              </Link>
             </div>
-            <Link
-              to="/"
-              className="flex items-center text-lg font-extrabold tracking-tight leading-none mx-2"
-              style={{ marginLeft: 2 }}
-            >
-              <span className="text-green-900">Deals</span>
-              <span className="text-yellow-700">Oz</span>
-            </Link>
-          </div>
-        ) : (
-          // Desktop: Existing layout
-          <div className="flex items-center gap-1 min-w-0">
-            <div className="md:hidden relative z-20">
-              <MobileMenu />
+          ) : (
+            <div className="flex items-center gap-4">
+              <Link
+                to="/"
+                className="flex items-center text-xl sm:text-2xl font-extrabold tracking-tight leading-none space-x-1"
+              >
+                <span className="text-green-900">Deals</span>
+                <span className="text-yellow-700">Oz</span>
+              </Link>
+              {/* Desktop: Navigation Links */}
+              <DesktopNav />
             </div>
-            <Link
-              to="/"
-              className="flex items-center text-xl sm:text-2xl font-extrabold tracking-tight leading-none space-x-1 pl-0"
-              style={{ marginLeft: 2 }}
-            >
-              <span className="text-green-900">Deals</span>
-              <span className="text-yellow-700">Oz</span>
-            </Link>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Center: Search */}
-        <div className={`flex-1 flex justify-center items-center px-1 ${isMobile ? "" : ""}`}>
-          <div className={`w-full max-w-xs ${isMobile ? "flex justify-end" : ""}`}>
-            {/* On mobile: search toggles open */}
-            {isMobile ? (
-              isSearchOpen ? (
+        <div className={`flex-1 flex justify-center items-center px-1 ${isMobile ? "" : ""}`}>          
+          {isMobile ? (
+            <div className={`w-full max-w-xs ${isMobile ? "flex justify-end" : ""}`}>
+              {isSearchOpen ? (
                 <SearchBar onSearch={onSearch} />
               ) : (
                 <Button variant="ghost" size="icon" className="ml-auto" onClick={toggleSearch} style={{marginRight: 2}}>
                   <Search className="h-5 w-5" />
                   <span className="sr-only">Open search</span>
                 </Button>
-              )
-            ) : (
-              <SearchBar onSearch={onSearch} />
-            )}
-          </div>
+              )}
+            </div>
+          ) : (
+            <SearchBar onSearch={onSearch} className="w-full max-w-md" />
+          )}
         </div>
 
-        {/* Right: Icons - notifications, theme, user */}
-        <div className="flex items-center gap-1 md:gap-2 shrink-0">
+        {/* Actions, to the far right on desktop (Submit Deal, Theme, User, Notifications) */}
+        <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          <Link to="/submit-deal" className="hidden md:block">
+            <Button variant="secondary">Submit a Deal</Button>
+          </Link>
           <ThemeToggle variant="ghost" />
           <NotificationsMenu />
           <UserMenu />
         </div>
 
         {/* Mobile: Menu Button */}
-        <Button variant="ghost" size="icon" className="md:hidden" asChild>
-          <Link to="#">
-            <Menu className="h-5 w-5" />
-          </Link>
+        <div className="md:hidden">
+          <MobileMenu />
         </div>
-
-      {/* Mobile Navigation Menu */}
-      <MobileMenu />
-
-
+        
       </div>
 
-      {/* Mobile: Expanding search bar overlay, tidy/compact positioning */}
       {isMobile && isSearchOpen && (
         <div className="fixed inset-x-0 top-[44px] z-40 md:hidden bg-background border-b p-2 shadow">
           <SearchBar onSearch={onSearch} />
         </div>
       )}
 
-      {/* Desktop nav bar: compact, tight height */}
-      <nav className="hidden md:block border-t bg-background" style={{ minHeight: 40 }}>
-        <DesktopNav />
-      </nav>
     </header>
     
   );

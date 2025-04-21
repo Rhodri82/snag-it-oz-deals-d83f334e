@@ -50,7 +50,7 @@ export const MobileMenu = () => {
         <div className="flex justify-between items-center mb-6">
           <Link to="/" onClick={handleLinkClick}>
             <img 
-              src="/public/lovable-uploads/94b05e26-27d9-4f0a-b50e-c3ca3ce313ca.png" 
+              src="/public/dealsoz_logo_clean.svg" 
               alt="DealsOz – Community Deals Across Australia" 
               className="h-8 w-auto"
             />
