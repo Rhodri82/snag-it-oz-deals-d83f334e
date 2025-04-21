@@ -39,10 +39,12 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   const toggleSearch = () => setIsSearchOpen((v) => !v);
 
   return (
-    <header
-      className="sticky top-0 z-50 w-full border-b bg-background shadow-sm"
-      style={{ minHeight: HEADER_HEIGHT, height: HEADER_HEIGHT, lineHeight: 1 }}
-    >
+    <header className="sticky top-0 z-50 w-full border-b bg-background shadow-sm"
+    style={{
+      minHeight: HEADER_HEIGHT,
+      height: HEADER_HEIGHT,
+      lineHeight: '1',
+    }}>
       <div
         className="max-w-screen-2xl mx-auto flex items-center justify-between"
         style={{
