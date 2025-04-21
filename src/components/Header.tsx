@@ -2,12 +2,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, Menu, X, Tag, MessageSquare, Ticket, PlusCircle } from "lucide-react";
+import { Menu, X, Tag, MessageSquare, Ticket, PlusCircle } from "lucide-react";
 import { UserMenu } from './header/UserMenu';
 import { NotificationsMenu } from './header/NotificationsMenu';
 import { ThemeToggle } from './theme/ThemeToggle';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
@@ -18,35 +17,10 @@ interface HeaderProps {
 export const HEADER_HEIGHT = 54;
 
 const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
-  const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = React.useState(false);
   const isMobile = useIsMobile();
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const searchInputRef = React.useRef<HTMLInputElement>(null);
 
   const HEADER_HEIGHT = isMobile ? 44 : 54;
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSearch(searchQuery);
-    if (isMobile) {
-      setIsSearchOpen(false);
-    }
-  };
-
-  const toggleSearch = () => {
-    const newState = !isSearchOpen;
-    setIsSearchOpen(newState);
-    
-    if (newState) {
-      // Focus the search input after it's rendered
-      setTimeout(() => {
-        searchInputRef.current?.focus();
-      }, 10);
-    } else {
-      setSearchQuery("");
-    }
-  };
 
   return (
     <header
@@ -125,72 +99,36 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
 
         {/* Center Navigation - DESKTOP ONLY */}
         {!isMobile && (
-          <div 
-            className={cn(
-              "flex items-center ml-6 transition-all duration-300",
-              isSearchOpen && "ml-0"
-            )}
-          >
+          <div className="flex items-center ml-6 transition-all duration-300">
             <Link to="/categories" className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-amber-900">
               <Tag className="h-4 w-4" />
-              <span className={cn("transition-all duration-300", isSearchOpen && "hidden")}>Categories</span>
+              <span>Categories</span>
             </Link>
             <Link to="/discussions" className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-amber-900">
               <MessageSquare className="h-4 w-4" />
-              <span className={cn("transition-all duration-300", isSearchOpen && "hidden")}>Discussions</span>
+              <span>Discussions</span>
             </Link>
             <Link to="/vouchers" className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-amber-900">
               <Ticket className="h-4 w-4" />
-              <span className={cn("transition-all duration-300", isSearchOpen && "hidden")}>Vouchers</span>
+              <span>Vouchers</span>
             </Link>
           </div>
         )}
 
         {/* Right: Actions */}
         <div className="flex items-center gap-2">
-          {/* Search */}
-          <div className="relative flex items-center">
-            {isSearchOpen ? (
-              <form onSubmit={handleSearch} className={cn(
-                "absolute right-0 transition-all duration-300 ease-in-out",
-                isMobile ? "w-48" : "w-64"
-              )}>
-                <div className="flex items-center">
-                  <Input
-                    ref={searchInputRef}
-                    type="search"
-                    placeholder="Search deals..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pr-8"
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="absolute right-0"
-                    onClick={toggleSearch}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                </div>
-              </form>
-            ) : (
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                onClick={toggleSearch}
-                aria-label="Search"
-                className={isMobile ? "p-1" : ""}
-              >
+          {/* Search - DESKTOP ONLY */}
+          {!isMobile && (
+            <div className="relative flex items-center">
+              <Button variant="ghost" size="icon" aria-label="Search">
                 <Search className="h-5 w-5" />
               </Button>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Submit button - DESKTOP ONLY */}
           {!isMobile && (
-            <div className={cn("transition-all duration-300", isSearchOpen ? "opacity-0 w-0 overflow-hidden" : "opacity-100")}>
+            <div className="transition-all duration-300 opacity-100">
               <Link to="/submit-deal">
                 <Button variant="secondary" className="bg-orange-500 text-white hover:bg-orange-600">
                   <PlusCircle className="h-4 w-4 mr-1" />
@@ -212,31 +150,6 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           )}
         </div>
       </div>
-
-      {/* Mobile search overlay when active */}
-      {isMobile && isSearchOpen && (
-        <div className="fixed inset-x-0 top-[44px] z-40 bg-background border-b p-2 shadow">
-          <form onSubmit={handleSearch} className="flex items-center">
-            <Input
-              type="search"
-              placeholder="Search deals..."
-              className="w-full"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              autoFocus
-            />
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={() => setIsSearchOpen(false)}
-              type="button"
-              className="ml-2"
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </form>
-        </div>
-      )}
     </header>
   );
 };
