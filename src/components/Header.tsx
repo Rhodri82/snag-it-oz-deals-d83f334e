@@ -121,29 +121,29 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
         </div>
 
         {/* Actions, to the far right on desktop (Submit Deal, Theme, User, Notifications) */}
-        <div className="flex items-center gap-2 md:gap-4 shrink-0">
-          <div className="flex items-center gap-2 md:gap-4 shrink-0">
-            <Link to="/submit-deal" className={`md:block ${isDesktopSearchActive ? "" : "hidden"} `}>
-              <Button variant="secondary" size="icon" >
-                <span className="text-green-900">D</span>
-                <span className="text-yellow-700">O</span>
-              </Button>
-            </Link>
-          </div>
-          <div className={`flex items-center gap-2 md:gap-4 shrink-0`}>
-            <Button variant="ghost" size="icon" className="ml-auto" onClick={toggleDesktopSearch} style={{marginRight: 2}}>
-              <Search className="h-5 w-5" />
+        {/* Actions, to the far right on desktop (Submit Deal, Search, Theme, User, Notifications) */}
+        <div className="flex items-center gap-2 md:gap-4 shrink-0">          
+          <Link to="/submit-deal" className={`md:block`}>
+          <Button variant="secondary" size={isDesktopSearchActive ? "icon" : "default"}>
+              {isDesktopSearchActive ? (
+                <>
+                  <span className="text-green-900">D</span>
+                  <span className="text-yellow-700">O</span>
+                </>
+              ) : (
+                "Submit a Deal"
+              )}
             </Button>
+          </Link>
+          <div className={`flex items-center gap-2 md:gap-4 shrink-0`}>            
+              <Button variant="ghost" size="icon" className="ml-auto" onClick={toggleDesktopSearch} style={{ marginRight: 2 }}>
+                <Search className="h-5 w-5" />
+              </Button>          
             <ThemeToggle variant="ghost" />
             <NotificationsMenu />
             <UserMenu />
-            </div>
-          ) : (
-            <SearchBar onSearch={onSearch} className="w-full max-w-md" />
-          )}
-        </div>
-
-        {/* Actions, to the far right on desktop (Submit Deal, Theme, User, Notifications) */}
+          </div>
+          {/* Old actions - removed */}
         <div className="flex items-center gap-2 md:gap-4 shrink-0">
           <Link to="/submit-deal" className="hidden md:block">
             <Button variant="secondary">Submit a Deal</Button>
@@ -151,6 +151,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           <ThemeToggle variant="ghost" />
           <NotificationsMenu />
           <UserMenu />
+        </div>
         </div>
 
         {/* Mobile: Menu Button */}
