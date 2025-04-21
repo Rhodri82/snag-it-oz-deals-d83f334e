@@ -33,8 +33,8 @@ export const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange }) =>
             className={`
               relative inline-block font-medium transition-all mx-1 px-2 py-2 text-sm
               ${selected
-                ? "text-amber-700 font-bold"
-                : "text-muted-foreground hover:text-amber-900"}
+                ? "text-amber-800 font-bold"
+                : "text-zinc-500 hover:text-amber-700"}
             `}
           >
             <span className="relative inline-block">
