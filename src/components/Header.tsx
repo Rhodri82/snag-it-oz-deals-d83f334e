@@ -126,15 +126,13 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
 
         {/* Right: Submit + Search + User Actions */}
         <div className="flex items-center gap-2">
-          {/* Keep only the first Submit button (with plus icon) */}
+          {/* Restore the original Submit button styling */}
           <Link to="/submit-deal">
-            <Button variant="secondary" className="bg-orange-500 hover:bg-orange-600 text-white">
-              <span className="mr-1">+</span>
+            <Button variant="secondary" className="rounded-md bg-orange-500 hover:bg-orange-600 text-white">
+              <span className="text-lg mr-1">+</span>
               Submit a Deal
             </Button>
           </Link>
-
-          {/* Remove the duplicate Submit button */}
 
           {/* Search button */}
           <Button 
