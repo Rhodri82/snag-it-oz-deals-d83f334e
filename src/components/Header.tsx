@@ -2,9 +2,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, Menu, X } from "lucide-react";
-import { DesktopNav } from './header/DesktopNav';
-import { SearchBar } from './header/SearchBar';
+import { Search, Menu, X, Tag, MessageSquare, Ticket } from "lucide-react";
 import { UserMenu } from './header/UserMenu';
 import { NotificationsMenu } from './header/NotificationsMenu';
 import { ThemeToggle } from './theme/ThemeToggle';
@@ -53,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
         }}
       >
         {/* Left: Logo + Hamburger Menu */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Sheet open={isSideMenuOpen} onOpenChange={setIsSideMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="ml-2">
@@ -64,25 +62,21 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
             <SheetContent side="left" className="w-72 pt-12">
               <div className="flex justify-between items-center mb-6">
                 <Link to="/" onClick={() => setIsSideMenuOpen(false)}>
-                  <span className="text-green-900 font-bold text-lg">Deals</span>
-                  <span className="text-yellow-700 font-bold text-lg">Oz</span>
+                  <div className="flex items-center">
+                    <span className="text-green-900 font-bold text-lg">Deals</span>
+                    <span className="text-yellow-700 font-bold text-lg">Oz</span>
+                  </div>
                 </Link>
                 <ThemeToggle />
               </div>
               
               <nav className="space-y-1">
                 <Link 
-                  to="/"
-                  className="flex items-center gap-3 py-2 px-2 hover:bg-muted rounded-md text-foreground"
-                  onClick={() => setIsSideMenuOpen(false)}
-                >
-                  Home
-                </Link>
-                <Link 
                   to="/categories"
                   className="flex items-center gap-3 py-2 px-2 hover:bg-muted rounded-md text-foreground"
                   onClick={() => setIsSideMenuOpen(false)}
                 >
+                  <Tag className="h-4 w-4" />
                   Categories
                 </Link>
                 <Link 
@@ -90,6 +84,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
                   className="flex items-center gap-3 py-2 px-2 hover:bg-muted rounded-md text-foreground"
                   onClick={() => setIsSideMenuOpen(false)}
                 >
+                  <MessageSquare className="h-4 w-4" />
                   Discussions
                 </Link>
                 <Link 
@@ -97,6 +92,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
                   className="flex items-center gap-3 py-2 px-2 hover:bg-muted rounded-md text-foreground"
                   onClick={() => setIsSideMenuOpen(false)}
                 >
+                  <Ticket className="h-4 w-4" />
                   Vouchers
                 </Link>
               </nav>
@@ -105,26 +101,25 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
 
           <Link
             to="/"
-            className="flex items-center text-xl sm:text-2xl font-extrabold leading-none space-x-1"
+            className="flex items-center text-xl sm:text-2xl font-extrabold leading-none"
           >
             <span className="text-green-900">Deals</span>
             <span className="text-yellow-700">Oz</span>
           </Link>
         </div>
 
-        {/* Center: Navigation Links - Keep the existing styled links */}
-        <div className="hidden md:flex items-center">
-          <Link to="/" className="px-4 py-2 font-medium relative text-amber-700 font-bold">
-            Home
-            <span className="block absolute left-1.5 right-1.5 -bottom-[3px] h-[2px] rounded-full transition-all duration-200 bg-amber-500" />
-          </Link>
-          <Link to="/categories" className="px-4 py-2 text-muted-foreground hover:text-amber-900">
+        {/* Center: Navigation Links - with icons and closer to logo */}
+        <div className="hidden md:flex items-center ml-6">
+          <Link to="/categories" className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-amber-900">
+            <Tag className="h-4 w-4" />
             Categories
           </Link>
-          <Link to="/discussions" className="px-4 py-2 text-muted-foreground hover:text-amber-900">
+          <Link to="/discussions" className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-amber-900">
+            <MessageSquare className="h-4 w-4" />
             Discussions
           </Link>
-          <Link to="/vouchers" className="px-4 py-2 text-muted-foreground hover:text-amber-900">
+          <Link to="/vouchers" className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-amber-900">
+            <Ticket className="h-4 w-4" />
             Vouchers
           </Link>
         </div>
@@ -133,11 +128,13 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
         <div className="flex items-center gap-2">
           {/* Keep only the first Submit button (with plus icon) */}
           <Link to="/submit-deal">
-            <Button variant="secondary" className="flex items-center gap-2">
-              <span className="text-lg font-bold">+</span>
+            <Button variant="secondary" className="bg-orange-500 hover:bg-orange-600 text-white">
+              <span className="mr-1">+</span>
               Submit a Deal
             </Button>
           </Link>
+
+          {/* Remove the duplicate Submit button */}
 
           {/* Search button */}
           <Button 
