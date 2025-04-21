@@ -9,6 +9,19 @@ import { SAMPLE_DEALS } from '@/data/sample-deals';
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 
+/**
+ * Index Page
+ * 
+ * Main homepage of the DealsOz application. Features:
+ * - Deal filtering tabs (Popular/Fresh/Snagged)
+ * - Filter controls for categories, retailers, price ranges
+ * - View mode toggle (list/grid)
+ * - Deal sorting options
+ * - Paginated deal listing
+ * - Mobile submit deal button
+ * 
+ * This page demonstrates the full deal browsing experience.
+ */
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;

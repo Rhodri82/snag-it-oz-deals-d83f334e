@@ -3,6 +3,16 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 
+/**
+ * Layout Component
+ * 
+ * Main layout wrapper for the application. Provides consistent page structure with:
+ * - Header with navigation
+ * - Main content area with appropriate padding and max width
+ * - Footer
+ * 
+ * Used as a wrapper for all page components.
+ */
 interface LayoutProps {
   children: React.ReactNode;
 }

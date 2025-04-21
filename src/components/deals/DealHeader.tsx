@@ -4,6 +4,14 @@ import { DealTabs } from './DealTabs';
 import { DealFilters } from './DealFilters';
 import { DealSort } from './DealSort';
 
+/**
+ * DealHeader Component
+ * 
+ * Main control panel for deal filtering, sorting and display options.
+ * Includes tabs, filters, view mode toggle, and sorting controls.
+ * 
+ * Used in: Index page and other deal listing pages
+ */
 interface DealHeaderProps {
   activeTab: string;
   viewMode: "list" | "grid";

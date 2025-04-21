@@ -1,6 +1,14 @@
 
 import React from 'react';
 
+/**
+ * DealTabs Component
+ * 
+ * Navigation tabs for filtering deals by popularity, freshness, or trending status.
+ * Features clean underline style for active tab and smooth transitions.
+ * 
+ * Used in: DealHeader for main deal filtering controls
+ */
 interface DealTabsProps {
   activeTab: string;
   onTabChange: (tab: string) => void;

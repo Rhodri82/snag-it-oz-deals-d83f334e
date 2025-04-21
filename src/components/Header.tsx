@@ -11,6 +11,20 @@ import { MobileMenu } from './header/MobileMenu';
 import { ThemeToggle } from './theme/ThemeToggle';
 import { useIsMobile } from '@/hooks/use-mobile';
 
+/**
+ * Header Component
+ * 
+ * Main navigation header for the application. Features:
+ * - Mobile hamburger menu
+ * - Logo and branding
+ * - Search functionality
+ * - Theme toggle
+ * - Notifications dropdown
+ * - User account dropdown
+ * - Desktop navigation links
+ * 
+ * Adapts responsively between mobile and desktop layouts
+ */
 interface HeaderProps {
   onSearch?: (query: string) => void;
 }

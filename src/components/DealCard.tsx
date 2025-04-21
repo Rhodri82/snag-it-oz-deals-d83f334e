@@ -12,6 +12,14 @@ import { useDealInteractions } from '@/hooks/useDealInteractions';
 import { Clock, User, MapPin, MessageSquare, ExternalLink } from 'lucide-react';
 import { Link } from "react-router-dom";
 
+/**
+ * DealCard Component
+ * 
+ * Displays a single deal with complete information including price, retailer,
+ * voting options, deal details, and action buttons.
+ * 
+ * Used in: DealList, search results, and related deals sections
+ */
 interface DealCardProps {
   id: number;
   title: string;
@@ -157,6 +165,5 @@ const DealCard = ({
     </Card>
   );
 };
-
 
 export default DealCard;

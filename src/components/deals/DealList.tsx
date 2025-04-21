@@ -1,12 +1,20 @@
 
 import React from 'react';
 import { cn } from "@/lib/utils";
-import DealCard from '@/components/DealCard';
+import DealCard from '@/components/DealCard';  // Importing from the main components directory
 import { Button } from "@/components/ui/button";
 import { Deal } from '@/types/deals';
 import { Card } from '@/components/ui/card';
 import { Pagination } from "@/components/Pagination";
 
+/**
+ * DealList Component
+ * 
+ * Displays a collection of deals in either list or grid view with pagination.
+ * Handles empty states and includes a sidebar for featured content.
+ * 
+ * Used in: Homepage, category pages, search results
+ */
 interface DealListProps {
   deals: Deal[];
   viewMode: "list" | "grid";

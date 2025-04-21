@@ -11,6 +11,20 @@ import { ViewModeToggle } from './filters/ViewModeToggle';
 import { ExpiredToggle } from './filters/ExpiredToggle';
 import { ClearFiltersButton } from './filters/ClearFiltersButton';
 
+/**
+ * DealFilters Component
+ * 
+ * Comprehensive filter controls for deals allowing users to filter by:
+ * - Categories
+ * - Retailers
+ * - Price ranges
+ * - Show/hide expired deals
+ * - View mode (list/grid)
+ * 
+ * Shows a badge with active filter count and provides clear all functionality.
+ * 
+ * Used in: DealHeader component
+ */
 interface DealFiltersProps {
   selectedCategories: string[];
   selectedRetailers: string[];

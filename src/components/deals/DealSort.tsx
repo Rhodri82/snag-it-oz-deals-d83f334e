@@ -10,6 +10,17 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 
+/**
+ * DealSort Component
+ * 
+ * Dropdown menu for sorting deals by different criteria:
+ * - Most Popular
+ * - Latest First
+ * - Trending Now
+ * - Most Discussed
+ * 
+ * Used in: DealHeader component
+ */
 interface DealSortProps {
   sortOption: string;
   onSortChange: (option: string) => void;
