@@ -1,14 +1,4 @@
 
-import React from 'react';
-import { Button } from "@/components/ui/button";
-import { LayoutList, Grid3X3 } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-interface ViewModeToggleProps {
-  viewMode: "list" | "grid";
-  onViewModeChange: (mode: "list" | "grid") => void;
-}
-
 export const ViewModeToggle: React.FC<ViewModeToggleProps> = ({
   viewMode,
   onViewModeChange,
@@ -19,7 +9,7 @@ export const ViewModeToggle: React.FC<ViewModeToggleProps> = ({
         variant="ghost"
         size="sm"
         className={cn(
-          "px-3 h-full rounded-none flex items-center gap-1",
+          "px-3 h-10 rounded-none flex items-center gap-1",
           viewMode === "list" && "bg-muted"
         )}
         onClick={() => onViewModeChange("list")}
@@ -31,7 +21,7 @@ export const ViewModeToggle: React.FC<ViewModeToggleProps> = ({
         variant="ghost"
         size="sm"
         className={cn(
-          "px-3 h-full rounded-none flex items-center gap-1",
+          "px-3 h-10 rounded-none flex items-center gap-1",
           viewMode === "grid" && "bg-muted"
         )}
         onClick={() => onViewModeChange("grid")}
