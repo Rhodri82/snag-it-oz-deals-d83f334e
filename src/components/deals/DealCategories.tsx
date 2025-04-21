@@ -4,13 +4,14 @@ import { AUSTRALIAN_DEAL_CATEGORIES } from "@/components/sidebar/sidebar-data";
 
 interface DealCategoriesProps {
   categories: string[];
+  className?: string;
 }
 
-export const DealCategories = ({ categories }: DealCategoriesProps) => {
+export const DealCategories = ({ categories, className }: DealCategoriesProps) => {
   if (categories.length === 0) return null;
 
   return (
-    <div className="mt-2 flex flex-wrap gap-2">
+    <div className={`mt-2 flex flex-wrap gap-2 ${className || ''}`}>
       {categories.map((category) => {
         const categoryData = AUSTRALIAN_DEAL_CATEGORIES.find(
           (cat) => cat.slug === category.toLowerCase()

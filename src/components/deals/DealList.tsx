@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { cn } from "@/lib/utils";
-import DealCard from './DealCard';
+import DealCard from '@/components/DealCard';
 import { Button } from "@/components/ui/button";
 import { Deal } from '@/types/deals';
 import { Card } from '@/components/ui/card';
