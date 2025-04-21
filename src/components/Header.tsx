@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, Search } from "lucide-react";
-
 import { DesktopNav } from './header/DesktopNav';
 import { SearchBar } from './header/SearchBar';
 import { UserMenu } from './header/UserMenu';
@@ -18,30 +17,34 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
 
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
-  };
+  const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        {/* Left Section - Logo */}
-        <Link
-          to="/"
-          className="flex items-center text-2xl font-extrabold tracking-tight leading-none space-x-1"
-        >
-          <span className="text-green-900">Deals</span>
-          <span className="text-yellow-700">Oz</span>
-        </Link>
-
-        {/* Center Section - Desktop Search Bar */}
-        <div className="hidden md:block flex-1">
-          <SearchBar onSearch={onSearch} />
+    <header className="sticky top-0 z-50 w-full bg-background border-b shadow-sm">
+      <div className="max-w-screen-2xl mx-auto flex items-center justify-between h-[68px] px-2 sm:px-6 md:px-8">
+        {/* Left: Hamburger and Logo */}
+        <div className="flex items-center gap-2 min-w-[90px]">
+          {/* Mobile hamburger menu button (absolute on mobile, static on desktop) */}
+          <div className="md:hidden relative z-20">
+            <MobileMenu />
+          </div>
+          {/* Logo */}
+          <Link to="/" className="flex items-center text-2xl font-extrabold tracking-tight leading-none space-x-1 pl-1 md:pl-0">
+            <span className="text-green-900">Deals</span>
+            <span className="text-yellow-700">Oz</span>
+          </Link>
         </div>
 
-        {/* Right Section - Mobile Search Toggle, Nav, Actions */}
-        <div className="flex items-center gap-4">
-          {/* Mobile Search Button */}
+        {/* Middle: Search (desktop prominently; mobile hidden) */}
+        <div className="flex-1 flex justify-center px-2">
+          <div className="w-full max-w-xl">
+            <SearchBar onSearch={onSearch} />
+          </div>
+        </div>
+
+        {/* Right: Actions */}
+        <div className="flex items-center gap-2 md:gap-3 shrink-0">
+          {/* Mobile: Search toggle button */}
           <Button
             variant="ghost"
             size="icon"
@@ -49,37 +52,25 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
             onClick={toggleSearch}
           >
             <Search className="h-5 w-5" />
+            <span className="sr-only">Open search</span>
           </Button>
-
-          {/* Desktop Search Bar */}
-          <div className="hidden md:block flex-1 max-w-lg">
-            <SearchBar onSearch={onSearch} />
-          </div>
-
-          {/* Desktop Navigation */}
-          <DesktopNav />      
           <ThemeToggle variant="ghost" />
           <NotificationsMenu />
           <UserMenu />
-          
-          {/* Mobile: Menu Button */}
-          <Button variant="ghost" size="icon" className="md:hidden" asChild>
-            <Link to="#">
-              <Menu className="h-5 w-5" />
-            </Link>
-          </Button>
         </div>
-
-        {/* Mobile Search Bar (Dropdown) */}
-        {isSearchOpen && (
-          <div className="absolute top-16 left-0 right-0 z-50 md:hidden bg-background p-4 border-b">
-            <SearchBar onSearch={onSearch} />
-          </div>
-        )}
       </div>
 
-      {/* Mobile Navigation Menu */}
-      <MobileMenu />
+      {/* Mobile: Expanding search bar overlay */}
+      {isSearchOpen && (
+        <div className="fixed inset-x-0 top-[68px] z-40 md:hidden bg-background border-b p-3">
+          <SearchBar onSearch={onSearch} />
+        </div>
+      )}
+
+      {/* Desktop nav bar */}
+      <nav className="hidden md:block border-t bg-background">
+        <DesktopNav />
+      </nav>
     </header>
   );
 };
