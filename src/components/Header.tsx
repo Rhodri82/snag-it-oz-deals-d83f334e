@@ -29,16 +29,24 @@ interface HeaderProps {
   onSearch?: (query: string) => void;
 }
 
+// More compact height for header on mobile & desktop
+export const HEADER_HEIGHT = 54; 
+
+
+
+
 const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const isMobile = useIsMobile();
 
   // More compact height for header on mobile & desktop
-  const HEADER_HEIGHT = isMobile ? 44 : 54;
+  const HEADER_HEIGHT = isMobile ? 44 : 54;  
+
+  
 
   const toggleSearch = () => setIsSearchOpen((v) => !v);
-
-  return (
+  
+  return (    
     <header className="sticky top-0 z-50 w-full border-b bg-background shadow-sm"
       style={{
         minHeight: HEADER_HEIGHT,

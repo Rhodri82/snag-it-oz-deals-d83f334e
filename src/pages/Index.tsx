@@ -53,30 +53,29 @@ const Index = () => {
   );
 
   return (
-    <Layout>
-      <main className="pt-16 pb-8 md:pb-12">
-        {/* Sticky header with filter tabs */}        
-        <div className={`bg-background sticky top-[${HEADER_HEIGHT}px] z-10 border-b`}>
-        <DealHeader
-            activeTab={activeTab}
-            viewMode={viewMode}
-            selectedCategories={selectedCategories}
-            selectedRetailers={selectedRetailers}
-            selectedPriceRanges={selectedPriceRanges}
-            showExpired={showExpired}
-            sortOption={sortOption}
-            onTabChange={handleTabChange}
-            onCategoryToggle={handleCategoryToggle}
-            onRetailerToggle={handleRetailerToggle}
-            onPriceRangeToggle={handlePriceRangeToggle}
-            onShowExpiredChange={setShowExpired}
-            onViewModeChange={setViewMode}
-            onSortChange={setSortOption}
-            onClearFilters={clearFilters}
-          />
-
-        {/* Deal listing */}
-        <div className="py-6">
+        <Layout>
+            <main className="pt-16 pb-8 md:pb-12">
+                {/* Sticky header with filter tabs */}
+                <div className={`bg-background sticky top-[${HEADER_HEIGHT}px] z-10 border-b`}>
+                    <DealHeader
+                        activeTab={activeTab}
+                        viewMode={viewMode}
+                        selectedCategories={selectedCategories}
+                        selectedRetailers={selectedRetailers}
+                        selectedPriceRanges={selectedPriceRanges}
+                        showExpired={showExpired}
+                        sortOption={sortOption}
+                        onTabChange={handleTabChange}
+                        onCategoryToggle={handleCategoryToggle}
+                        onRetailerToggle={handleRetailerToggle}
+                        onPriceRangeToggle={handlePriceRangeToggle}
+                        onShowExpiredChange={setShowExpired}
+                        onViewModeChange={setViewMode}
+                        onSortChange={setSortOption}
+                        onClearFilters={clearFilters}
+                    />
+                </div>
+                 <div className="py-6">
           <DealList
             deals={currentDeals}
             viewMode={viewMode}
@@ -85,22 +84,22 @@ const Index = () => {
             onPageChange={setCurrentPage}
             totalPages={totalPages}
           />
-        </div>
-      </main>
+                </div>
+            </main>
 
-      {/* Floating button for mobile */}
-      <Button
-        className="fixed bottom-4 right-4 md:hidden z-50 rounded-full shadow-lg"
-        variant="secondary"
-        asChild
-      >
-        <Link to="/submit-deal" className="gap-2">
-          <PlusCircle className="w-5 h-5" />
-          <span>Submit a Deal</span>
-        </Link>
-      </Button>
-    </Layout>
-  );
+            {/* Floating button for mobile */}
+            <Button
+                className="fixed bottom-4 right-4 md:hidden z-50 rounded-full shadow-lg"
+                variant="secondary"
+                asChild
+            >
+                <Link to="/submit-deal" className="gap-2">
+                    <PlusCircle className="w-5 h-5" />
+                    <span>Submit a Deal</span>
+                </Link>
+            </Button>
+        </Layout>
+    );
 };
 
 export default Index;
