@@ -3,6 +3,18 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+/**
+ * Pagination Component
+ * 
+ * Provides navigation controls for paginated content.
+ * Features include:
+ * - Previous/next page buttons
+ * - Direct page number selection
+ * - Ellipses for large page counts
+ * - Active page highlighting
+ * 
+ * Used in: DealList and other paginated listings
+ */
 interface PaginationProps {
   currentPage: number;
   totalPages: number;

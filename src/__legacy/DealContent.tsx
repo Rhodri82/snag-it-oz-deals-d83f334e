@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { DealTemperature } from './DealTemperature';
 import { DealMetadata } from './DealMetadata';
-import { DealImage } from '../DealImage';
-import { DealCategories } from '../DealCategories';
-import { PriceDisplay } from '../PriceDisplay';
-import { DealVoting } from '../DealVoting';
+import { DealImage } from '@/components/deals/DealImage';
+import { DealCategories } from '@/components/deals/DealCategories';
+import { PriceDisplay } from '@/components/deals/PriceDisplay';
+import { DealVoting } from '@/components/deals/DealVoting';
 
 interface DealContentProps {
   id: number;

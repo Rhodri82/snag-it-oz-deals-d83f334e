@@ -11,6 +11,7 @@ interface DealVotingProps {
   onVote: (type: 'yeah' | 'nah') => void;
   commentCount: number;
   orientation?: 'horizontal' | 'vertical';
+  className?: string;
 }
 
 export const DealVoting = ({
@@ -18,7 +19,8 @@ export const DealVoting = ({
   userVote,
   onVote,
   commentCount,
-  orientation = 'horizontal'
+  orientation = 'horizontal',
+  className
 }: DealVotingProps) => {
   const snagScore = votes.yeah - votes.nah;
   const totalVotes = votes.yeah + votes.nah;  
@@ -38,6 +40,7 @@ export const DealVoting = ({
       orientation === 'vertical'
         ? "flex-col items-center justify-center"
         : "items-center justify-between md:flex-row flex-col",
+      className
     )}>
       <div className={cn(
         "flex gap-2 items-center",
@@ -94,7 +97,7 @@ export const DealVoting = ({
           <TooltipTrigger asChild>
             <Button
               variant="ghost"
-              size="icon"
+              size="sm"
               className={cn(
                 "h-10 px-3 rounded-md border border-border transition-colors",
                 userVote === 'nah' && "text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/20 border-rose-300 dark:border-rose-700",

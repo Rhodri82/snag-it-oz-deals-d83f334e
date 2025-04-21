@@ -4,6 +4,14 @@ import { DealTabs } from './DealTabs';
 import { DealFilters } from './DealFilters';
 import { DealSort } from './DealSort';
 
+/**
+ * DealHeader Component
+ * 
+ * Main control panel for deal filtering, sorting and display options.
+ * Includes tabs, filters, view mode toggle, and sorting controls.
+ * 
+ * Used in: Index page and other deal listing pages
+ */
 interface DealHeaderProps {
   activeTab: string;
   viewMode: "list" | "grid";
@@ -40,15 +48,15 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
   onClearFilters
 }) => {
   return (
-    <div className="bg-background px-4 sm:px-6 md:px-8 py-4 border-b">
-      <div className="flex flex-col gap-4">
-        {/* Tabs Row */}
-        <div className="pl-4 sm:pl-6 md:pl-8">
+    <div className="bg-background px-2 sm:px-6 md:px-8 py-2 border-b" style={{paddingTop: 0, paddingBottom: 0}}>
+      <div className="flex flex-col gap-1">
+        {/* Tabs Row - less left padding for compact, remove vertical margin */}
+        <div className="pl-0 sm:pl-6 md:pl-8">
           <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
         </div>
 
-        {/* Filters & Sort Row */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        {/* Filters & Sort Row - closer to tabs */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mt-0">
           <DealFilters
             selectedCategories={selectedCategories}
             selectedRetailers={selectedRetailers}
