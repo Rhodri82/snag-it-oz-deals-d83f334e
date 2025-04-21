@@ -39,29 +39,30 @@ export const DealHeader: React.FC<DealHeaderProps> = ({
   onSortChange,
   onClearFilters
 }) => {
-  return (<div className="flex flex-col gap-0 mt-0 mb-1 max-w-screen-xl mx-auto bg-background border-b">
-        {/* Tabs Row */}
-        <div>
-          <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
-        </div>
-
-        {/* Filters & Sort Row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-2 h-10">
-          <DealFilters
-            selectedCategories={selectedCategories}
-            selectedRetailers={selectedRetailers}
-            selectedPriceRanges={selectedPriceRanges}
-            showExpired={showExpired}
-            onCategoryToggle={onCategoryToggle}
-            onRetailerToggle={onRetailerToggle}
-            onPriceRangeToggle={onPriceRangeToggle}
-            onShowExpiredChange={onShowExpiredChange}
-            onClearFilters={onClearFilters}
-            viewMode={viewMode}
-            onViewModeChange={onViewModeChange}
-          />
-          <DealSort sortOption={sortOption} onSortChange={onSortChange} />
-        </div>
+  return (
+    <div className="bg-background border-b px-4 md:px-6 max-w-screen-xl mx-auto mt-0 mb-4">
+      {/* Tabs Row */}
+      <div className="pt-2 pb-1">
+        <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
       </div>
+
+      {/* Filters & Sort Row */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
+        <DealFilters
+          selectedCategories={selectedCategories}
+          selectedRetailers={selectedRetailers}
+          selectedPriceRanges={selectedPriceRanges}
+          showExpired={showExpired}
+          onCategoryToggle={onCategoryToggle}
+          onRetailerToggle={onRetailerToggle}
+          onPriceRangeToggle={onPriceRangeToggle}
+          onShowExpiredChange={onShowExpiredChange}
+          onClearFilters={onClearFilters}
+          viewMode={viewMode}
+          onViewModeChange={onViewModeChange}
+        />
+        <DealSort sortOption={sortOption} onSortChange={onSortChange} />
+      </div>
+    </div>
   );
 };
