@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { cn } from "@/lib/utils";
-import DealCard from './DealCard'; // ✅ Correct relative path
+import DealCard from './DealCard';
 import { Button } from "@/components/ui/button";
 import { Deal } from '@/types/deals';
 import { Card } from '@/components/ui/card';
@@ -67,15 +67,5 @@ export const DealList: React.FC<DealListProps> = ({
             </Card>
         </aside>
     </div>
-      {/* {totalPages > 1 && (
-        <div className="flex justify-center pt-8">
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={onPageChange}
-          />
-        </div>
-      )} */}
-    
   );
 };

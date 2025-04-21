@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, Search } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+
 import { DesktopNav } from './header/DesktopNav';
 import { SearchBar } from './header/SearchBar';
 import { UserMenu } from './header/UserMenu';
@@ -23,8 +23,8 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background pr-4">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 ">
+    <header className="sticky top-0 z-50 w-full border-b bg-background">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Left Section - Logo */}
         <Link
           to="/"
@@ -42,16 +42,14 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
         {/* Right Section - Mobile Search Toggle, Nav, Actions */}
         <div className="flex items-center gap-4">
           {/* Mobile Search Button */}
-          <DropdownMenu open={isSearchOpen} onOpenChange={setIsSearchOpen}>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Search className="h-5 w-5" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="absolute top-16 left-0 right-0 z-50 md:hidden bg-background p-4 border-b">
-              <SearchBar onSearch={onSearch} />
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={toggleSearch}
+          >
+            <Search className="h-5 w-5" />
+          </Button>
 
           {/* Desktop Search Bar */}
           <div className="hidden md:block flex-1 max-w-lg">
@@ -63,19 +61,21 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
           <ThemeToggle variant="ghost" />
           <NotificationsMenu />
           <UserMenu />
+          
+          {/* Mobile: Menu Button */}
+          <Button variant="ghost" size="icon" className="md:hidden" asChild>
+            <Link to="#">
+              <Menu className="h-5 w-5" />
+            </Link>
+          </Button>
         </div>
 
-        {/* Mobile: Menu Button */}
-        <Button variant="ghost" size="icon" className="md:hidden" asChild>
-          <Link to="#">
-            <Menu className="h-5 w-5" />
-          </Link>
-        </div>
-
-      {/* Mobile Navigation Menu */}
-      <MobileMenu />
-
-
+        {/* Mobile Search Bar (Dropdown) */}
+        {isSearchOpen && (
+          <div className="absolute top-16 left-0 right-0 z-50 md:hidden bg-background p-4 border-b">
+            <SearchBar onSearch={onSearch} />
+          </div>
+        )}
       </div>
 
       {/* Mobile Navigation Menu */}
