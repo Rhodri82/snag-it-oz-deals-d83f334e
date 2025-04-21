@@ -15,7 +15,7 @@ const TABS = [
 export const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange }) => {
   return (
     <div 
-      className="doz-tablist flex w-full justify-start sm:justify-center overflow-x-auto hide-scrollbar" 
+      className="doz-tablist flex w-full justify-center sm:justify-center overflow-x-auto hide-scrollbar" 
       style={{ 
         background: "var(--background)",
         marginBottom: 0,
@@ -31,7 +31,7 @@ export const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange }) =>
             type="button"
             onClick={() => onTabChange(tab.value)}
             className={`
-              relative inline-block font-medium transition-all mx-1 px-2 py-2 text-sm
+              relative inline-block font-medium transition-all mx-1 px-3 py-2 text-sm
               ${selected
                 ? "text-amber-800 font-bold"
                 : "text-zinc-500 hover:text-amber-700"}
