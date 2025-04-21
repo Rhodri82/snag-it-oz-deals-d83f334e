@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, Menu, X, Tag, MessageSquare, Ticket } from "lucide-react";
+import { Search, Menu, X, Tag, MessageSquare, Ticket, PlusCircle } from "lucide-react";
 import { UserMenu } from './header/UserMenu';
 import { NotificationsMenu } from './header/NotificationsMenu';
 import { ThemeToggle } from './theme/ThemeToggle';
@@ -126,10 +126,10 @@ const Header: React.FC<HeaderProps> = ({ onSearch = () => {} }) => {
 
         {/* Right: Submit + Search + User Actions */}
         <div className="flex items-center gap-2">
-          {/* Restore the original Submit button styling */}
+          {/* Submit button using Button component properly */}
           <Link to="/submit-deal">
-            <Button variant="secondary" className="rounded-md bg-orange-500 hover:bg-orange-600 text-white">
-              <span className="text-lg mr-1">+</span>
+            <Button variant="secondary" className="bg-orange-500 text-white hover:bg-orange-600">
+              <PlusCircle className="h-4 w-4 mr-1" />
               Submit a Deal
             </Button>
           </Link>
