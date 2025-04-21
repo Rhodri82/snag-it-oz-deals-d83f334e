@@ -33,7 +33,7 @@ export const DealSort: React.FC<DealSortProps> = ({ sortOption, onSortChange }) 
         <Button
           variant="outline"
           size="sm"
-          className="gap-1 h-9 px-3 text-xs"
+          className="gap-1 h-9 px-3 text-xs items-center"
         >
           Sort by
           <ChevronDown className="h-3.5 w-3.5 opacity-50" />
