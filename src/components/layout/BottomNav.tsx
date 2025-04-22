@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Tag, MessageSquare, Ticket, User, PlusCircle, Search } from 'lucide-react';
+import { Tag, MessageSquare, Ticket, PlusCircle, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
