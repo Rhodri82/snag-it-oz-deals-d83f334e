@@ -2,12 +2,13 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { DealList } from '@/components/deals/DealList';
-import { DealHeader } from '@/components/deals/DealHeader';
+import DealHeader from '@/components/deals/DealHeader';
 import Header from '@/components/Header';
 import { useDeals } from '@/hooks/use-deals';
 import { SAMPLE_DEALS } from '@/data/sample-deals';
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
+import { Deal } from '@/types/deals';
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,10 +34,11 @@ const Index = () => {
   } = useDeals(SAMPLE_DEALS);
 
   const totalPages = Math.ceil(sortedDeals.length / itemsPerPage);
+  // Cast the DealWithTrendingScore[] to Deal[] to match the DealList component's expectations
   const currentDeals = sortedDeals.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
-  );
+  ) as Deal[];
 
   return (
     <>

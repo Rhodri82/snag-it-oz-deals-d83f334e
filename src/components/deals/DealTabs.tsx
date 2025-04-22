@@ -7,9 +7,10 @@ export type DealTab = 'ripper' | 'fresh' | 'snagged';
 interface DealTabsProps {
   activeTab: DealTab;
   onTabChange: (tab: DealTab) => void;
+  isMobileHeader?: boolean;
 }
 
-const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange }) => {
+const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange, isMobileHeader }) => {
   return (
     <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
       <TabsList className="grid w-full grid-cols-3 bg-gray-100">

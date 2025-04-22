@@ -6,16 +6,17 @@ interface DealImageProps {
   title: string;
   discount?: string;
   className?: string;
+  alt?: string;
 }
 
-export const DealImage = ({ imageUrl, title, discount, className }: DealImageProps) => {
+export const DealImage = ({ imageUrl, title, discount, className, alt }: DealImageProps) => {
   const defaultImageUrl = `https://via.placeholder.com/300x200?text=${encodeURIComponent(title)}`;
 
   return (
     <div className={`relative w-full h-40 rounded border bg-muted overflow-hidden ${className || ''}`}>
       <img
         src={imageUrl || defaultImageUrl}
-        alt={title}
+        alt={alt || title}
         className="w-full h-full object-cover"
         loading="lazy"
       />
@@ -28,3 +29,5 @@ export const DealImage = ({ imageUrl, title, discount, className }: DealImagePro
     </div>
   );
 };
+
+export default DealImage;

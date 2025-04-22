@@ -1,6 +1,7 @@
 
 import { useState, useMemo } from "react";
 import { calculateTrendingScore } from "@/utils/trendingScore";
+import { Deal } from "@/types/deals";
 
 export interface DealWithTrendingScore extends Deal {
   trendingScore: number;

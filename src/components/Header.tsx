@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -10,7 +9,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { DealTabs } from './deals/DealTabs';
+import DealTabs, { DealTab } from './deals/DealTabs';
 
 interface HeaderProps {
   onSearch?: (query: string) => void;
@@ -44,7 +43,6 @@ const Header: React.FC<HeaderProps> = ({
     setIsSearchOpen(newState);
     
     if (newState) {
-      // Focus the search input after it's rendered
       setTimeout(() => {
         searchInputRef.current?.focus();
       }, 10);
@@ -129,7 +127,7 @@ const Header: React.FC<HeaderProps> = ({
         {/* Mobile Tabs - Only visible on mobile */}
         {isMobile && (
           <div className="flex-1 ml-2">
-            <DealTabs activeTab={activeTab} onTabChange={onTabChange} isMobileHeader={true} />
+            <DealTabs activeTab={activeTab as DealTab} onTabChange={(tab) => onTabChange(tab)} isMobileHeader={true} />
           </div>
         )}
 
@@ -213,7 +211,7 @@ const Header: React.FC<HeaderProps> = ({
           )}
 
           {/* Theme toggle - visible on both */}
-          <ThemeToggle variant="ghost" className={isMobile ? "p-1" : ""} />
+          <ThemeToggle size="icon" variant="ghost" className={isMobile ? "p-1" : ""} />
           
           {/* Notifications and profile - DESKTOP ONLY */}
           {!isMobile && (
@@ -229,7 +227,7 @@ const Header: React.FC<HeaderProps> = ({
       {!isMobile && (
         <div className="border-t border-b bg-background">
           <div className="max-w-screen-2xl mx-auto">
-            <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
+            <DealTabs activeTab={activeTab as DealTab} onTabChange={(tab) => onTabChange(tab)} />
           </div>
         </div>
       )}
