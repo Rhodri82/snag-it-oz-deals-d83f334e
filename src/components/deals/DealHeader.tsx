@@ -1,97 +1,53 @@
 
 import React from 'react';
-import { DealTabs } from './DealTabs';
-import { DealFilters } from './DealFilters';
-import { DealSort } from './DealSort';
-import { useIsMobile } from '@/hooks/use-mobile';
+import DealTabs, { DealTab } from './DealTabs';
+import DealFilters from './DealFilters';
+import DealSort from './DealSort';
+import { List, Grid } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface DealHeaderProps {
-  activeTab: string;
-  viewMode: "list" | "grid";
-  selectedCategories: string[];
-  selectedRetailers: string[];
-  selectedPriceRanges: string[];
-  showExpired: boolean;
-  sortOption: string;
-  onTabChange: (tab: string) => void;
-  onCategoryToggle: (category: string) => void;
-  onRetailerToggle: (retailer: string) => void;
-  onPriceRangeToggle: (range: string) => void;
-  onShowExpiredChange: (show: boolean) => void;
-  onViewModeChange: (mode: "list" | "grid") => void;
-  onSortChange: (sort: string) => void;
-  onClearFilters: () => void;
+  activeTab: DealTab;
+  onTabChange: (tab: DealTab) => void;
+  viewMode: 'list' | 'grid';
+  onViewModeChange: (mode: 'list' | 'grid') => void;
 }
 
-export const DealHeader: React.FC<DealHeaderProps> = ({
+const DealHeader: React.FC<DealHeaderProps> = ({
   activeTab,
-  viewMode,
-  selectedCategories,
-  selectedRetailers,
-  selectedPriceRanges,
-  showExpired,
-  sortOption,
   onTabChange,
-  onCategoryToggle,
-  onRetailerToggle,
-  onPriceRangeToggle,
-  onShowExpiredChange,
-  onViewModeChange,
-  onSortChange,
-  onClearFilters
+  viewMode,
+  onViewModeChange
 }) => {
-  const isMobile = useIsMobile();
-
-  // For desktop, render tabs and filters/sort normally
-  if (!isMobile) {
-    return (
-      <div className="bg-background border-b px-4 md:px-6 max-w-screen-xl mx-auto mt-0 mb-4">
-        {/* Tabs Row */}
-        <div className="pt-2 pb-1">
+  return (
+    <div className="flex items-center justify-between space-x-4 mb-4">
+      <div className="flex items-center space-x-4 flex-grow">
+        <div className="flex-grow">
           <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
         </div>
-
-        {/* Filters & Sort Row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 pb-2">
-          <DealFilters
-            selectedCategories={selectedCategories}
-            selectedRetailers={selectedRetailers}
-            selectedPriceRanges={selectedPriceRanges}
-            showExpired={showExpired}
-            onCategoryToggle={onCategoryToggle}
-            onRetailerToggle={onRetailerToggle}
-            onPriceRangeToggle={onPriceRangeToggle}
-            onShowExpiredChange={onShowExpiredChange}
-            onClearFilters={onClearFilters}
-            viewMode={viewMode}
-            onViewModeChange={onViewModeChange}
-          />
-          <DealSort sortOption={sortOption} onSortChange={onSortChange} />
+        <div className="flex items-center space-x-2">
+          <DealFilters />
+          <DealSort />
+          <div className="flex space-x-1">
+            <Button
+              variant={viewMode === 'list' ? 'default' : 'outline'}
+              size="icon"
+              onClick={() => onViewModeChange('list')}
+            >
+              <List size={20} />
+            </Button>
+            <Button
+              variant={viewMode === 'grid' ? 'default' : 'outline'}
+              size="icon"
+              onClick={() => onViewModeChange('grid')}
+            >
+              <Grid size={20} />
+            </Button>
+          </div>
         </div>
-      </div>
-    );
-  }
-
-  // For mobile, we'll render just the filter and sort on one line
-  return (
-    <div className="bg-background border-b px-4 max-w-screen-xl mx-auto mt-0 mb-4">
-      {/* Only filters and sort on one line for mobile */}
-      <div className="flex items-center justify-between py-2">
-        <DealFilters
-          selectedCategories={selectedCategories}
-          selectedRetailers={selectedRetailers}
-          selectedPriceRanges={selectedPriceRanges}
-          showExpired={showExpired}
-          onCategoryToggle={onCategoryToggle}
-          onRetailerToggle={onRetailerToggle}
-          onPriceRangeToggle={onPriceRangeToggle}
-          onShowExpiredChange={onShowExpiredChange}
-          onClearFilters={onClearFilters}
-          viewMode={viewMode}
-          onViewModeChange={onViewModeChange}
-        />
-        <DealSort sortOption={sortOption} onSortChange={onSortChange} />
       </div>
     </div>
   );
 };
+
+export default DealHeader;
