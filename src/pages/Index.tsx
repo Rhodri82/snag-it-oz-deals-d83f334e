@@ -44,28 +44,31 @@ const Index = () => {
   return (
     <>
       <Header />
-      <main className="px-4 sm:px-6 md:px-8 max-w-screen-xl mx-auto pt-16 pb-8 md:pb-12">
+      <main className="pb-8 md:pb-12">
         {/* Sticky header with filter tabs */}
-        <div className="bg-background sticky top-14 z-10 py-4">
-          <DealHeader
-            activeTab={activeTab as DealTab}
-            viewMode={viewMode}
-            selectedCategories={selectedCategories}
-            selectedRetailers={selectedRetailers}
-            selectedPriceRanges={selectedPriceRanges}
-            showExpired={showExpired}
-            sortOption={sortOption}
-            onTabChange={handleTabChange}
-            onCategoryToggle={handleCategoryToggle}
-            onRetailerToggle={handleRetailerToggle}
-            onPriceRangeToggle={handlePriceRangeToggle}
-            onShowExpiredChange={setShowExpired}
-            onViewModeChange={setViewMode}
-            onSortChange={setSortOption}
-            onClearFilters={clearFilters}
-          />
+        <div className="bg-background sticky top-14 z-10">
+          <div className="max-w-screen-xl mx-auto">
+            <DealHeader
+              activeTab={activeTab as DealTab}
+              viewMode={viewMode}
+              selectedCategories={selectedCategories}
+              selectedRetailers={selectedRetailers}
+              selectedPriceRanges={selectedPriceRanges}
+              showExpired={showExpired}
+              sortOption={sortOption}
+              onTabChange={handleTabChange}
+              onCategoryToggle={handleCategoryToggle}
+              onRetailerToggle={handleRetailerToggle}
+              onPriceRangeToggle={handlePriceRangeToggle}
+              onShowExpiredChange={setShowExpired}
+              onViewModeChange={setViewMode}
+              onSortChange={setSortOption}
+              onClearFilters={clearFilters}
+            />
+          </div>
         </div>
-        <div>
+        
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8">
           <DealList
             deals={currentDeals}
             viewMode={viewMode}

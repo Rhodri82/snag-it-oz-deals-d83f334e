@@ -42,14 +42,14 @@ const DealHeader: React.FC<DealHeaderProps> = ({
   onClearFilters = () => {}
 }) => {
   return (
-    <div className="space-y-2">
+    <div className="space-y-0">
       {/* Deal Tabs */}
       <div className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
       </div>
       
       {/* Filters, Sort and View toggles */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between py-2">
         <div className="flex items-center gap-2">
           <DealFilters 
             selectedCategories={selectedCategories}
@@ -75,7 +75,7 @@ const DealHeader: React.FC<DealHeaderProps> = ({
             onClick={() => onViewModeChange('list')}
             className={viewMode === 'list' ? 'bg-accent text-accent-foreground' : ''}
           >
-            <List className="h-4 w-4" />
+            <List className="h-5 w-5" />
           </Button>
           <Button
             variant="ghost"
@@ -83,7 +83,7 @@ const DealHeader: React.FC<DealHeaderProps> = ({
             onClick={() => onViewModeChange('grid')}
             className={viewMode === 'grid' ? 'bg-accent text-accent-foreground' : ''}
           >
-            <Grid className="h-4 w-4" />
+            <Grid className="h-5 w-5" />
           </Button>
         </div>
       </div>

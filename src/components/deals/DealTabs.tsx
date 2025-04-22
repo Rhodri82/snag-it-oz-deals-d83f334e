@@ -13,7 +13,7 @@ interface DealTabsProps {
 const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange }) => {
   return (
     <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
-      <TabsList className="grid w-full grid-cols-3 h-12 bg-muted/50">
+      <TabsList className="grid w-full grid-cols-3 h-14 bg-muted/50">
         <TabsTrigger 
           value="ripper"
           className="text-base font-medium"
