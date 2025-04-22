@@ -61,6 +61,8 @@ const DealHeader: React.FC<DealHeaderProps> = ({
             onPriceRangeToggle={onPriceRangeToggle}
             onShowExpiredChange={onShowExpiredChange}
             onClearFilters={onClearFilters}
+            viewMode={viewMode}
+            onViewModeChange={onViewModeChange}
           />
           <DealSort sortOption={sortOption} onSortChange={onSortChange} />
         </div>
