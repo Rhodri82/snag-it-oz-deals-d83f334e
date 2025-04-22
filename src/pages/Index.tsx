@@ -42,11 +42,11 @@ const Index = () => {
 
   return (
     <>
-      <Header activeTab={activeTab} onTabChange={handleTabChange} />
+      <Header activeTab={activeTab as DealTab} onTabChange={handleTabChange} />
       <main className="px-4 sm:px-6 md:px-8 max-w-screen-xl mx-auto pt-16 pb-8 md:pb-12">
         {/* Sticky header with filter tabs */}
-        <div className="bg-background sticky top-14 z-10">
-         <DealHeader
+        <div className="bg-background sticky top-14 z-10 py-4">
+          <DealHeader
             activeTab={activeTab}
             viewMode={viewMode}
             selectedCategories={selectedCategories}
