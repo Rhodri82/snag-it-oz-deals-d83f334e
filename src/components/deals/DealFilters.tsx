@@ -7,7 +7,6 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { CategoryFilter } from './filters/CategoryFilter';
 import { RetailerFilter } from './filters/RetailerFilter';
 import { PriceRangeFilter } from './filters/PriceRangeFilter';
-import { ViewModeToggle } from './filters/ViewModeToggle';
 import { ExpiredToggle } from './filters/ExpiredToggle';
 import { ClearFiltersButton } from './filters/ClearFiltersButton';
 
@@ -19,7 +18,6 @@ import { ClearFiltersButton } from './filters/ClearFiltersButton';
  * - Retailers
  * - Price ranges
  * - Show/hide expired deals
- * - View mode (list/grid)
  * 
  * Shows a badge with active filter count and provides clear all functionality.
  * 
@@ -49,15 +47,14 @@ export const DealFilters: React.FC<DealFiltersProps> = ({
   onPriceRangeToggle,
   onShowExpiredChange,
   onClearFilters,
+  // We still receive these props but don't use them here anymore
   viewMode,
   onViewModeChange,
 }) => {
   const totalFilters = selectedCategories.length + selectedRetailers.length + selectedPriceRanges.length;
 
   return (
-    <div className="flex items-center gap-2 flex-wrap">
-      <ViewModeToggle viewMode={viewMode} onViewModeChange={onViewModeChange} />
-
+    <div className="flex items-center gap-2">
       <Popover>
         <PopoverTrigger asChild>
           <Button

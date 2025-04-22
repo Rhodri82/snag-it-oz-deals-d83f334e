@@ -9,6 +9,7 @@ import { SAMPLE_DEALS } from '@/data/sample-deals';
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { Deal } from '@/types/deals';
+import { DealTab } from '@/components/deals/DealTabs';
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +48,7 @@ const Index = () => {
         {/* Sticky header with filter tabs */}
         <div className="bg-background sticky top-14 z-10 py-4">
           <DealHeader
-            activeTab={activeTab}
+            activeTab={activeTab as DealTab}
             viewMode={viewMode}
             selectedCategories={selectedCategories}
             selectedRetailers={selectedRetailers}

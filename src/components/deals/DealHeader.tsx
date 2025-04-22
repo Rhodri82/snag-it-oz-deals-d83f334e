@@ -42,30 +42,38 @@ const DealHeader: React.FC<DealHeaderProps> = ({
   onClearFilters = () => {}
 }) => {
   return (
-    <div className="flex items-center justify-between space-x-4 mb-4">
-      <div className="flex-grow">
+    <div className="flex flex-col space-y-4">
+      {/* Deal Tabs in their own row */}
+      <div className="w-full">
         <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
       </div>
-      <div className="flex items-center space-x-2">
-        <DealFilters 
-          selectedCategories={selectedCategories}
-          selectedRetailers={selectedRetailers}
-          selectedPriceRanges={selectedPriceRanges}
-          showExpired={showExpired}
-          onCategoryToggle={onCategoryToggle}
-          onRetailerToggle={onRetailerToggle}
-          onPriceRangeToggle={onPriceRangeToggle}
-          onShowExpiredChange={onShowExpiredChange}
-          onClearFilters={onClearFilters}
-          viewMode={viewMode}
-          onViewModeChange={onViewModeChange}
-        />
-        <DealSort sortOption={sortOption} onSortChange={onSortChange} />
+      
+      {/* Filters, Sort and View toggles in a row */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <DealFilters 
+            selectedCategories={selectedCategories}
+            selectedRetailers={selectedRetailers}
+            selectedPriceRanges={selectedPriceRanges}
+            showExpired={showExpired}
+            onCategoryToggle={onCategoryToggle}
+            onRetailerToggle={onRetailerToggle}
+            onPriceRangeToggle={onPriceRangeToggle}
+            onShowExpiredChange={onShowExpiredChange}
+            onClearFilters={onClearFilters}
+            viewMode={viewMode}
+            onViewModeChange={onViewModeChange}
+          />
+          <DealSort sortOption={sortOption} onSortChange={onSortChange} />
+        </div>
+        
+        {/* View Mode Toggle buttons */}
         <div className="flex space-x-1">
           <Button
             variant={viewMode === 'list' ? 'default' : 'outline'}
             size="icon"
             onClick={() => onViewModeChange('list')}
+            className="w-10 h-10 p-0"
           >
             <List size={20} />
           </Button>
@@ -73,6 +81,7 @@ const DealHeader: React.FC<DealHeaderProps> = ({
             variant={viewMode === 'grid' ? 'default' : 'outline'}
             size="icon"
             onClick={() => onViewModeChange('grid')}
+            className="w-10 h-10 p-0"
           >
             <Grid size={20} />
           </Button>

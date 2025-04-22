@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -9,19 +10,20 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import DealTabs, { DealTab } from './deals/DealTabs';
+import DealTabs from './deals/DealTabs';
+import type { DealTab } from './deals/DealTabs';
 
 interface HeaderProps {
   onSearch?: (query: string) => void;
-  activeTab?: string;
-  onTabChange?: (tab: string) => void;
+  activeTab?: DealTab;
+  onTabChange?: (tab: DealTab) => void;
 }
 
 export const HEADER_HEIGHT = 54;
 
 const Header: React.FC<HeaderProps> = ({ 
   onSearch = () => {}, 
-  activeTab = "popular",
+  activeTab = "ripper",
   onTabChange = () => {}
 }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -127,7 +129,7 @@ const Header: React.FC<HeaderProps> = ({
         {/* Mobile Tabs - Only visible on mobile */}
         {isMobile && (
           <div className="flex-1 ml-2">
-            <DealTabs activeTab={activeTab as DealTab} onTabChange={(tab) => onTabChange(tab)} isMobileHeader={true} />
+            <DealTabs activeTab={activeTab} onTabChange={onTabChange} isMobileHeader={true} />
           </div>
         )}
 
@@ -211,7 +213,7 @@ const Header: React.FC<HeaderProps> = ({
           )}
 
           {/* Theme toggle - visible on both */}
-          <ThemeToggle size="icon" variant="ghost" className={isMobile ? "p-1" : ""} />
+          <ThemeToggle />
           
           {/* Notifications and profile - DESKTOP ONLY */}
           {!isMobile && (
@@ -223,14 +225,7 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Desktop tabs section - only for desktop */}
-      {!isMobile && (
-        <div className="border-t border-b bg-background">
-          <div className="max-w-screen-2xl mx-auto">
-            <DealTabs activeTab={activeTab as DealTab} onTabChange={(tab) => onTabChange(tab)} />
-          </div>
-        </div>
-      )}
+      {/* Remove desktop tabs section - we'll only use tabs in DealHeader */}
     </header>
   );
 };
