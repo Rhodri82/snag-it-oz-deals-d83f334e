@@ -10,11 +10,13 @@ import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { Deal } from '@/types/deals';
 import { DealTab } from '@/components/deals/DealTabs';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
+  const isMobile = useIsMobile();
+  
   const {
     activeTab,
     viewMode,
@@ -44,9 +46,9 @@ const Index = () => {
   return (
     <>
       <Header />
-      <main className="pb-8 md:pb-12">
+      <main className={`pb-20 md:pb-12 ${isMobile ? 'pt-[44px]' : ''}`}>
         {/* Sticky header with filter tabs */}
-        <div className="bg-background sticky top-14 z-10">
+        <div className={`bg-background sticky ${isMobile ? 'top-[44px]' : 'top-14'} z-10`}>
           <div className="max-w-screen-xl mx-auto">
             <DealHeader
               activeTab={activeTab as DealTab}
@@ -79,9 +81,10 @@ const Index = () => {
           />
         </div>
       </main>
+
       {/* Floating button for mobile */}
       <Button
-        className="fixed bottom-4 right-4 md:hidden z-50 rounded-full shadow-lg"
+        className="fixed bottom-[70px] right-4 md:hidden z-40 rounded-full shadow-lg"
         variant="secondary"
         asChild
       >
