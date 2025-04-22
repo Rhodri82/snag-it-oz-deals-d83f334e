@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Tag, MessageSquare, User, PlusCircle, Search } from 'lucide-react';
+import { Tag, MessageSquare, Ticket, User, PlusCircle, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
@@ -31,15 +31,15 @@ export const BottomNav = () => {
       highlight: true,
     },
     {
+      icon: Ticket,
+      label: 'Vouchers',
+      href: '/vouchers',
+    },
+    {
       icon: Search,
       label: 'Search',
       action: () => setIsSearchOpen(true),
       isActive: isSearchOpen,
-    },
-    {
-      icon: User,
-      label: 'Profile',
-      href: '/profile',
     },
   ];
 
@@ -90,7 +90,7 @@ export const BottomNav = () => {
 
       {/* Search Popup */}
       {isSearchOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 md:hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 md:hidden">
           <div className="bg-background border rounded-lg shadow-lg w-full max-w-md p-4">
             <form className="space-y-4">
               <div>
