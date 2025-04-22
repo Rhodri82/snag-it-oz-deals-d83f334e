@@ -10,25 +10,25 @@ interface DealTabsProps {
   isMobileHeader?: boolean;
 }
 
-const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange, isMobileHeader }) => {
+const DealTabs: React.FC<DealTabsProps> = ({ activeTab, onTabChange }) => {
   return (
     <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
-      <TabsList className="grid w-full grid-cols-3 h-10 rounded-md bg-muted p-1">
+      <TabsList className="grid w-full grid-cols-3 h-12 bg-muted/50">
         <TabsTrigger 
           value="ripper"
-          className="rounded-sm text-sm font-medium transition-colors hover:text-accent data-[state=active]:bg-background data-[state=active]:text-accent data-[state=active]:shadow-sm"
+          className="text-base font-medium"
         >
           Ripper
         </TabsTrigger>
         <TabsTrigger 
           value="fresh"
-          className="rounded-sm text-sm font-medium transition-colors hover:text-accent data-[state=active]:bg-background data-[state=active]:text-accent data-[state=active]:shadow-sm"
+          className="text-base font-medium"
         >
           Fresh
         </TabsTrigger>
         <TabsTrigger 
           value="snagged"
-          className="rounded-sm text-sm font-medium transition-colors hover:text-accent data-[state=active]:bg-background data-[state=active]:text-accent data-[state=active]:shadow-sm"
+          className="text-base font-medium"
         >
           Snagged
         </TabsTrigger>

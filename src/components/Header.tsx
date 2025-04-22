@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -15,16 +14,12 @@ import type { DealTab } from './deals/DealTabs';
 
 interface HeaderProps {
   onSearch?: (query: string) => void;
-  activeTab?: DealTab;
-  onTabChange?: (tab: DealTab) => void;
 }
 
 export const HEADER_HEIGHT = 54;
 
 const Header: React.FC<HeaderProps> = ({ 
   onSearch = () => {}, 
-  activeTab = "ripper",
-  onTabChange = () => {}
 }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -55,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b bg-background shadow-sm"
+      className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm"
       style={{
         minHeight: HEADER_HEIGHT,
         height: isMobile ? 'auto' : HEADER_HEIGHT,
@@ -126,21 +121,12 @@ const Header: React.FC<HeaderProps> = ({
           </Link>
         </div>
 
-        {/* Mobile Tabs - Only visible on mobile */}
-        {isMobile && (
-          <div className="flex-1 ml-2">
-            <DealTabs activeTab={activeTab} onTabChange={onTabChange} isMobileHeader={true} />
-          </div>
-        )}
-
         {/* Center Navigation - DESKTOP ONLY */}
         {!isMobile && (
-          <div 
-            className={cn(
-              "flex items-center ml-6 transition-all duration-300",
-              isSearchOpen && "ml-0"
-            )}
-          >
+          <div className={cn(
+            "flex items-center ml-6 transition-all duration-300",
+            isSearchOpen && "ml-0"
+          )}>
             <Link to="/categories" className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-amber-900">
               <Tag className="h-4 w-4" />
               <span className={cn("transition-all duration-300", isSearchOpen && "hidden")}>Categories</span>
@@ -224,8 +210,6 @@ const Header: React.FC<HeaderProps> = ({
           )}
         </div>
       </div>
-
-      {/* Remove desktop tabs section - we'll only use tabs in DealHeader */}
     </header>
   );
 };

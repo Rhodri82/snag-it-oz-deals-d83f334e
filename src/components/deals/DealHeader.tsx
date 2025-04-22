@@ -42,15 +42,15 @@ const DealHeader: React.FC<DealHeaderProps> = ({
   onClearFilters = () => {}
 }) => {
   return (
-    <div className="flex flex-col space-y-4">
-      {/* Deal Tabs in their own row */}
-      <div className="w-full">
+    <div className="space-y-2">
+      {/* Deal Tabs */}
+      <div className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <DealTabs activeTab={activeTab} onTabChange={onTabChange} />
       </div>
       
-      {/* Filters, Sort and View toggles in a row */}
+      {/* Filters, Sort and View toggles */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center gap-2">
           <DealFilters 
             selectedCategories={selectedCategories}
             selectedRetailers={selectedRetailers}
@@ -61,29 +61,27 @@ const DealHeader: React.FC<DealHeaderProps> = ({
             onPriceRangeToggle={onPriceRangeToggle}
             onShowExpiredChange={onShowExpiredChange}
             onClearFilters={onClearFilters}
-            viewMode={viewMode}
-            onViewModeChange={onViewModeChange}
           />
           <DealSort sortOption={sortOption} onSortChange={onSortChange} />
         </div>
         
         {/* View Mode Toggle buttons */}
-        <div className="flex space-x-1">
+        <div className="flex gap-1">
           <Button
-            variant={viewMode === 'list' ? 'default' : 'outline'}
+            variant="ghost"
             size="icon"
             onClick={() => onViewModeChange('list')}
-            className="w-10 h-10 p-0"
+            className={viewMode === 'list' ? 'bg-accent text-accent-foreground' : ''}
           >
-            <List size={20} />
+            <List className="h-4 w-4" />
           </Button>
           <Button
-            variant={viewMode === 'grid' ? 'default' : 'outline'}
+            variant="ghost"
             size="icon"
             onClick={() => onViewModeChange('grid')}
-            className="w-10 h-10 p-0"
+            className={viewMode === 'grid' ? 'bg-accent text-accent-foreground' : ''}
           >
-            <Grid size={20} />
+            <Grid className="h-4 w-4" />
           </Button>
         </div>
       </div>
